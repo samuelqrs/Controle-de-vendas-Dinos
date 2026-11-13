@@ -3,76 +3,10 @@
   "ramificacao": "main",
   "convencoes": [
     "Usar português do Brasil em todo código autoral: nomes de arquivos e pastas da aplicação, variáveis, funções, classes, propriedades, campos do banco, rotas, identificadores HTML, classes CSS, comentários, mensagens, testes e documentação. Usar identificadores sem acentos, como calcularTotal e precoUnitario, e acentuação normal nos textos exibidos. Manter a grafia de palavras reservadas, APIs, bibliotecas, comandos e contratos externos obrigatórios. O esquema interno do harness é autoral e também usa português; preservar os caminhos de infraestrutura existentes para manter suas referências.",
-    "Ao fim de cada tarefa, lembrar o autor de solicitar o commit. Criar commits somente quando houver solicitação explícita."
+    "Ao fim de cada tarefa, lembrar o autor de solicitar o commit. Criar commits somente quando houver solicitação explícita.",
+    "Adotar mobile first: projetar e implementar primeiro para telas pequenas; definir o CSS base para dispositivos móveis e ampliar o layout com media queries min-width. Verificar navegação por toque e teclado, legibilidade e ausência de rolagem horizontal antes de conferir telas maiores."
   ],
   "funcionalidades": [
-    {
-      "identificador": "F01",
-      "titulo": "Definir a base e preparar a primeira página",
-      "estado": "em_andamento",
-      "objetivo": "Preparar uma aplicação compreensível para um iniciante, com HTML5, CSS3 e JavaScript ou TypeScript, e documentar como executá-la.",
-      "verificacao": "Executar os comandos documentados, abrir a primeira página e verificar sua estrutura e apresentação no navegador; revisar o uso de português do Brasil no código autoral conforme as convenções do projeto.",
-      "tarefas": [
-        {
-          "identificador": "F01-T01",
-          "descricao": "Explicar as opções e definir a tecnologia, a persistência compartilhada e a publicação considerando o prazo.",
-          "responsavel": "agente",
-          "estado": "aprovada",
-          "evidencia": "Autor escolheu TypeScript em 13/11/2026. Base: HTML5, CSS3 e TypeScript sem framework de interface, com Vite para desenvolvimento e compilação. Supabase e Netlify mantidos para persistência compartilhada e publicação futura; serviços não provisionados."
-        },
-        {
-          "identificador": "F01-T02",
-          "descricao": "Preparar a estrutura mínima e uma primeira página, explicando a função de cada arquivo.",
-          "responsavel": "agente",
-          "estado": "aprovada",
-          "evidencia": "Criados index.html, aplicacao/estilos.css e aplicacao/principal.ts, com apresentação responsiva e botão acessível para mostrar/ocultar próximas etapas. Configurados Vite e TypeScript estrito; função dos arquivos explicada no README.md. Verificação de execução será registrada em T03."
-        },
-        {
-          "identificador": "F01-T03",
-          "descricao": "Documentar instalação, execução e estrutura no repositório, incluindo AGENTS.md.",
-          "responsavel": "agente",
-          "estado": "aprovada",
-          "evidencia": "README.md e AGENTS.md documentam Node.js, instalação, desenvolvimento, tipos, compilação, teste, preview e estrutura. npm install concluído com TypeScript 6.0.3 e Vite 8.3.8; auditoria sem vulnerabilidades. npm test passou (tipos, build e 1 teste de recursos). npm run dev e npm run preview iniciaram nas portas 5173 e 4173. Página de desenvolvimento conferida no navegador: clique, Enter, apresentação desktop e largura de 390 px; sem erros no console observado. Capturas em harness/main/evidencias/. Prévia de produção iniciada; interação nela não verificada. Autor solicitou registrar T01 a T03 em commit; T04 permanece em andamento."
-        },
-        {
-          "identificador": "F01-T04",
-          "descricao": "Executar a página com orientação e explicar o papel de HTML, CSS e JavaScript.",
-          "responsavel": "autor",
-          "estado": "em_andamento",
-          "evidencia": "Roteiro de cinco passos apresentado no README.md: executar, alternar botão, teclado, tela pequena e explicar HTML/CSS/TypeScript. Aguardando execução e relato pelo autor; zero cenários relatados pelo autor. F01 permanece em andamento."
-        }
-      ]
-    },
-    {
-      "identificador": "F02",
-      "titulo": "Disponibilizar o cardápio",
-      "estado": "nao_iniciada",
-      "objetivo": "Disponibilizar pizzas, refrigerantes, sucos e adicionais com os dados necessários para montar pedidos.",
-      "verificacao": "Conferir um cardápio de exemplo sem dados reais, com preços por tamanho, sabores, adicionais e bebidas.",
-      "tarefas": [
-        {
-          "identificador": "F02-T01",
-          "descricao": "Definir tamanhos, limite de sabores, preços e cobrança de adicionais; decidir se o cardápio inicial será pré-cadastrado.",
-          "responsavel": "autor",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
-        },
-        {
-          "identificador": "F02-T02",
-          "descricao": "Modelar os dados e apresentar o cardápio com exemplos fictícios, explicando listas e objetos.",
-          "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
-        },
-        {
-          "identificador": "F02-T03",
-          "descricao": "Verificar que os produtos e preços apresentados correspondem aos exemplos definidos.",
-          "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
-        }
-      ]
-    },
     {
       "identificador": "F03",
       "titulo": "Montar o pedido",
@@ -245,6 +179,73 @@
           "responsavel": "agente",
           "estado": "aprovada",
           "evidencia": "ConvertFrom-Json validou o esquema; comparação campo a campo preservou sete demandas e 22 tarefas originais. Conferidos os 24 identificadores únicos, responsáveis, estados, documentação do esquema e espaços nos cinco arquivos. git diff --check sem erros; somente avisos de LF/CRLF."
+        }
+      ]
+    },
+    {
+      "identificador": "F01",
+      "titulo": "Definir a base e preparar a primeira página",
+      "estado": "aprovada",
+      "objetivo": "Preparar uma aplicação compreensível para um iniciante, com HTML5, CSS3 e JavaScript ou TypeScript, e documentar como executá-la.",
+      "verificacao": "Executar os comandos documentados, abrir a primeira página e verificar sua estrutura e apresentação no navegador; revisar o uso de português do Brasil no código autoral conforme as convenções do projeto.",
+      "tarefas": [
+        {
+          "identificador": "F01-T01",
+          "descricao": "Explicar as opções e definir a tecnologia, a persistência compartilhada e a publicação considerando o prazo.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Autor escolheu TypeScript em 13/11/2026. Base: HTML5, CSS3 e TypeScript sem framework de interface, com Vite para desenvolvimento e compilação. Supabase e Netlify mantidos para persistência compartilhada e publicação futura; serviços não provisionados."
+        },
+        {
+          "identificador": "F01-T02",
+          "descricao": "Preparar a estrutura mínima e uma primeira página, explicando a função de cada arquivo.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Criados index.html, aplicacao/estilos.css e aplicacao/principal.ts, com apresentação responsiva e botão acessível para mostrar/ocultar próximas etapas. Configurados Vite e TypeScript estrito; função dos arquivos explicada no README.md. Verificação de execução será registrada em T03."
+        },
+        {
+          "identificador": "F01-T03",
+          "descricao": "Documentar instalação, execução e estrutura no repositório, incluindo AGENTS.md.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "README.md e AGENTS.md documentam Node.js, instalação, desenvolvimento, tipos, compilação, teste, preview e estrutura. npm install concluído com TypeScript 6.0.3 e Vite 8.3.8; auditoria sem vulnerabilidades. npm test passou (tipos, build e 1 teste de recursos). npm run dev e npm run preview iniciaram nas portas 5173 e 4173. Página de desenvolvimento conferida no navegador: clique, Enter, apresentação desktop e largura de 390 px; sem erros no console observado. Capturas em harness/main/evidencias/. Prévia de produção iniciada; interação nela não verificada. Autor solicitou registrar T01 a T03 em commit; T04 permanece em andamento."
+        },
+        {
+          "identificador": "F01-T04",
+          "descricao": "Executar a página com orientação e explicar o papel de HTML, CSS e JavaScript.",
+          "responsavel": "autor",
+          "estado": "aprovada",
+          "evidencia": "Prática concluída, relatada pelo autor. Quantidade de cenários e explicação conceitual não informadas; autor dispensou perguntas e autorizou a continuidade. Aceita a dispensa da confirmação detalhada, sem atribuir ao autor os testes do agente."
+        }
+      ]
+    },
+    {
+      "identificador": "F02",
+      "titulo": "Disponibilizar o cardápio",
+      "estado": "aprovada",
+      "objetivo": "Disponibilizar pizzas, refrigerantes, sucos e adicionais com os dados necessários para montar pedidos.",
+      "verificacao": "Conferir um cardápio de exemplo sem dados reais, com preços por tamanho, sabores, adicionais e bebidas.",
+      "tarefas": [
+        {
+          "identificador": "F02-T01",
+          "descricao": "Definir tamanhos, limite de sabores, preços e cobrança de adicionais; decidir se o cardápio inicial será pré-cadastrado.",
+          "responsavel": "autor",
+          "estado": "aprovada",
+          "evidencia": "Autor autorizou prosseguir sem perguntas. Premissas fictícias e ajustáveis: cardápio pré-cadastrado; pequena 25 cm/4 fatias/1 sabor, média 30 cm/6 fatias/2 sabores, grande 35 cm/8 fatias/3 sabores; preço pelo sabor mais caro; adicionais por pizza, cobrados integralmente uma vez. Valores em centavos, sem taxa de entrega definida nesta etapa."
+        },
+        {
+          "identificador": "F02-T02",
+          "descricao": "Modelar os dados e apresentar o cardápio com exemplos fictícios, explicando listas e objetos.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Dados tipados em aplicacao/cardapio.ts; HTML semântico e apresentação com seletor de tamanho, pizzas, bebidas e adicionais. CSS mobile first com min-width; listas, objetos e funções explicados no README."
+        },
+        {
+          "identificador": "F02-T03",
+          "descricao": "Verificar que os produtos e preços apresentados correspondem aos exemplos definidos.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "npm test passou: tipos, build e 3 testes, zero falhas. Navegador conferiu 4 pizzas nos 3 tamanhos (12 preços), 4 bebidas e 3 adicionais, com correspondência aos dados fictícios. Viewport 390x844: uma coluna e sem rolagem horizontal (375 px de conteúdo/documento); em 1280x900: duas colunas e sem rolagem horizontal (1265 px). Console observado sem erros. Capturas f02-movel.jpg e f02-desktop.jpg. Reutilizado servidor existente na porta 5173; nova tentativa não iniciou por porta ocupada, sem encerrar processo preexistente. Commit das tarefas concluídas solicitado pelo autor; F03 permanece não iniciada."
         }
       ]
     }

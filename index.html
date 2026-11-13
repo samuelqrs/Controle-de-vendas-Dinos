@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="DINNOS: sistema acadêmico de registro de pedidos de pizzaria." />
-    <title>DINNOS | Pedidos da pizzaria</title>
+    <meta name="description" content="Consulte o cardápio de demonstração da pizzaria DINNOS." />
+    <title>DINNOS | Cardápio</title>
     <link rel="stylesheet" href="/aplicacao/estilos.css" />
     <script type="module" src="/aplicacao/principal.ts"></script>
   </head>
@@ -15,26 +15,32 @@
     </header>
     <main id="inicio">
       <section class="apresentacao" aria-labelledby="titulo-principal">
-        <p class="sobretitulo">DO PRIMEIRO CLIQUE AO PEDIDO</p>
-        <h1 id="titulo-principal">Um lugar para<br />cada pedido.</h1>
-        <p class="introducao">A base do atendimento da sua pizzaria começa aqui. Vamos construir, passo a passo, o registro e a consulta de pedidos.</p>
-        <button id="botao-etapas" type="button" aria-expanded="false" aria-controls="etapas">Conhecer as próximas etapas <span aria-hidden="true">↓</span></button>
-        <noscript><p>Ative o JavaScript para usar o botão. As próximas etapas são cardápio, montagem e consulta de pedidos.</p></noscript>
+        <p class="sobretitulo">FEITA PARA COMPARTILHAR</p>
+        <h1 id="titulo-principal">Escolha seu próximo sabor.</h1>
+        <p class="introducao">Pizzas, bebidas e aquele toque a mais. Explore nosso cardápio de demonstração.</p>
+        <p class="aviso">Produtos e preços fictícios. O registro de pedidos estará disponível em uma próxima etapa.</p>
+        <nav aria-label="Categorias do cardápio"><a href="#secao-pizzas">Pizzas</a><a href="#secao-bebidas">Bebidas</a><a href="#secao-adicionais">Adicionais</a></nav>
+        <noscript><p>Ative o JavaScript para consultar os produtos e preços.</p></noscript>
       </section>
-      <aside class="painel" aria-labelledby="titulo-base">
-        <span class="numero-etapa" aria-hidden="true">01</span>
-        <p class="sobretitulo">PRIMEIRA ETAPA</p>
-        <h2 id="titulo-base">A casa está tomando forma.</h2>
-        <p>Esta é a primeira página do DINNOS. O cardápio e o registro de pedidos serão desenvolvidos nas próximas funcionalidades.</p>
-        <div class="situacao"><span aria-hidden="true">●</span> Base em desenvolvimento</div>
-      </aside>
-      <section id="etapas" class="etapas" aria-labelledby="titulo-etapas" hidden>
-        <h2 id="titulo-etapas">O que vem a seguir</h2>
-        <ol class="lista-etapas">
-          <li><h3>Cardápio</h3><p>Pizzas, bebidas e adicionais para começar um pedido.</p></li>
-          <li><h3>Montagem e revisão</h3><p>Cliente, itens e valores reunidos antes de salvar.</p></li>
-          <li><h3>Registro e consulta</h3><p>Pedidos salvos para acesso em outros dispositivos.</p></li>
-        </ol>
+      <section id="secao-pizzas" class="secao-cardapio" aria-labelledby="titulo-pizzas">
+        <p class="sobretitulo">01 / DO FORNO</p>
+        <h2 id="titulo-pizzas">Pizzas</h2>
+        <label for="tamanho">Escolha o tamanho</label>
+        <select id="tamanho" name="tamanho"></select>
+        <p id="resumo-tamanho" role="status"></p>
+        <p class="regra">Ao combinar sabores, vale o preço do sabor mais caro no tamanho escolhido.</p>
+        <ul id="pizzas" class="produtos"></ul>
+      </section>
+      <section id="secao-bebidas" class="secao-cardapio" aria-labelledby="titulo-bebidas">
+        <p class="sobretitulo">02 / PARA ACOMPANHAR</p>
+        <h2 id="titulo-bebidas">Bebidas</h2>
+        <ul id="bebidas" class="produtos"></ul>
+      </section>
+      <section id="secao-adicionais" class="secao-cardapio" aria-labelledby="titulo-adicionais">
+        <p class="sobretitulo">03 / DO SEU JEITO</p>
+        <h2 id="titulo-adicionais">Adicionais</h2>
+        <p class="regra">Cada adicional é cobrado integralmente uma vez por pizza, além do preço dos sabores.</p>
+        <ul id="adicionais" class="produtos"></ul>
       </section>
     </main>
     <footer>DINNOS <span aria-hidden="true">/</span> Aprendendo a construir, uma etapa por vez.</footer>

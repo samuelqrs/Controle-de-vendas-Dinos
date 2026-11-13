@@ -1,6 +1,6 @@
 # DINNOS — Pedidos da pizzaria
 
-Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem framework de interface. O F01 prepara a primeira página; registro e consulta de pedidos ainda não estão disponíveis.
+Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem framework de interface. O F02 disponibiliza o cardápio de demonstração; registro e consulta de pedidos ainda não estão disponíveis.
 
 ## Preparar e executar
 
@@ -63,3 +63,17 @@ A base escolhida é HTML + CSS + TypeScript, com Vite para desenvolvimento e com
 A publicação planejada é no Netlify: comando de build npm run build e diretório de publicação dist. Não há site publicado ou conta provisionada nesta etapa. Conferir os limites e condições dos serviços antes do uso. O controle de acesso será definido antes de gravar dados de clientes; nunca colocar chaves privilegiadas no código da página.
 
 Referências oficiais: [Vite](https://vite.dev/guide/), [TypeScript](https://www.typescriptlang.org/tsconfig/), [Supabase Auth](https://supabase.com/docs/guides/auth), [Netlify](https://docs.netlify.com/manage/projects/add-new-project/).
+
+## Cardápio e mobile first (F02)
+
+A interface parte do celular: CSS base em uma coluna e controles com altura mínima de 44 px; media queries min-width ampliam o layout a partir de 640 e 1024 px. Verificar primeiro em 390 px e depois em telas maiores.
+
+Os dados fictícios e ajustáveis ficam em aplicacao/cardapio.ts. Uma lista reúne vários produtos; cada objeto descreve um produto com identificador, nome e preços. O tipo Sabor exige preço para todos os tamanhos; os preços são inteiros em centavos. A função formatarPreco converte centavos apenas para exibição. principal.ts cria os elementos e atualiza preços e limites ao trocar o tamanho.
+
+Premissas adotadas por delegação do autor: pequena de 25 cm/4 fatias/1 sabor; média de 30 cm/6 fatias/2 sabores; grande de 35 cm/8 fatias/3 sabores. Sabores combinados usam o preço mais caro do tamanho escolhido. Adicionais são cobrados integralmente uma vez por pizza, em qualquer tamanho. A montagem e o cálculo do pedido ficam para F03 e F04.
+
+Preços por sabor, na ordem pequena/média/grande: muçarela R$ 28/38/48; calabresa R$ 30/42/52; frango R$ 34/46/58; quatro queijos R$ 36/48/62. Bebidas: cola 2 litros R$ 12; guaraná 350 ml R$ 6; sucos de laranja e uva 500 ml R$ 9 cada. Adicionais: muçarela extra R$ 6; bacon R$ 7; requeijão R$ 5.
+
+Verificar com npm test: checagem de tipos, compilação, teste dos recursos publicados e dois testes de dados/formatação em testes/cardapio.test.mjs. O Node.js usa --experimental-strip-types para ler os dados TypeScript nos testes; a checagem de tipos continua responsabilidade do tsc.
+
+Roteiro atual: abrir a página em tela pequena, conferir quatro pizzas, trocar entre os três tamanhos, comparar preços e limites com os valores acima, conferir quatro bebidas e três adicionais e ampliar para desktop. O roteiro anterior do F01 é histórico: seu botão de próximas etapas foi substituído pelo cardápio.

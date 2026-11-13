@@ -97,3 +97,26 @@
 
 - Autor solicitou o commit de F01-T01, F01-T02 e F01-T03. Agrupamento: base TypeScript, primeira página, documentação, evidências e estado pertinente do harness em um commit. Incluído o lembrete de commit solicitado durante essas tarefas.
 - Mantidas F01 e F01-T04 em andamento; nenhuma prática relatada pelo autor. Evidências de npm test e navegador da implementação preservadas; sem alterações executáveis posteriores que exijam repetir testes.
+
+## 2026-11-13 — Mobile first e continuidade autorizada
+
+- Premissa explícita: Adotar mobile first: projetar e implementar primeiro para telas pequenas; definir o CSS base para dispositivos móveis e ampliar o layout com media queries min-width. Verificar navegação por toque e teclado, legibilidade e ausência de rolagem horizontal antes de conferir telas maiores.
+- Autor relatou prática concluída e dispensou as perguntas de confirmação. F01-T04 aprovada com essa dispensa; cenários e compreensão conceitual não verificados em detalhe. F01 encerrada com base nas verificações técnicas anteriores e na dispensa explícita do autor.
+- F02 autorizada: usar premissas fictícias e ajustáveis, sem exigir decisões do autor. T01 aprovada por delegação; T02 em andamento.
+- Lembrete: solicitar o commit de F01-T04 concluída e das premissas registradas. Não criar commit sem nova solicitação.
+
+## 2026-11-13 — F02 concluída com mobile first
+
+- Cardápio pré-cadastrado e fictício em aplicacao/cardapio.ts: quatro sabores com preços por tamanho, quatro bebidas (refrigerantes e sucos) e três adicionais. Regras e todos os preços documentados no README.md; valores em centavos e formatação em reais. Nenhuma regra de pedido implementada antes de F03/F04.
+- CSS refeito com base móvel em uma coluna e ampliações min-width 640/1024 px. Controles com altura mínima de 44 px e foco visível. Premissa registrada em AGENTS.md e nas convenções do harness.
+- F02-T02 e T03 aprovadas; F02 movida para concluidas. npm test passou: checagem de tipos, build e três testes (dados, formatação, recursos publicados), sem falhas. Não houve nova dependência.
+- Navegador: comparados 12 preços de pizzas nos três tamanhos e limites de sabores, quatro bebidas e três adicionais; apresentação móvel e desktop sem rolagem horizontal; console observado sem erros. Evidências em harness/main/evidencias/f02-movel.jpg e f02-desktop.jpg.
+- Servidor preexistente em 5173 reutilizado; nova tentativa com strictPort falhou por porta ocupada. Não encerrar o servidor preexistente do autor.
+- Bloqueios e riscos: dados e regras são premissas delegadas e ajustáveis, não preços reais. Prática do F01 relatada sem quantidade de cenários e sem explicação conceitual; confirmação detalhada dispensada expressamente. Controle de acesso e armazenamento compartilhado permanecem futuros.
+- Lembrete ao concluir T02 e T03: solicitar o commit das tarefas e das premissas, quando desejar. Nenhum commit criado nesta etapa. Próxima funcionalidade: F03, sem iniciar nesta sessão.
+- Verificação final: JSON válido, 24 tarefas únicas e nenhuma em andamento; arquivos autorais sem espaços finais. git diff --check sem erros, apenas avisos de LF/CRLF.
+
+## 2026-11-13 — Commit do cardápio e das premissas
+
+- Autor solicitou comitar as tarefas concluídas. Agrupamento: F02, mobile first e encerramento de F01-T04, com código, documentação, testes, capturas e estado do harness em um commit.
+- Preservadas as verificações da implementação: npm test com três testes aprovados, checagem de tipos, build e conferência no navegador. Sem alterações executáveis posteriores; não foi necessário repetir esses testes para o commit. F03 permanece não iniciada.

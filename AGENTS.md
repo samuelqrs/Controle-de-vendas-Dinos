@@ -2,12 +2,14 @@
 
 ## Estrutura e organização do projeto
 
-O repositório contém a primeira página da aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScript com Vite, além das skills e do planejamento no harness. Cardápio e registro de pedidos ainda não foram implementados.
+O repositório contém a primeira página da aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScript com Vite, além das skills e do planejamento no harness. O cardápio fictício está disponível; registro de pedidos ainda não foi implementado.
 
 - `index.html`: estrutura e conteúdo da primeira página.
-- `aplicacao/principal.ts`: interações da página em TypeScript.
+- `aplicacao/principal.ts`: apresentação dos produtos e troca de tamanho.
+- `aplicacao/cardapio.ts`: dados tipados e preços fictícios em centavos.
 - `aplicacao/estilos.css`: apresentação e adaptação a telas pequenas.
 - `testes/pagina.test.mjs`: verificação dos recursos da compilação.
+- `testes/cardapio.test.mjs`: testes de dados e formatação.
 - `package.json`, `package-lock.json` e `tsconfig.json`: dependências, comandos e checagem de tipos.
 - `README.md`: preparação, explicações e roteiro manual.
 - `skills/professor-mode/SKILL.md`: instruções da skill de ensino.
@@ -41,9 +43,13 @@ Usar identificadores sem acentos, como `calcularTotal` e `precoUnitario`, e acen
 
 Usar títulos descritivos em Markdown e instruções curtas e acionáveis. Usar dois espaços na indentação YAML e preservar os campos obrigatórios dos metadados no cabeçalho de `SKILL.md`. Nomear novas pastas de skills com palavras minúsculas separadas por hífens e preservar os nomes obrigatórios `SKILL.md` e `agents/openai.yaml`.
 
+## Interface mobile first
+
+Adotar mobile first: projetar e implementar primeiro para telas pequenas; definir o CSS base para dispositivos móveis e ampliar o layout com media queries min-width. Verificar navegação por toque e teclado, legibilidade e ausência de rolagem horizontal antes de conferir telas maiores.
+
 ## Verificação
 
-O teste automatizado `testes/pagina.test.mjs` verifica os recursos de publicação com `npm test`; não há meta de cobertura. Conferir também a interação e a apresentação no navegador conforme o README.md. Nas alterações de skills, revisar manualmente o cabeçalho, os metadados, os caminhos e os exemplos. Ao atualizar um ZIP, verificar se seu conteúdo corresponde à pasta da skill. Não alterar pacotes sem confirmar o procedimento de empacotamento.
+`npm test` compila e executa os testes de recursos publicados, dados do cardápio e formatação de preços; não há meta de cobertura. Conferir também a interação e a apresentação no navegador conforme o README.md. Nas alterações de skills, revisar manualmente o cabeçalho, os metadados, os caminhos e os exemplos. Ao atualizar um ZIP, verificar se seu conteúdo corresponde à pasta da skill. Não alterar pacotes sem confirmar o procedimento de empacotamento.
 
 Nas alterações da lista de funcionalidades, validar o JSON, os identificadores, os responsáveis, os estados e a preservação das demandas existentes. Ao adicionar código executável, incluir testes adequados e documentar os nomes e o comando exato de execução.
 
