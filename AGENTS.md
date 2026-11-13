@@ -1,40 +1,52 @@
-# Repository Guidelines
+# Orientações do repositório
 
-## Project Structure & Module Organization
+## Estrutura e organização do projeto
 
-This repository is in its initial setup stage. It currently contains Codex skill resources; no sales application source code, test suite, or application assets have been added.
+O repositório está na etapa inicial. Contém recursos de skills e o planejamento no harness; ainda não há código, testes ou recursos da aplicação de vendas.
 
-- `skills/professor-mode/SKILL.md`: Portuguese instructions for the teaching skill.
-- `skills/professor-mode/agents/openai.yaml`: skill display metadata.
-- `skills/professor-mode.zip`: packaged skill archive.
-- `.skill-build/problem-interviewer/`: skill preparation files, including instructions and agent metadata.
+- `skills/professor-mode/SKILL.md`: instruções da skill de ensino.
+- `skills/professor-mode/agents/openai.yaml`: metadados de apresentação da skill.
+- `skills/professor-mode.zip`: pacote da skill.
+- `.skill-build/problem-interviewer/`: arquivos de preparação da skill de investigação.
+- `harness/guides/workflow.md`: procedimento de trabalho e formato do estado.
+- `harness/main/state/feature_list.json`: funcionalidades pendentes e concluídas da branch `main`.
+- `harness/main/state/progress.md`: progresso, decisões, verificações e riscos.
+- `harness/main/state/session-handoff.md`: contexto e próximo passo para continuidade.
 
-Keep each skill's instructions and metadata together. When adding application code, document its directory layout and setup commands here. Do not assume a framework or introduce empty source directories solely to match a template.
+Manter as instruções e os metadados de cada skill juntos. Ao adicionar a aplicação, documentar sua estrutura e os comandos de preparação aqui. Não presumir um framework nem criar pastas vazias para seguir um modelo.
 
-## Build, Test, and Development Commands
+## Compilação, testes e desenvolvimento
 
-No dependency manifest, build script, development server, formatter, or test runner is currently configured. Commands such as `npm install` and `npm test` are therefore not established workflows.
+Ainda não há manifesto de dependências, comando de compilação, servidor de desenvolvimento, formatador ou executor de testes. Comandos como `npm install` e `npm test` não são procedimentos estabelecidos.
 
-Useful repository checks, run from the root:
+Verificações úteis a partir da raiz:
 
-- `git status --short --branch`: review the active branch and pending changes.
-- `git diff --check`: detect whitespace errors in tracked changes.
-- `git diff -- AGENTS.md skills/ .skill-build/`: review contributor guidance and skill edits before staging.
+- `git status --short --branch`: consultar a branch e as alterações pendentes.
+- `git diff --check`: detectar erros de espaços em alterações rastreadas.
+- `git diff -- AGENTS.md skills/ .skill-build/ harness/`: revisar orientações, skills e estado antes de preparar um commit.
 
-## Coding Style & Naming Conventions
+Ler `harness/guides/workflow.md` e o estado da branch antes de executar uma demanda. Uma verificação do harness não equivale a um teste da aplicação.
 
-Use descriptive Markdown headings and short, actionable instructions. Preserve the Portuguese language of existing skill content unless translation is requested. Use two spaces for YAML indentation and preserve valid YAML front matter in `SKILL.md` files. Name new skill directories in lowercase kebab-case, such as `professor-mode`, and retain the `SKILL.md` and `agents/openai.yaml` filenames.
+## Idioma, estilo e nomes
 
-## Testing Guidelines
+Usar português do Brasil em todo código autoral: nomes de arquivos e pastas da aplicação, variáveis, funções, classes, propriedades, campos do banco, rotas, identificadores HTML, classes CSS, comentários, mensagens, testes e documentação.
 
-There is no automated testing framework or coverage threshold yet. For skill changes, review front matter, metadata, referenced paths, and example instructions manually. If updating a packaged ZIP, verify that its contents match the corresponding skill directory. When adding executable code, include appropriate tests and document their naming conventions and exact execution command.
+Usar identificadores sem acentos, como `calcularTotal` e `precoUnitario`, e acentuação normal nos textos exibidos. Manter a grafia exigida pelas palavras reservadas, APIs, bibliotecas, comandos e contratos externos. O esquema interno do harness também usa português, conforme seu guia. Preservar os caminhos existentes de infraestrutura e das skills para manter suas referências.
 
-## Commit & Pull Request Guidelines
+Usar títulos descritivos em Markdown e instruções curtas e acionáveis. Usar dois espaços na indentação YAML e preservar os campos obrigatórios dos metadados no cabeçalho de `SKILL.md`. Nomear novas pastas de skills com palavras minúsculas separadas por hífens e preservar os nomes obrigatórios `SKILL.md` e `agents/openai.yaml`.
 
-There is no commit history from which to infer conventions. Use concise, imperative commit messages, for example `docs: clarify professor skill activation`. Keep unrelated changes in separate commits.
+## Verificação
 
-Pull requests should describe the change, its purpose, and validation performed. Link relevant issues when available. Include screenshots for future UI changes and explain archive updates or newly introduced dependencies.
+Ainda não há testes automatizados ou meta de cobertura. Nas alterações de skills, revisar manualmente o cabeçalho, os metadados, os caminhos e os exemplos. Ao atualizar um ZIP, verificar se seu conteúdo corresponde à pasta da skill. Não alterar pacotes sem confirmar o procedimento de empacotamento.
 
-## Security & Configuration
+Nas alterações da lista de funcionalidades, validar o JSON, os identificadores, os responsáveis, os estados e a preservação das demandas existentes. Ao adicionar código executável, incluir testes adequados e documentar os nomes e o comando exato de execução.
 
-Never commit credentials, tokens, local environment files, or customer sales data. Use sanitized examples and document required configuration without including secret values.
+## Commits e solicitações de revisão
+
+Usar mensagens curtas e no imperativo, por exemplo `docs: esclarecer ativação do modo professor`. Separar assuntos sem relação em commits distintos. Criar commits somente quando solicitado.
+
+Descrever a alteração, sua finalidade e as verificações realizadas. Vincular questões relacionadas quando houver. Incluir capturas de tela nas futuras alterações da interface e explicar atualizações de arquivos compactados e novas dependências.
+
+## Segurança e configuração
+
+Nunca incluir credenciais, tokens, arquivos locais de ambiente ou dados reais de vendas de clientes no controle de versão. Usar exemplos fictícios e documentar as configurações necessárias sem expor valores secretos.

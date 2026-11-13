@@ -5,7 +5,7 @@ persistido em arquivos, independentemente da ferramenta utilizada.
 
 ## Estado atual do projeto
 
-O repositório contém documentação e skills em `skills/` e
+O repositório contém documentação, estado do harness e skills em `skills/` e
 `.skill-build/`. Ainda não há aplicação, build, testes ou CI.
 
 Não considerar uma validação do harness como teste da futura aplicação.
@@ -31,23 +31,34 @@ uma funcionalidade. Preservar alterações preexistentes do usuário.
 ## Planejamento e execução
 
 Responder ao usuário apenas em português do Brasil (pt-BR).
-Preservar a grafia original de comandos, identificadores e caminhos.
+Usar português do Brasil no código e na documentação autorais, inclusive nos campos e valores do esquema interno do harness. Usar identificadores sem acentos e manter acentuação normal nos textos exibidos. Preservar a grafia exigida por palavras reservadas, APIs, bibliotecas, comandos e contratos externos. Manter os caminhos existentes de infraestrutura e das skills para preservar suas referências.
 
 Declarar premissas antes de tarefas não triviais. Discutir decisões
 em aberto com uma pergunta por vez.
 
-Antes de executar um plano, registrar a feature em `feature_list.json`,
+Antes de executar um plano, registrar a funcionalidade em `feature_list.json`,
 com objetivo, verificação e lista completa de tarefas.
 
-Usar os estados `not_started`, `in_progress`, `blocked` e `passing`.
+Usar os estados `nao_iniciada`, `em_andamento`, `bloqueada` e `aprovada`.
 Manter no máximo uma tarefa em andamento por vez.
 
-Cada tarefa deve informar responsável (`agent` ou `author`), estado
+Cada tarefa deve informar responsável (`agente` ou `autor`), estado
 e evidência. O plano descreve os passos; não duplica seus estados.
 
 Criar `plans/`, `specs/` e `handoffs/` somente quando necessários.
 Planos e especificações permanecem na branch de origem.
 Registrar referências explícitas quando o trabalho continuar em outra.
+
+## Estrutura da lista de funcionalidades
+
+O arquivo `feature_list.json` usa `versaoEsquema`, `ramificacao`,
+`convencoes`, `funcionalidades` e `concluidas` na raiz.
+Cada funcionalidade informa `identificador`, `titulo`, `estado`,
+`objetivo`, `verificacao` e `tarefas`. Cada tarefa informa
+`identificador`, `descricao`, `responsavel`, `estado` e `evidencia`.
+Usar os estados e responsáveis em português definidos acima.
+Não há integração externa que exija chaves em inglês neste esquema.
+Os nomes existentes dos arquivos de infraestrutura permanecem iguais.
 
 ## Verificação e conclusão
 
@@ -61,9 +72,9 @@ Testes manuais relatados pelo usuário devem ser identificados como
 “relatados pelo autor”, com quantidade exata e riscos aceitos.
 Apresentar os passos manuais antes de solicitar sua execução.
 
-Tarefas aprovadas não aprovam automaticamente a feature.
-Marcar a feature como `passing` somente após verificar seu objetivo;
-então movê-la de `features` para `completed`.
+Tarefas aprovadas não aprovam automaticamente a funcionalidade.
+Marcar a funcionalidade como `aprovada` somente após verificar seu objetivo;
+então movê-la de `funcionalidades` para `concluidas`.
 
 Registrar verificações pendentes e riscos em `progress.md`.
 Não iniciar o próximo plano enquanto houver pendências do atual.
@@ -73,7 +84,7 @@ Não iniciar o próximo plano enquanto houver pendências do atual.
 Atualizar os três arquivos de estado:
 
 - `feature_list.json`: trabalho pendente e concluído, com evidências.
-- `progress.md`: realizado, decisões e seção “Blockers / Risks”.
+- `progress.md`: realizado, decisões e seção “Bloqueios e riscos”.
 - `session-handoff.md`: objetivo, verificações e próximo passo.
 
 Não depender do histórico da conversa para explicar como continuar.

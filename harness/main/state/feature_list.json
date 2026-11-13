@@ -1,0 +1,251 @@
+{
+  "versaoEsquema": 1,
+  "ramificacao": "main",
+  "convencoes": [
+    "Usar português do Brasil em todo código autoral: nomes de arquivos e pastas da aplicação, variáveis, funções, classes, propriedades, campos do banco, rotas, identificadores HTML, classes CSS, comentários, mensagens, testes e documentação. Usar identificadores sem acentos, como calcularTotal e precoUnitario, e acentuação normal nos textos exibidos. Manter a grafia de palavras reservadas, APIs, bibliotecas, comandos e contratos externos obrigatórios. O esquema interno do harness é autoral e também usa português; preservar os caminhos de infraestrutura existentes para manter suas referências."
+  ],
+  "funcionalidades": [
+    {
+      "identificador": "F01",
+      "titulo": "Definir a base e preparar a primeira página",
+      "estado": "nao_iniciada",
+      "objetivo": "Preparar uma aplicação compreensível para um iniciante, com HTML5, CSS3 e JavaScript ou TypeScript, e documentar como executá-la.",
+      "verificacao": "Executar os comandos documentados, abrir a primeira página e verificar sua estrutura e apresentação no navegador; revisar o uso de português do Brasil no código autoral conforme as convenções do projeto.",
+      "tarefas": [
+        {
+          "identificador": "F01-T01",
+          "descricao": "Explicar as opções e definir a tecnologia, a persistência compartilhada e a publicação considerando o prazo.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F01-T02",
+          "descricao": "Preparar a estrutura mínima e uma primeira página, explicando a função de cada arquivo.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F01-T03",
+          "descricao": "Documentar instalação, execução e estrutura no repositório, incluindo AGENTS.md.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F01-T04",
+          "descricao": "Executar a página com orientação e explicar o papel de HTML, CSS e JavaScript.",
+          "responsavel": "autor",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        }
+      ]
+    },
+    {
+      "identificador": "F02",
+      "titulo": "Disponibilizar o cardápio",
+      "estado": "nao_iniciada",
+      "objetivo": "Disponibilizar pizzas, refrigerantes, sucos e adicionais com os dados necessários para montar pedidos.",
+      "verificacao": "Conferir um cardápio de exemplo sem dados reais, com preços por tamanho, sabores, adicionais e bebidas.",
+      "tarefas": [
+        {
+          "identificador": "F02-T01",
+          "descricao": "Definir tamanhos, limite de sabores, preços e cobrança de adicionais; decidir se o cardápio inicial será pré-cadastrado.",
+          "responsavel": "autor",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F02-T02",
+          "descricao": "Modelar os dados e apresentar o cardápio com exemplos fictícios, explicando listas e objetos.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F02-T03",
+          "descricao": "Verificar que os produtos e preços apresentados correspondem aos exemplos definidos.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        }
+      ]
+    },
+    {
+      "identificador": "F03",
+      "titulo": "Montar o pedido",
+      "estado": "nao_iniciada",
+      "objetivo": "Permitir ao atendente informar cliente, entrega ou retirada, observações, forma de pagamento e itens com quantidades; pizzas permitem tamanho, sabores e adicionais.",
+      "verificacao": "Montar pedidos de entrega e retirada com pizza personalizada e bebida; validar os campos obrigatórios e impedir quantidades inválidas.",
+      "tarefas": [
+        {
+          "identificador": "F03-T01",
+          "descricao": "Definir campos obrigatórios, dados de entrega e formas de pagamento aceitas.",
+          "responsavel": "autor",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F03-T02",
+          "descricao": "Implementar o formulário e a inclusão, alteração e remoção de itens antes da gravação, explicando eventos e estado.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F03-T03",
+          "descricao": "Verificar os cenários de entrega, retirada, campos obrigatórios e quantidades inválidas.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        }
+      ]
+    },
+    {
+      "identificador": "F04",
+      "titulo": "Calcular e revisar os valores",
+      "estado": "nao_iniciada",
+      "objetivo": "Calcular a pizza pelo sabor mais caro no tamanho escolhido, incluindo adicionais e quantidades, e apresentar o total do pedido.",
+      "verificacao": "Comparar cálculos com exemplos manuais: pizza de um sabor, sabores de preços diferentes, adicionais e múltiplas quantidades; conferir valores monetários sem erros de arredondamento.",
+      "tarefas": [
+        {
+          "identificador": "F04-T01",
+          "descricao": "Definir o tratamento de eventual taxa de entrega e o momento em que o pedido representa uma venda.",
+          "responsavel": "autor",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F04-T02",
+          "descricao": "Implementar o cálculo e o resumo para revisão, explicando funções e representação de valores monetários.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F04-T03",
+          "descricao": "Testar as regras de preço com resultados esperados calculados independentemente.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        }
+      ]
+    },
+    {
+      "identificador": "F05",
+      "titulo": "Gravar pedidos com acesso compartilhado",
+      "estado": "nao_iniciada",
+      "objetivo": "Persistir pedidos após fechar o sistema e permitir consultá-los em mais de um dispositivo.",
+      "verificacao": "Salvar um pedido, fechar e reabrir o sistema e consultar o mesmo registro em outro dispositivo; verificar que uma falha de gravação não é apresentada como sucesso.",
+      "tarefas": [
+        {
+          "identificador": "F05-T01",
+          "descricao": "Definir o controle de acesso antes de disponibilizar dados de clientes e documentar configurações sem segredos.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F05-T02",
+          "descricao": "Implementar armazenamento compartilhado e gravação com identificação, data, itens e preços preservados, explicando o fluxo dos dados.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F05-T03",
+          "descricao": "Verificar gravação, reabertura, acesso autorizado e tratamento de falha; apresentar os passos para teste em dois dispositivos.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F05-T04",
+          "descricao": "Executar o teste orientado em dois dispositivos e relatar os resultados e a quantidade de cenários executados.",
+          "responsavel": "autor",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        }
+      ]
+    },
+    {
+      "identificador": "F06",
+      "titulo": "Consultar os pedidos registrados",
+      "estado": "nao_iniciada",
+      "objetivo": "Listar pedidos salvos e abrir seus detalhes, sem acompanhamento de etapas de produção ou entrega.",
+      "verificacao": "Encontrar um pedido salvo e conferir cliente, modalidade, itens, observações, pagamento informado e total; verificar a lista vazia e falhas de consulta.",
+      "tarefas": [
+        {
+          "identificador": "F06-T01",
+          "descricao": "Implementar listagem e detalhes dos pedidos persistidos.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F06-T02",
+          "descricao": "Verificar dados apresentados, lista vazia e mensagens de falha.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        }
+      ]
+    },
+    {
+      "identificador": "F07",
+      "titulo": "Validar e preparar a apresentação acadêmica",
+      "estado": "nao_iniciada",
+      "objetivo": "Entregar uma versão demonstrável e documentada e permitir que o autor explique o fluxo completo de registro e consulta.",
+      "verificacao": "Executar um pedido completo, validar persistência e consulta compartilhada e revisar os requisitos obrigatórios e as instruções de execução.",
+      "tarefas": [
+        {
+          "identificador": "F07-T01",
+          "descricao": "Executar as verificações disponíveis e corrigir falhas do fluxo completo.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F07-T02",
+          "descricao": "Documentar execução, limitações, requisitos atendidos e roteiro de demonstração com dados fictícios.",
+          "responsavel": "agente",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        },
+        {
+          "identificador": "F07-T03",
+          "descricao": "Realizar a demonstração orientada e explicar o caminho dos dados da tela ao armazenamento e à consulta.",
+          "responsavel": "autor",
+          "estado": "nao_iniciada",
+          "evidencia": "Não verificada."
+        }
+      ]
+    }
+  ],
+  "concluidas": [
+    {
+      "identificador": "F08",
+      "titulo": "Adequar a estrutura existente ao português do Brasil",
+      "estado": "aprovada",
+      "objetivo": "Traduzir os campos e estados autorais do harness e alinhar a documentação existente à premissa de idioma, sem iniciar a aplicação.",
+      "verificacao": "Validar o JSON, conferir a preservação das sete demandas e 22 tarefas originais, verificar as referências no guia e revisar whitespace e o diff.",
+      "tarefas": [
+        {
+          "identificador": "F08-T01",
+          "descricao": "Traduzir o esquema e os valores autorais da lista de demandas e atualizar o guia e as orientações do repositório.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Esquema e valores traduzidos; guia, orientações do repositório e arquivos de continuidade alinhados."
+        },
+        {
+          "identificador": "F08-T02",
+          "descricao": "Verificar a migração e registrar evidências e continuidade nos três arquivos de estado.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "ConvertFrom-Json validou o esquema; comparação campo a campo preservou sete demandas e 22 tarefas originais. Conferidos os 24 identificadores únicos, responsáveis, estados, documentação do esquema e espaços nos cinco arquivos. git diff --check sem erros; somente avisos de LF/CRLF."
+        }
+      ]
+    }
+  ]
+}
