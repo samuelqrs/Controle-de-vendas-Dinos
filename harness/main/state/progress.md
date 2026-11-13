@@ -120,3 +120,40 @@
 
 - Autor solicitou comitar as tarefas concluídas. Agrupamento: F02, mobile first e encerramento de F01-T04, com código, documentação, testes, capturas e estado do harness em um commit.
 - Preservadas as verificações da implementação: npm test com três testes aprovados, checagem de tipos, build e conferência no navegador. Sem alterações executáveis posteriores; não foi necessário repetir esses testes para o commit. F03 permanece não iniciada.
+
+## 2026-11-13 — F03 concluída: montagem do pedido
+
+- Autor solicitou iniciar F03; mantida a delegação anterior para premissas ajustáveis. Nome e telefone com DDD obrigatórios; entrega exige logradouro, número, bairro e cidade; complemento e observações opcionais. Dinheiro, Pix e cartão apenas informativos. Quantidade inteira de 1 a 99; sabores conforme o tamanho; adicionais por pizza.
+- F03-T01 aprovada por delegação; T02 implementou formulário, rascunho em memória, inclusão, edição, cancelamento e remoção. T03 aprovada após verificações. F03 movida para concluidas. F04 a F07 preservadas e não iniciadas.
+- Novos arquivos: aplicacao/pedido.ts (tipos e validações), aplicacao/montagem.ts (formulário e eventos), testes/pedido.test.mjs. Estrutura, regras, explicação de eventos/estado e roteiro manual documentados no README e AGENTS. Sem nova dependência.
+- npm test passou: tipos, compilação e sete testes, zero falhas. Cobertos campos obrigatórios, telefone, entrega/retirada, pedido vazio, limites por tamanho, sabores/adicionais/bebidas inválidos, duplicatas e quantidades zero, negativas, fracionárias e fora do intervalo.
+- Navegador móvel antes do desktop: pedido de retirada e de entrega com pizza média de dois sabores, bacon e bebida; conferência; edição da quantidade, cancelamento preservando o original e remoção; bloqueios para pedido vazio, endereço ausente, pizza sem sabor/excesso e quantidade zero; Enter e Tab conferidos. Sem rolagem horizontal em 390x844 (375 px de conteúdo) e 1280x900 (1265 px). Console observado sem erros. Capturas em harness/main/evidencias/f03-movel.jpg e f03-desktop.jpg.
+- Baseline automatizado demorou a concluir e finalizou durante as alterações; não representa execução isolada do código original. A execução final dos sete testes verificou a implementação. Branch inicialmente limpa em main, último commit db3dcc0. Verificadores rápido/completo próprios do harness indisponíveis; revisão de JSON e diff usada para o estado, separada dos testes da aplicação.
+- Lembretes de commit apresentados ao encerrar T01, T02 e T03. Nenhum commit criado. Servidor preexistente em 5173 reutilizado e preservado. Preferências locais ausentes; recomenda-se criar harness/user_preferences.md quando houver template, sem criação silenciosa.
+
+### Bloqueios e riscos atuais
+
+- Rascunho existe apenas em memória e é perdido ao recarregar; aviso exibido na tela. Cálculo do total é F04; gravação compartilhada e acesso são F05. Nenhum pagamento é processado.
+- Dados e regras são fictícios e ajustáveis. Testes feitos pelo agente; prática do autor não verificada. Não foi feita uma auditoria completa de acessibilidade nem teste em aparelho físico.
+
+
+## 2026-11-13 — F04: cálculo e revisão dos valores
+
+- Autor solicitou continuidade após a F03; iniciada somente F04. Branch main, com alterações anteriores da F03 preservadas; nenhum commit criado. Último commit db3dcc0.
+- T01 aprovada por delegação: taxa fictícia fixa de R$ 5,00 por pedido de entrega, retirada sem taxa; rascunho vazio mostra zero. Venda registrada apenas após gravação bem-sucedida na futura F05; forma de pagamento informada não confirma recebimento.
+- T02 implementada: aplicacao/valores.ts com funções puras que usam centavos inteiros; pizza pelo sabor mais caro, adicionais por unidade, quantidades, bebidas, subtotal, taxa e total. Valores por item e resumo automático na interface. Revisão de cliente, modalidade, endereço, pagamento, observações e total apenas após validação; invalidada por qualquer alteração e impedida durante edição aberta. README explica funções, centavos e roteiro manual; AGENTS atualizado. Sem novas dependências.
+- Baseline: tipos e sete testes existentes aprovados. npm test do baseline também concluiu com sete testes, zero falhas, build anterior à implementação da F04. Verificadores próprios do harness continuam indisponíveis. Preferências locais ausentes; recomenda-se criá-las quando houver template, sem criação silenciosa.
+- Seis testes novos em testes/valores.test.mjs passaram isoladamente: preços nos tamanhos, combinação pelo maior preço, adicionais e múltiplas quantidades, bebida, taxa única, pedido vazio, edição/remoção sem mutação, inteiros na quantidade máxima e rejeição de dados inválidos. Resultados esperados literais calculados independentemente.
+- Navegador primeiro móvel 390x844 (375 px de conteúdo), depois desktop 1280x900 (1265 px): sem rolagem horizontal. Exemplo verificado: duas pizzas médias muçarela/frango com bacon R$ 106 + três colas R$ 36 = R$ 142 na retirada, R$ 147 na entrega. Edição para uma pizza gerou R$ 94 com entrega; remover bebidas gerou R$ 58; cancelar edição preservou R$ 147. Conferência com edição aberta impedida; nome/modalidade alterados ocultaram revisão; Enter acionou conferência. Console sem erros observados. Capturas f04-movel.jpg e f04-desktop.jpg. Servidor preexistente 5173 preservado.
+- Revisão preliminar: git diff --check sem erros, apenas avisos LF/CRLF. 24 tarefas únicas, demais funcionalidades preservadas. Suíte completa final npm test aprovada: tipos, build e 13 testes, zero falhas. T03 e F04 aprovadas; F04 movida para concluidas, sem tarefas em andamento. Lembrete de commit apresentado também ao encerrar T03.
+
+### Bloqueios e riscos da F04
+
+- Taxa e preços fictícios, ajustáveis. O rascunho é perdido ao recarregar; nenhuma persistência ou cobrança existe. Supabase e Netlify permanecem previstos, sem provisionamento. Prática do autor não verificada; testes são do agente. Não realizada auditoria completa de acessibilidade nem teste em celular físico.
+- Lembretes de commit apresentados ao encerrar T01 e T02. Não criar commits sem solicitação explícita. F05 a F07 não iniciadas.
+
+
+## 2026-11-13 — Registro das F03 e F04 em commit
+
+- Autor solicitou criar um commit com as alterações realizadas. Agrupamento: montagem, cálculo e revisão do pedido (F03/F04), com código, testes, documentação, capturas e estado pertinente do harness.
+- Preservadas as verificações finais: npm test com tipos, build e 13 testes aprovados; navegador móvel e desktop; JSON válido e diff sem erros de espaços. Nenhuma alteração executável posterior exige repetir os testes. F05 a F07 permanecem não iniciadas.

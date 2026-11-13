@@ -8,66 +8,6 @@
   ],
   "funcionalidades": [
     {
-      "identificador": "F03",
-      "titulo": "Montar o pedido",
-      "estado": "nao_iniciada",
-      "objetivo": "Permitir ao atendente informar cliente, entrega ou retirada, observações, forma de pagamento e itens com quantidades; pizzas permitem tamanho, sabores e adicionais.",
-      "verificacao": "Montar pedidos de entrega e retirada com pizza personalizada e bebida; validar os campos obrigatórios e impedir quantidades inválidas.",
-      "tarefas": [
-        {
-          "identificador": "F03-T01",
-          "descricao": "Definir campos obrigatórios, dados de entrega e formas de pagamento aceitas.",
-          "responsavel": "autor",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
-        },
-        {
-          "identificador": "F03-T02",
-          "descricao": "Implementar o formulário e a inclusão, alteração e remoção de itens antes da gravação, explicando eventos e estado.",
-          "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
-        },
-        {
-          "identificador": "F03-T03",
-          "descricao": "Verificar os cenários de entrega, retirada, campos obrigatórios e quantidades inválidas.",
-          "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
-        }
-      ]
-    },
-    {
-      "identificador": "F04",
-      "titulo": "Calcular e revisar os valores",
-      "estado": "nao_iniciada",
-      "objetivo": "Calcular a pizza pelo sabor mais caro no tamanho escolhido, incluindo adicionais e quantidades, e apresentar o total do pedido.",
-      "verificacao": "Comparar cálculos com exemplos manuais: pizza de um sabor, sabores de preços diferentes, adicionais e múltiplas quantidades; conferir valores monetários sem erros de arredondamento.",
-      "tarefas": [
-        {
-          "identificador": "F04-T01",
-          "descricao": "Definir o tratamento de eventual taxa de entrega e o momento em que o pedido representa uma venda.",
-          "responsavel": "autor",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
-        },
-        {
-          "identificador": "F04-T02",
-          "descricao": "Implementar o cálculo e o resumo para revisão, explicando funções e representação de valores monetários.",
-          "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
-        },
-        {
-          "identificador": "F04-T03",
-          "descricao": "Testar as regras de preço com resultados esperados calculados independentemente.",
-          "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
-        }
-      ]
-    },
-    {
       "identificador": "F05",
       "titulo": "Gravar pedidos com acesso compartilhado",
       "estado": "nao_iniciada",
@@ -246,6 +186,66 @@
           "responsavel": "agente",
           "estado": "aprovada",
           "evidencia": "npm test passou: tipos, build e 3 testes, zero falhas. Navegador conferiu 4 pizzas nos 3 tamanhos (12 preços), 4 bebidas e 3 adicionais, com correspondência aos dados fictícios. Viewport 390x844: uma coluna e sem rolagem horizontal (375 px de conteúdo/documento); em 1280x900: duas colunas e sem rolagem horizontal (1265 px). Console observado sem erros. Capturas f02-movel.jpg e f02-desktop.jpg. Reutilizado servidor existente na porta 5173; nova tentativa não iniciou por porta ocupada, sem encerrar processo preexistente. Commit das tarefas concluídas solicitado pelo autor; F03 permanece não iniciada."
+        }
+      ]
+    },
+    {
+      "identificador": "F03",
+      "titulo": "Montar o pedido",
+      "estado": "aprovada",
+      "objetivo": "Permitir ao atendente informar cliente, entrega ou retirada, observações, forma de pagamento e itens com quantidades; pizzas permitem tamanho, sabores e adicionais.",
+      "verificacao": "Montar pedidos de entrega e retirada com pizza personalizada e bebida; validar os campos obrigatórios e impedir quantidades inválidas.",
+      "tarefas": [
+        {
+          "identificador": "F03-T01",
+          "descricao": "Definir campos obrigatórios, dados de entrega e formas de pagamento aceitas.",
+          "responsavel": "autor",
+          "estado": "aprovada",
+          "evidencia": "Definidas por delegação anterior do autor: nome e telefone obrigatórios; entrega exige logradouro, número, bairro e cidade; complemento e observações opcionais; pagamento em dinheiro, Pix ou cartão, apenas informativo. Quantidade inteira de 1 a 99. Premissas fictícias e ajustáveis."
+        },
+        {
+          "identificador": "F03-T02",
+          "descricao": "Implementar o formulário e a inclusão, alteração e remoção de itens antes da gravação, explicando eventos e estado.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Formulário e lista em memória implementados em montagem.ts; incluir, editar, cancelar edição e remover itens; validações em pedido.ts. Eventos e estado explicados no README. Conferidos retirada e entrega com pizza personalizada e bebida no navegador, edição de quantidade e cancelamento. T03 verifica os demais cenários."
+        },
+        {
+          "identificador": "F03-T03",
+          "descricao": "Verificar os cenários de entrega, retirada, campos obrigatórios e quantidades inválidas.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "npm test: tipos, build e 7 testes aprovados, zero falhas. Testes cobrem entrega/retirada, obrigatoriedade, telefone, pedido vazio, quantidades e produtos/limites inválidos. Navegador: retirada e entrega com pizza personalizada e bebida, pedido vazio, endereço obrigatório, pizza sem sabor/excesso, quantidade zero, edição/cancelamento/remoção, Enter e Tab. Sem rolagem horizontal em 390x844 (375 px) e 1280x900 (1265 px); console sem erros observados. Capturas f03-movel.jpg e f03-desktop.jpg. Servidor preexistente 5173 preservado. Verificadores próprios do harness indisponíveis; prática do autor não verificada."
+        }
+      ]
+    },
+    {
+      "identificador": "F04",
+      "titulo": "Calcular e revisar os valores",
+      "estado": "aprovada",
+      "objetivo": "Calcular a pizza pelo sabor mais caro no tamanho escolhido, incluindo adicionais e quantidades, e apresentar o total do pedido.",
+      "verificacao": "Comparar cálculos com exemplos manuais: pizza de um sabor, sabores de preços diferentes, adicionais e múltiplas quantidades; conferir valores monetários sem erros de arredondamento.",
+      "tarefas": [
+        {
+          "identificador": "F04-T01",
+          "descricao": "Definir o tratamento de eventual taxa de entrega e o momento em que o pedido representa uma venda.",
+          "responsavel": "autor",
+          "estado": "aprovada",
+          "evidencia": "Premissas ajustáveis por delegação do autor: entrega R$ 5,00 por pedido e retirada sem taxa. Venda registrada somente após gravação bem-sucedida na F05; forma de pagamento informada não confirma recebimento. Rascunho não representa venda."
+        },
+        {
+          "identificador": "F04-T02",
+          "descricao": "Implementar o cálculo e o resumo para revisão, explicando funções e representação de valores monetários.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Funções puras em aplicacao/valores.ts calculam base, adicionais, unidade, subtotal, taxa e total em centavos. Interface mostra composição dos itens e valores do rascunho; conferência apresenta dados do cliente e total, invalidada ao alterar dados. README explica funções, centavos e roteiro. Tipos passaram; navegador móvel confirmou exemplo R$ 106 + R$ 36 = R$ 142 na retirada."
+        },
+        {
+          "identificador": "F04-T03",
+          "descricao": "Testar as regras de preço com resultados esperados calculados independentemente.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "npm test passou: tipos, build e 13 testes, zero falhas; seis novos testes de valores com resultados literais independentes. Navegador móvel e desktop: exemplo R$ 142 retirada/R$ 147 entrega, edição R$ 94, remoção R$ 58, cancelamento preservou total, revisão invalidada e edição aberta bloqueada; Enter conferido. Sem rolagem horizontal em 390x844 e 1280x900; console sem erros observados. Capturas f04-movel.jpg e f04-desktop.jpg. Prática do autor não verificada; verificadores próprios do harness indisponíveis."
         }
       ]
     }

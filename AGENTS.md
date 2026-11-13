@@ -2,11 +2,16 @@
 
 ## Estrutura e organização do projeto
 
-O repositório contém a primeira página da aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScript com Vite, além das skills e do planejamento no harness. O cardápio fictício está disponível; registro de pedidos ainda não foi implementado.
+O repositório contém a aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScript com Vite, além das skills e do planejamento no harness. O cardápio fictício, a montagem, o cálculo e a revisão de rascunhos estão disponíveis; gravação de pedidos ainda não foi implementada.
 
 - `index.html`: estrutura e conteúdo da primeira página.
 - `aplicacao/principal.ts`: apresentação dos produtos e troca de tamanho.
 - `aplicacao/cardapio.ts`: dados tipados e preços fictícios em centavos.
+- `aplicacao/valores.ts`: cálculo de preços por item, taxa e total em centavos.
+- `testes/valores.test.mjs`: regras de preço com resultados independentes.
+- `aplicacao/pedido.ts`: tipos e validações da montagem do pedido.
+- `aplicacao/montagem.ts`: formulário, eventos e edição dos itens em memória.
+- `testes/pedido.test.mjs`: validação de entrega, retirada, personalização e quantidades.
 - `aplicacao/estilos.css`: apresentação e adaptação a telas pequenas.
 - `testes/pagina.test.mjs`: verificação dos recursos da compilação.
 - `testes/cardapio.test.mjs`: testes de dados e formatação.

@@ -1,6 +1,6 @@
 # DINNOS — Pedidos da pizzaria
 
-Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem framework de interface. O F02 disponibiliza o cardápio de demonstração; registro e consulta de pedidos ainda não estão disponíveis.
+Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem framework de interface. Cardápio, montagem, cálculo e revisão de rascunhos de pedidos disponíveis; gravação e consulta de pedidos ainda não implementadas.
 
 ## Preparar e executar
 
@@ -25,7 +25,7 @@ Após clonar uma versão que já contém package-lock.json, use npm ci para inst
 
 - index.html: estrutura e conteúdo da página, com cabeçalho, conteúdo principal e rodapé. O atributo lang informa o idioma.
 - aplicacao/estilos.css: cores, tipografia, espaçamento e adaptação a telas pequenas.
-- aplicacao/principal.ts: comportamento do botão que mostra e oculta as próximas etapas. Os tipos ajudam a detectar erros antes de executar.
+- aplicacao/principal.ts: apresentação do cardápio e troca de tamanho; importa a montagem do pedido.
 - package.json: dependências e comandos do projeto; suas chaves e os nomes dev, build, preview e test seguem convenções das ferramentas.
 - package-lock.json: versões exatas das dependências, para repetir a instalação.
 - tsconfig.json: regras de checagem do TypeScript, incluindo o modo estrito.
@@ -35,7 +35,7 @@ Após clonar uma versão que já contém package-lock.json, use npm ci para inst
 
 HTML define o que existe; CSS define a apresentação; JavaScript define as interações. Escrevemos essas interações em TypeScript, que acrescenta tipos ao JavaScript. Por exemplo, HTMLButtonElement identifica um botão; boolean representa verdadeiro ou falso. As anotações de tipo não vão para o navegador.
 
-Em principal.ts, querySelector encontra os elementos pelo identificador; addEventListener reage ao clique; hidden controla a visibilidade; aria-expanded comunica o estado do botão às tecnologias assistivas. O teste de existência dos elementos evita acessar um elemento ausente.
+Em principal.ts, querySelector encontra os elementos pelo identificador e addEventListener reage à mudança do tamanho. Em montagem.ts, os eventos atualizam os itens e os resumos; hidden controla a visibilidade do endereço e da revisão.
 
 ## Compilar e verificar
 
@@ -77,3 +77,85 @@ Preços por sabor, na ordem pequena/média/grande: muçarela R$ 28/38/48; calabr
 Verificar com npm test: checagem de tipos, compilação, teste dos recursos publicados e dois testes de dados/formatação em testes/cardapio.test.mjs. O Node.js usa --experimental-strip-types para ler os dados TypeScript nos testes; a checagem de tipos continua responsabilidade do tsc.
 
 Roteiro atual: abrir a página em tela pequena, conferir quatro pizzas, trocar entre os três tamanhos, comparar preços e limites com os valores acima, conferir quatro bebidas e três adicionais e ampliar para desktop. O roteiro anterior do F01 é histórico: seu botão de próximas etapas foi substituído pelo cardápio.
+## Montagem do pedido — F03
+
+A seção “Montar pedido” permite incluir, editar e remover pizzas e bebidas em um
+rascunho temporário. Os dados são perdidos ao recarregar a página. O cálculo e a
+revisão foram acrescentados na F04; a gravação pertence à F05.
+
+Premissas fictícias e ajustáveis, definidas por delegação do autor:
+
+- Nome e telefone com DDD (10 ou 11 dígitos) obrigatórios.
+- Retirada dispensa endereço. Entrega exige logradouro, número (ou s/n), bairro e cidade.
+- Complemento e observações são opcionais.
+- Dinheiro, Pix ou cartão são informações de pagamento; não há cobrança pelo sistema.
+- Quantidades inteiras de 1 a 99 por item; sabores seguem o limite de cada tamanho.
+- Adicionais opcionais aplicam-se a cada pizza da quantidade informada.
+
+`aplicacao/pedido.ts` define os tipos e funções de validação sem acessar a tela.
+`aplicacao/montagem.ts` escuta eventos: `change` alterna os campos da modalidade e
+do produto; `submit` valida o formulário e impede a navegação com `preventDefault`.
+A variável `itens` guarda a lista em memória. `indiceEdicao` identifica o item sendo
+editado; ao salvar, esse item é substituído. Cancelar preserva o item original.
+Depois de cada alteração, `apresentarItens` reconstrói a lista com `textContent`.
+
+Execute `npm test` para tipos, compilação, recursos publicados, cardápio e
+`testes/pedido.test.mjs` (entrega, retirada, obrigatoriedade, quantidades e personalização).
+
+## Roteiro manual da F03
+
+1. Em tela pequena, abra “Montar pedido”. Use apenas dados fictícios, por exemplo
+   Cliente Exemplo e (11) 99999-9999. Selecione retirada e Pix.
+2. Tente conferir sem itens. Inclua duas pizzas médias com dois sabores e bacon,
+   depois uma bebida. Confira os dados e observe a confirmação do rascunho.
+3. Edite a pizza, mude a quantidade e salve. Edite novamente e cancele; o item
+   original deve permanecer. Remova a bebida e inclua outra.
+4. Tente quantidade zero, negativa e fracionária; tente pizza sem sabor e pizza
+   pequena com dois sabores. Nenhuma deve entrar no pedido.
+5. Alterne para entrega. Confira sem endereço, depois preencha logradouro, número,
+   bairro e cidade fictícios. Volte para retirada: endereço não deve ser exigido.
+6. Navegue com Tab e Shift+Tab, selecione caixas com Espaço e acione botões com
+   Enter. Confira foco visível, legibilidade, toque e ausência de rolagem horizontal.
+   Repita a apresentação em tela maior.
+
+## Cálculo e revisão — F04
+
+A função calcularItem, em aplicacao/valores.ts, usa o sabor mais caro no tamanho
+escolhido, soma os adicionais uma vez por pizza e multiplica pela quantidade.
+Bebidas usam preço unitário vezes quantidade. calcularPedido soma os subtotais
+e acrescenta a taxa uma única vez: entrega R$ 5,00, retirada R$ 0,00. Um rascunho
+vazio mostra zero em todos os valores. São premissas fictícias e ajustáveis.
+
+Todos os cálculos usam inteiros em centavos: R$ 53,00 é 5300. A divisão por 100
+ocorre apenas na exibição com formatarPreco. As funções não acessam a tela nem
+alteram os itens recebidos; a interface usa seus resultados para apresentar os valores.
+
+Exemplo independente: duas pizzas médias de muçarela/frango com bacon usam
+R$ 46 + R$ 7 = R$ 53 por unidade, ou R$ 106 nas duas. Três refrigerantes de cola
+custam R$ 36. Subtotal R$ 142; retirada R$ 142; entrega R$ 147.
+
+O botão “Conferir dados do pedido” valida os dados e mostra cliente, telefone,
+modalidade, endereço, pagamento, observações e total conferido. Qualquer alteração
+oculta essa revisão até nova conferência. Durante uma edição, os valores continuam
+representando os itens adicionados; salve ou cancele antes de conferir.
+
+O rascunho não representa venda. A premissa é considerar venda registrada apenas
+após gravação bem-sucedida na F05. Pagamento informado não confirma recebimento;
+não há processamento de pagamento. Nenhuma gravação foi implementada na F04.
+
+Execute npm test: tipos, build e testes, incluindo testes/valores.test.mjs com
+resultados literais calculados independentemente (sabores, adicionais, bebidas,
+quantidades, taxa, edição/remoção e rejeição de dados inválidos).
+
+### Roteiro manual da F04
+
+1. Em largura de 390 px, inclua duas pizzas médias de muçarela/frango com bacon e
+   três refrigerantes de cola. Compare os valores com o exemplo acima.
+2. Troque retirada por entrega e vice-versa. Confira a diferença única de R$ 5.
+3. Preencha dados fictícios e confira: a revisão deve apresentar os dados e o total.
+4. Edite a quantidade, cancele, depois edite e salve; remova uma bebida. Confira os
+   valores após cada ação e que a revisão anterior ficou oculta.
+5. Altere cliente, pagamento ou modalidade após conferir: exija nova conferência.
+   Tente conferir com edição aberta: a revisão não deve aparecer.
+6. Use Tab, Shift+Tab e Enter; confira legibilidade, foco e ausência de rolagem
+   horizontal no celular antes de repetir a apresentação em tela maior.

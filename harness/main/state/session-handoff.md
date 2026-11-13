@@ -1,39 +1,31 @@
 # Continuidade da sessão
 
-## Objetivo
+## Objetivo e estado
 
-Construir o sistema acadêmico de pedidos da pizzaria DINNOS por etapas, com aprendizagem do autor iniciante. Prazo interpretado como 18/11/2026, ainda sem confirmação explícita do mês. Branch única: main.
+Construir o sistema acadêmico DINNOS por etapas, com aprendizagem do autor iniciante. Prazo interpretado como 18/11/2026, ainda sem confirmação explícita do mês. Branch única main.
 
-## Estado atual
+F01, F02, F03, F04 e F08 aprovadas. Nenhuma tarefa em andamento. F05 a F07 não iniciadas. Ler o guia e os três arquivos de estado antes de continuar. Autor delegou premissas razoáveis e ajustáveis, sem exigir respostas a perguntas.
 
-- Ler harness/guides/workflow.md e os três arquivos de estado antes de continuar.
-- F01, F02 e F08 concluídas. Nenhuma tarefa em andamento; F03 a F07 não iniciadas. F01-T04 encerrada após relato de prática concluída e dispensa explícita da confirmação detalhada; quantidade de cenários e compreensão conceitual não verificadas.
-- Autor escolheu HTML5, CSS3 e TypeScript sem framework de interface. Vite 8.3.8 serve e compila; TypeScript 6.0.3 verifica tipos em modo estrito. Supabase previsto para persistência compartilhada e autenticação na F05; Netlify para publicação futura. Nenhum serviço externo provisionado.
-- Estrutura e comandos no README.md e AGENTS.md. Aplicação em index.html e aplicacao/; teste do pacote em testes/pagina.test.mjs. Cardápio fictício disponível com três tamanhos, quatro sabores, quatro bebidas e três adicionais; sem montagem ou gravação de pedidos. Dados em aplicacao/cardapio.ts.
-- Português do Brasil obrigatório em código e documentação autorais; identificadores sem acentos. Preservar contratos externos das ferramentas.
-- Premissa do autor: ao fim de cada tarefa, lembrar de solicitar o commit. Criar commits somente sob solicitação explícita. Commit das tarefas T01 a T03 solicitado pelo autor nesta sessão; agrupamento registrado no progresso. Consultar git log para identificar o registro.
+Aplicação em HTML5, CSS3 e TypeScript estrito com Vite, sem framework. Cardápio fictício em aplicacao/cardapio.ts; montagem e edição em aplicacao/montagem.ts; tipos/validação em aplicacao/pedido.ts; cálculo em aplicacao/valores.ts. Rascunho em memória, perdido ao recarregar, com aviso na tela. Sem persistência ou cobrança.
 
-## Verificações e limitações
+## Regras atuais
 
-- npm install concluído após ENOTFOUND no ambiente restrito e nova tentativa autorizada. Auditoria sem vulnerabilidades. Versões exatas em package-lock.json; node_modules/, dist/ e .npm-cache/ ignorados.
-- npm test passou: tsc, Vite build e 1 teste dos recursos publicados, zero falhas.
-- Servidor de desenvolvimento iniciado e página efetivamente conferida pelo navegador: conteúdo, clique para expandir, Enter para recolher, desktop e viewport móvel 390x844 sem rolagem horizontal. Console observado sem erros. Capturas em harness/main/evidencias/.
-- Preview de produção iniciou na porta 4173; interação nessa prévia não verificada. Requisições HTTP por node_repl falharam no ambiente restrito, sem impedir a verificação pelo navegador.
-- Verificadores próprios do harness indisponíveis. Validação de JSON e diff não equivalem a testes da aplicação.
-- Preferências locais ausentes; não criadas silenciosamente. Servidores de verificação devem ser encerrados ao finalizar; autor executará npm run dev para sua prática.
+Nome e telefone com DDD (10/11 dígitos) obrigatórios. Entrega exige logradouro, número, bairro e cidade; retirada dispensa endereço. Complemento e observações opcionais. Dinheiro, Pix ou cartão informativos. Quantidades inteiras 1 a 99; sabores conforme tamanho. Pizza pelo sabor mais caro no tamanho, mais adicionais por unidade; bebidas por quantidade. Valores em centavos inteiros. Taxa fictícia fixa R$ 5 por pedido de entrega, retirada sem taxa. Rascunho vazio mostra zeros.
 
-## Mobile first
+Venda registrada somente após gravação bem-sucedida na futura F05; pagamento informado não confirma recebimento. Conferência mostra dados e total; qualquer alteração oculta a revisão. Conferir durante edição aberta exige salvar ou cancelar. Valores exibidos durante edição representam os itens já adicionados.
 
-Premissa obrigatória: projetar e implementar primeiro para celular. CSS base para telas pequenas, ampliação via min-width, verificação de toque/teclado, legibilidade e rolagem horizontal antes do desktop. Registrada em AGENTS.md e nas convenções da lista.
+## Verificações
 
-## Verificações do F02
+Baseline com sete testes e tipos/build passou. F04: npm test passou com tipos, build e 13 testes, zero falhas. Seis novos testes de valores usam resultados literais independentes; cobrem tamanhos, sabor mais caro, adicionais, quantidades, bebida, taxa única, edição/remoção, inteiros e rejeição de dados inválidos.
 
-npm test passou com três testes, tipos e build; navegador conferiu todos os preços, tamanhos e limites. Layout móvel 390x844 em uma coluna e desktop 1280x900 em duas colunas, sem rolagem horizontal; console sem erros observados. Capturas em harness/main/evidencias/f02-movel.jpg e f02-desktop.jpg. Servidor preexistente em 5173 reutilizado e preservado. Verificadores próprios do harness continuam indisponíveis.
+Navegador primeiro móvel 390x844, depois desktop 1280x900, sem rolagem horizontal; console observado sem erros. Exemplo: duas pizzas médias muçarela/frango com bacon R$ 106 + três colas R$ 36 = R$ 142 retirada/R$ 147 entrega. Edição para uma pizza gerou R$ 94; remover bebidas R$ 58; cancelar preservou R$ 147. Revisão invalidada ao mudar nome/modalidade e bloqueada com edição aberta; Enter conferido. Capturas f04-movel.jpg e f04-desktop.jpg em harness/main/evidencias/. Servidor preexistente 5173 reutilizado e preservado.
+
+Verificadores próprios do harness indisponíveis. JSON com 8 funcionalidades e 24 tarefas únicas; demais funcionalidades preservadas. git diff --check sem erros, apenas avisos LF/CRLF. Prática do autor não verificada; não atribuir testes do agente ao autor. Sem auditoria completa de acessibilidade ou teste em celular físico.
 
 ## Próximo passo
 
-F03: montar o pedido. O autor autorizou prosseguir sem exigir respostas às perguntas; declarar e documentar premissas razoáveis e ajustáveis. Não presumir respostas nem inventar testes relatados pelo autor. As regras e preços fictícios do F02 estão no README.md e em aplicacao/cardapio.ts. Respeitar a cobrança pelo sabor mais caro e os limites por tamanho ao implementar a montagem. Não iniciar F04 a F07 junto da F03.
+F05: gravação compartilhada. Supabase foi previsto para PostgreSQL, autenticação e políticas de acesso; Netlify para publicação futura. Nenhum serviço provisionado. Consultar capacidades e documentação atual antes da integração. Definir acesso autorizado e configurações sem segredos, preservar itens/preços/data/identificação na gravação e tratar falhas sem falso sucesso. Não iniciar F06 antes de resolver as pendências da F05. T04 da F05 exige teste orientado do autor em dois dispositivos; apresentar roteiro antes de solicitar.
 
-Lembrar o autor de solicitar o commit ao fim de cada tarefa. F01-T01 a T03 estão no commit 4efc276. Autor solicitou registrar F02, mobile first e o encerramento de F01-T04 em novo commit; consultar git log para identificar o registro.
+Manter pt-BR, mobile first, uma tarefa em andamento por vez e atualização dos três arquivos de estado. Preferências locais ausentes, sem criação silenciosa; recomenda-se criá-las quando houver template.
 
-Revisão final: JSON válido, 24 tarefas únicas, nenhuma em andamento; git diff --check sem erros, somente avisos de LF/CRLF.
+Autor solicitou registrar F03/F04 em um commit com código, testes, documentação, capturas e estado do harness. Consultar git log para identificar o registro. Último commit anterior db3dcc0. Lembrar o autor de solicitar o commit ao concluir tarefas; não criar sem pedido explícito.
