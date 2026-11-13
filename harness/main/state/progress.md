@@ -57,3 +57,43 @@
 - Traduzidos campos, estados e responsáveis da lista de funcionalidades; guia e AGENTS.md alinhados. Caminhos de infraestrutura preservados.
 - As sete demandas e 22 tarefas originais permanecem pendentes; F08 registra esta manutenção separadamente.
 - F08 aprovada e movida para concluidas após validar o JSON, a preservação campo a campo das sete demandas e 22 tarefas originais, os 24 identificadores únicos e a documentação do esquema. git diff --check sem erros; revisão de espaços nos cinco arquivos sem falhas. Apenas avisos de LF/CRLF do Git. Não há aplicação ou testes da aplicação para executar.
+
+## 2026-11-13 — Início do F01
+
+- Autor solicitou executar F01. F01-T01 em andamento; demais tarefas preservadas.
+- Premissa: manter aprendizagem incremental e considerar o prazo interpretado como 18/11/2026.
+- Recomendação apresentada: HTML5, CSS3 e JavaScript sem framework; Supabase para persistência compartilhada na F05 e Netlify para futura publicação. TypeScript acrescenta configuração e conceitos nesta etapa.
+- Consultada a documentação oficial de Supabase (Auth e RLS) e Netlify (publicação de arquivos estáticos). Serviços propostos, sem contas ou recursos criados.
+- Decisão tecnológica aguardando resposta do autor. Nenhuma página criada nesta etapa de definição.
+- Baseline: main...origin/main sem alterações. Verificadores do harness continuam indisponíveis. Preferências locais ausentes; recomenda-se criá-las quando houver template.
+- Bloqueios e riscos: F01-T04 exige execução e explicação pelo autor; não pode ser aprovada somente por verificação do agente.
+
+## 2026-11-13 — Lembrete ao concluir tarefas
+
+- Premissa solicitada pelo autor: ao fim de cada tarefa, lembrar de solicitar o commit. Registrada no guia e nas convenções da lista. O lembrete não autoriza commits automáticos.
+
+## 2026-11-13 — Implementação da base do F01
+
+- Escolha do autor: TypeScript, aceitando configuração adicional. Mantidos HTML5 e CSS3; Vite cuida do servidor e da transformação para JavaScript, com tsc separado para checagem de tipos. Supabase e Netlify previstos para etapas futuras, sem recursos externos criados.
+- T01, T02 e T03 aprovadas; T04 em andamento, aguardando execução e explicação pelo autor. F01 não aprovada. F02 a F07 preservadas.
+- Criados index.html, aplicacao/principal.ts, aplicacao/estilos.css, package.json, package-lock.json, tsconfig.json, .gitignore, README.md e testes/pagina.test.mjs. Página responsiva com botão acessível de mostrar/ocultar etapas. Sem cardápio ou pedidos implementados.
+- README.md explica cada arquivo, HTML/CSS/TypeScript e o fluxo de compilação. AGENTS.md e estado atual do guia alinhados.
+- npm install --cache .npm-cache: primeira tentativa falhou com ENOTFOUND no ambiente restrito; nova tentativa com acesso autorizado concluída, 16 pacotes adicionados, auditoria sem vulnerabilidades. Instalados TypeScript 6.0.3 e Vite 8.3.8; Node.js v26.13.0 e npm 11.20.0 disponíveis. Cache e dependências ignorados pelo Git.
+- npm test: checagem de tipos e compilação aprovadas; 1 teste de recursos publicados passou, 0 falhas. O teste verifica idioma do HTML e existência dos arquivos JS e CSS referenciados na compilação.
+- npm run dev -- --strictPort: servidor iniciado em 127.0.0.1:5173. Execução restrita não acessível ao navegador; reinício com permissão resolveu. Navegador confirmou conteúdo, expansão por clique e recolhimento com Enter, layout desktop e móvel em viewport 390x844, sem rolagem horizontal (larguras do documento e conteúdo iguais: 375 px, descontada a barra vertical) e sem erros no console observado. Capturas em harness/main/evidencias/f01-desktop.jpg e f01-movel.jpg.
+- npm run preview -- --strictPort: prévia da compilação iniciou em 127.0.0.1:4173. Interação nessa prévia não verificada; recursos do pacote cobertos pelo teste automatizado. Requisições HTTP pelo node_repl permaneceram indisponíveis no ambiente restrito; a página foi efetivamente observada pelo navegador.
+- Preferências locais continuam ausentes; recomenda-se sua criação quando houver template. Não foi criada silenciosamente. Nenhum ZIP alterado e nenhum commit criado.
+
+### Bloqueios e riscos do F01
+
+- Falta o autor executar o roteiro manual de cinco passos e explicar os papéis dos arquivos (F01-T04). Não atribuir ao autor os testes feitos pelo agente. Zero cenários relatados pelo autor até aqui.
+- Não iniciar F02 antes de encerrar essa pendência. Persistência, autenticação e publicação permanecem futuras; nenhuma conexão com banco ou site público existe no F01.
+- Lembrete solicitado: ao fim de cada tarefa, lembrar o autor de solicitar o commit; não criar commits automaticamente.
+
+- Revisão final do estado: JSON válido; F02 a F07 e F08 preservadas em comparação com HEAD; 24 tarefas e identificadores únicos, responsáveis e estados válidos, apenas F01-T04 em andamento. Arquivos autorais novos sem espaços finais. Servidores de desenvolvimento e preview encerrados após as verificações.
+- git diff --check sem erros; somente avisos de conversão LF/CRLF. Revisados os diffs de AGENTS.md e do guia.
+
+## 2026-11-13 — Registro das tarefas concluídas
+
+- Autor solicitou o commit de F01-T01, F01-T02 e F01-T03. Agrupamento: base TypeScript, primeira página, documentação, evidências e estado pertinente do harness em um commit. Incluído o lembrete de commit solicitado durante essas tarefas.
+- Mantidas F01 e F01-T04 em andamento; nenhuma prática relatada pelo autor. Evidências de npm test e navegador da implementação preservadas; sem alterações executáveis posteriores que exijam repetir testes.

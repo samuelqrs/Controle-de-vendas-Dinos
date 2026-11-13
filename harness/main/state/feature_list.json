@@ -2,13 +2,14 @@
   "versaoEsquema": 1,
   "ramificacao": "main",
   "convencoes": [
-    "Usar português do Brasil em todo código autoral: nomes de arquivos e pastas da aplicação, variáveis, funções, classes, propriedades, campos do banco, rotas, identificadores HTML, classes CSS, comentários, mensagens, testes e documentação. Usar identificadores sem acentos, como calcularTotal e precoUnitario, e acentuação normal nos textos exibidos. Manter a grafia de palavras reservadas, APIs, bibliotecas, comandos e contratos externos obrigatórios. O esquema interno do harness é autoral e também usa português; preservar os caminhos de infraestrutura existentes para manter suas referências."
+    "Usar português do Brasil em todo código autoral: nomes de arquivos e pastas da aplicação, variáveis, funções, classes, propriedades, campos do banco, rotas, identificadores HTML, classes CSS, comentários, mensagens, testes e documentação. Usar identificadores sem acentos, como calcularTotal e precoUnitario, e acentuação normal nos textos exibidos. Manter a grafia de palavras reservadas, APIs, bibliotecas, comandos e contratos externos obrigatórios. O esquema interno do harness é autoral e também usa português; preservar os caminhos de infraestrutura existentes para manter suas referências.",
+    "Ao fim de cada tarefa, lembrar o autor de solicitar o commit. Criar commits somente quando houver solicitação explícita."
   ],
   "funcionalidades": [
     {
       "identificador": "F01",
       "titulo": "Definir a base e preparar a primeira página",
-      "estado": "nao_iniciada",
+      "estado": "em_andamento",
       "objetivo": "Preparar uma aplicação compreensível para um iniciante, com HTML5, CSS3 e JavaScript ou TypeScript, e documentar como executá-la.",
       "verificacao": "Executar os comandos documentados, abrir a primeira página e verificar sua estrutura e apresentação no navegador; revisar o uso de português do Brasil no código autoral conforme as convenções do projeto.",
       "tarefas": [
@@ -16,29 +17,29 @@
           "identificador": "F01-T01",
           "descricao": "Explicar as opções e definir a tecnologia, a persistência compartilhada e a publicação considerando o prazo.",
           "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
+          "estado": "aprovada",
+          "evidencia": "Autor escolheu TypeScript em 13/11/2026. Base: HTML5, CSS3 e TypeScript sem framework de interface, com Vite para desenvolvimento e compilação. Supabase e Netlify mantidos para persistência compartilhada e publicação futura; serviços não provisionados."
         },
         {
           "identificador": "F01-T02",
           "descricao": "Preparar a estrutura mínima e uma primeira página, explicando a função de cada arquivo.",
           "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
+          "estado": "aprovada",
+          "evidencia": "Criados index.html, aplicacao/estilos.css e aplicacao/principal.ts, com apresentação responsiva e botão acessível para mostrar/ocultar próximas etapas. Configurados Vite e TypeScript estrito; função dos arquivos explicada no README.md. Verificação de execução será registrada em T03."
         },
         {
           "identificador": "F01-T03",
           "descricao": "Documentar instalação, execução e estrutura no repositório, incluindo AGENTS.md.",
           "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
+          "estado": "aprovada",
+          "evidencia": "README.md e AGENTS.md documentam Node.js, instalação, desenvolvimento, tipos, compilação, teste, preview e estrutura. npm install concluído com TypeScript 6.0.3 e Vite 8.3.8; auditoria sem vulnerabilidades. npm test passou (tipos, build e 1 teste de recursos). npm run dev e npm run preview iniciaram nas portas 5173 e 4173. Página de desenvolvimento conferida no navegador: clique, Enter, apresentação desktop e largura de 390 px; sem erros no console observado. Capturas em harness/main/evidencias/. Prévia de produção iniciada; interação nela não verificada. Autor solicitou registrar T01 a T03 em commit; T04 permanece em andamento."
         },
         {
           "identificador": "F01-T04",
           "descricao": "Executar a página com orientação e explicar o papel de HTML, CSS e JavaScript.",
           "responsavel": "autor",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
+          "estado": "em_andamento",
+          "evidencia": "Roteiro de cinco passos apresentado no README.md: executar, alternar botão, teclado, tela pequena e explicar HTML/CSS/TypeScript. Aguardando execução e relato pelo autor; zero cenários relatados pelo autor. F01 permanece em andamento."
         }
       ]
     },

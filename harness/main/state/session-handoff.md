@@ -2,37 +2,33 @@
 
 ## Objetivo
 
-Criar um sistema acadêmico de registro de vendas de pizzaria, com aprendizagem gradual e demandas separadas na feature list. Entrega interpretada como 18/11/2026.
+Construir o sistema acadêmico de pedidos da pizzaria DINNOS por etapas, com aprendizagem do autor iniciante. Prazo interpretado como 18/11/2026, ainda sem confirmação explícita do mês. Branch única: main.
 
 ## Estado atual
 
-- Branch única: `main`.
-- Ler `harness/guides/workflow.md`, `feature_list.json` e `progress.md` antes de continuar.
-- Entrevista realizada com a skill problem-interviewer; organização inicial e adequação retroativa de idioma autorizadas. Aguardar orientação para iniciar a aplicação.
-- Feature list criada com F01 a F07, todas `nao_iniciada`, sem tarefas em andamento.
-- Nenhuma aplicação, dependência, banco ou infraestrutura criada; nenhum commit solicitado.
-- Não existem templates do estado nem verificadores do harness no repositório.
-- Preferências locais ausentes; recomendar a criação de `harness/user_preferences.md`, sem criá-lo silenciosamente.
+- Ler harness/guides/workflow.md e os três arquivos de estado antes de continuar.
+- F01 em andamento: T01 (escolhas), T02 (primeira página) e T03 (documentação) aprovadas. Somente T04 em andamento, de responsabilidade do autor. F02 a F07 não iniciadas. F08 permanece concluída.
+- Autor escolheu HTML5, CSS3 e TypeScript sem framework de interface. Vite 8.3.8 serve e compila; TypeScript 6.0.3 verifica tipos em modo estrito. Supabase previsto para persistência compartilhada e autenticação na F05; Netlify para publicação futura. Nenhum serviço externo provisionado.
+- Estrutura e comandos no README.md e AGENTS.md. Aplicação em index.html e aplicacao/; teste do pacote em testes/pagina.test.mjs. Somente apresentação e botão de próximas etapas, sem cardápio ou pedidos.
+- Português do Brasil obrigatório em código e documentação autorais; identificadores sem acentos. Preservar contratos externos das ferramentas.
+- Premissa do autor: ao fim de cada tarefa, lembrar de solicitar o commit. Criar commits somente sob solicitação explícita. Commit das tarefas T01 a T03 solicitado pelo autor nesta sessão; agrupamento registrado no progresso. Consultar git log para identificar o registro.
 
 ## Verificações e limitações
 
-- Baseline limpo na branch `main`; orientação do repositório e guia do harness revisados.
-- JSON válido: 7 features e 22 tarefas com IDs únicos, responsáveis e estados conferidos; três arquivos presentes. Whitespace conferido com git diff --check e git diff --no-index --check, sem erros; apenas avisos de LF/CRLF.
-- Nenhum teste da aplicação executado, pois ainda não há aplicação.
-- Validações do harness não equivalem a testes da aplicação.
+- npm install concluído após ENOTFOUND no ambiente restrito e nova tentativa autorizada. Auditoria sem vulnerabilidades. Versões exatas em package-lock.json; node_modules/, dist/ e .npm-cache/ ignorados.
+- npm test passou: tsc, Vite build e 1 teste dos recursos publicados, zero falhas.
+- Servidor de desenvolvimento iniciado e página efetivamente conferida pelo navegador: conteúdo, clique para expandir, Enter para recolher, desktop e viewport móvel 390x844 sem rolagem horizontal. Console observado sem erros. Capturas em harness/main/evidencias/.
+- Preview de produção iniciou na porta 4173; interação nessa prévia não verificada. Requisições HTTP por node_repl falharam no ambiente restrito, sem impedir a verificação pelo navegador.
+- Verificadores próprios do harness indisponíveis. Validação de JSON e diff não equivalem a testes da aplicação.
+- Preferências locais ausentes; não criadas silenciosamente. Servidores de verificação devem ser encerrados ao finalizar; autor executará npm run dev para sua prática.
 
 ## Próximo passo
 
-Apresentar ao autor a divisão de demandas e aguardar orientação para iniciar F01. Na próxima demanda, explicar e definir a base tecnológica considerando o autor iniciante, o prazo e o acesso em vários dispositivos. Se necessário, fazer uma pergunta por vez. Registrar a tarefa como `em_andamento` apenas quando sua execução começar e manter no máximo uma nessa condição.
+Orientar F01-T04 usando o roteiro de cinco passos do README.md: executar npm run dev, conferir página, alternar botão, testar teclado/tela pequena e explicar o papel de HTML, CSS e TypeScript. Pedir quantidade exata de passos executados e diferenças observadas. Até aqui, zero cenários relatados pelo autor. Não aprovar F01 antes dessa execução e explicação; não iniciar F02 enquanto houver essa pendência.
 
-Não implementar todas as demandas em uma única interação. Não criar commits sem solicitação. Atualizar os três arquivos de estado ao encerrar cada sessão e registrar evidências antes de concluir qualquer feature.
+Ao concluir T04, registrar o relato como informado pelo autor e suas limitações; se o objetivo estiver verificado, aprovar F01 e mover para concluidas. Atualizar os três arquivos de estado e lembrar o autor de solicitar o commit.
 
-## Premissa obrigatória de idioma
+## Revisão final
 
-Usar português do Brasil em todo código autoral: nomes de arquivos e pastas da aplicação, variáveis, funções, classes, propriedades, campos do banco, rotas, identificadores HTML, classes CSS, comentários, mensagens, testes e documentação. Manter a grafia original de palavras reservadas, APIs, bibliotecas, comandos e contratos obrigatórios das ferramentas, sem exigir inglês no esquema autoral do harness. Usar identificadores sem acentos, como calcularTotal e precoUnitario, preservando acentuação nos textos exibidos ao usuário.
-
-## Adequação de idioma (F08)
-
-- Campos e estados do harness agora usam português; consultar o esquema no guia.
-- Funcionalidades F01 a F07 continuam pendentes. A manutenção F08 foi aprovada e movida para concluidas; JSON, preservação dos dados, esquema documentado e espaços conferidos, sem falhas. Nenhuma tarefa em andamento.
-- Não reutilizar scripts antigos que dependam das chaves anteriores em inglês.
+JSON validado e comparado com HEAD: F02 a F07 e F08 preservadas; 24 tarefas, identificadores únicos e apenas F01-T04 em andamento. Servidores de verificação encerrados. Arquivos autorais novos revisados sem espaços finais.
+git diff --check sem erros, apenas avisos de LF/CRLF.

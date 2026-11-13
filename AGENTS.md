@@ -2,8 +2,14 @@
 
 ## Estrutura e organização do projeto
 
-O repositório está na etapa inicial. Contém recursos de skills e o planejamento no harness; ainda não há código, testes ou recursos da aplicação de vendas.
+O repositório contém a primeira página da aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScript com Vite, além das skills e do planejamento no harness. Cardápio e registro de pedidos ainda não foram implementados.
 
+- `index.html`: estrutura e conteúdo da primeira página.
+- `aplicacao/principal.ts`: interações da página em TypeScript.
+- `aplicacao/estilos.css`: apresentação e adaptação a telas pequenas.
+- `testes/pagina.test.mjs`: verificação dos recursos da compilação.
+- `package.json`, `package-lock.json` e `tsconfig.json`: dependências, comandos e checagem de tipos.
+- `README.md`: preparação, explicações e roteiro manual.
 - `skills/professor-mode/SKILL.md`: instruções da skill de ensino.
 - `skills/professor-mode/agents/openai.yaml`: metadados de apresentação da skill.
 - `skills/professor-mode.zip`: pacote da skill.
@@ -17,7 +23,7 @@ Manter as instruções e os metadados de cada skill juntos. Ao adicionar a aplic
 
 ## Compilação, testes e desenvolvimento
 
-Ainda não há manifesto de dependências, comando de compilação, servidor de desenvolvimento, formatador ou executor de testes. Comandos como `npm install` e `npm test` não são procedimentos estabelecidos.
+Requer Node.js 22.12 ou superior e npm. Na raiz, usar `npm ci` com o lockfile existente (ou `npm install` ao alterar dependências), `npm run dev` para desenvolvimento, `npm run verificar` para tipos, `npm run build` para gerar `dist/`, `npm run preview` para conferir a compilação e `npm test` para compilar e executar o teste de recursos com node:test. Não há formatador configurado. Não editar nem versionar `dist/` e `node_modules/`. Consultar o roteiro de interação, teclado e tela pequena no README.md.
 
 Verificações úteis a partir da raiz:
 
@@ -37,7 +43,7 @@ Usar títulos descritivos em Markdown e instruções curtas e acionáveis. Usar 
 
 ## Verificação
 
-Ainda não há testes automatizados ou meta de cobertura. Nas alterações de skills, revisar manualmente o cabeçalho, os metadados, os caminhos e os exemplos. Ao atualizar um ZIP, verificar se seu conteúdo corresponde à pasta da skill. Não alterar pacotes sem confirmar o procedimento de empacotamento.
+O teste automatizado `testes/pagina.test.mjs` verifica os recursos de publicação com `npm test`; não há meta de cobertura. Conferir também a interação e a apresentação no navegador conforme o README.md. Nas alterações de skills, revisar manualmente o cabeçalho, os metadados, os caminhos e os exemplos. Ao atualizar um ZIP, verificar se seu conteúdo corresponde à pasta da skill. Não alterar pacotes sem confirmar o procedimento de empacotamento.
 
 Nas alterações da lista de funcionalidades, validar o JSON, os identificadores, os responsáveis, os estados e a preservação das demandas existentes. Ao adicionar código executável, incluir testes adequados e documentar os nomes e o comando exato de execução.
 

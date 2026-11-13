@@ -5,8 +5,10 @@ persistido em arquivos, independentemente da ferramenta utilizada.
 
 ## Estado atual do projeto
 
-O repositório contém documentação, estado do harness e skills em `skills/` e
-`.skill-build/`. Ainda não há aplicação, build, testes ou CI.
+O repositório contém a primeira página da aplicação em HTML5, CSS3 e TypeScript,
+com desenvolvimento e compilação via Vite e teste dos recursos publicados.
+Também contém documentação, estado do harness e skills em `skills/` e
+`.skill-build/`. Ainda não há CI. Consultar os comandos no README.md.
 
 Não considerar uma validação do harness como teste da futura aplicação.
 
@@ -109,3 +111,7 @@ Consultar sempre o diretório correspondente à branch ativa.
 
 Durante merges, revisar os diretórios de estado incorporados.
 Não apagar históricos de outras branches automaticamente.
+
+## Lembrete de commit ao concluir tarefas
+
+Ao fim de cada tarefa, lembrar o autor de solicitar o commit. O lembrete não autoriza criar commits; aguardar solicitação explícita.
