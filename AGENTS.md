@@ -2,11 +2,17 @@
 
 ## Estrutura e organização do projeto
 
-O repositório contém a aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScript com Vite, além das skills e do planejamento no harness. O cardápio fictício, a montagem, o cálculo e a revisão de rascunhos estão disponíveis; gravação de pedidos ainda não foi implementada.
+O repositório contém a aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScript com Vite, além das skills e do planejamento no harness. O cardápio fictício, a montagem, o cálculo e a revisão de rascunhos estão disponíveis; gravação com Supabase implementada e dependente da configuração do projeto para validação compartilhada.
 
 - `index.html`: estrutura e conteúdo da primeira página.
 - `aplicacao/principal.ts`: apresentação dos produtos e troca de tamanho.
 - `aplicacao/cardapio.ts`: dados tipados e preços fictícios em centavos.
+- `aplicacao/acesso.ts`: login de atendentes e conferência da gravação por código.
+- `aplicacao/banco.ts`: adaptação ao SDK oficial do Supabase.
+- `aplicacao/registro.ts`: preparação, confirmação e controle das tentativas de gravação.
+- `aplicacao/configuracao.ts`, `aplicacao/ambiente.d.ts` e `.env.example`: configuração pública do banco.
+- `banco/001_criar_pedidos.sql` e `banco/README.md`: esquema, acesso, configuração e roteiro de dois dispositivos.
+- `testes/registro.test.mjs` e `testes/banco.test.mjs`: falhas de gravação, PostgreSQL e políticas de acesso.
 - `aplicacao/valores.ts`: cálculo de preços por item, taxa e total em centavos.
 - `testes/valores.test.mjs`: regras de preço com resultados independentes.
 - `aplicacao/pedido.ts`: tipos e validações da montagem do pedido.
@@ -30,7 +36,7 @@ Manter as instruções e os metadados de cada skill juntos. Ao adicionar a aplic
 
 ## Compilação, testes e desenvolvimento
 
-Requer Node.js 22.12 ou superior e npm. Na raiz, usar `npm ci` com o lockfile existente (ou `npm install` ao alterar dependências), `npm run dev` para desenvolvimento, `npm run verificar` para tipos, `npm run build` para gerar `dist/`, `npm run preview` para conferir a compilação e `npm test` para compilar e executar o teste de recursos com node:test. Não há formatador configurado. Não editar nem versionar `dist/` e `node_modules/`. Consultar o roteiro de interação, teclado e tela pequena no README.md.
+Requer Node.js 22.12 ou superior e npm. Na raiz, usar `npm ci` com o lockfile existente (ou `npm install` ao alterar dependências), `npm run dev` para desenvolvimento, `npm run verificar` para tipos, `npm run build` para gerar `dist/`, `npm run preview` para conferir a compilação e `npm test` para compilar e executar o teste de recursos com node:test. O SDK @supabase/supabase-js é dependência de execução; @electric-sql/pglite é usado apenas nos testes de PostgreSQL. Configurar Supabase conforme banco/README.md antes da verificação compartilhada. Não há formatador configurado. Não editar nem versionar `dist/` e `node_modules/`. Consultar o roteiro de interação, teclado e tela pequena no README.md.
 
 Verificações úteis a partir da raiz:
 

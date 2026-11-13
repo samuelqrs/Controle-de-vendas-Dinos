@@ -1,6 +1,6 @@
 # DINNOS — Pedidos da pizzaria
 
-Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem framework de interface. Cardápio, montagem, cálculo e revisão de rascunhos de pedidos disponíveis; gravação e consulta de pedidos ainda não implementadas.
+Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem framework de interface. Cardápio, montagem, cálculo e revisão de rascunhos de pedidos disponíveis; gravação via Supabase preparada e dependente da configuração do projeto; listagem de pedidos ainda não implementada.
 
 ## Preparar e executar
 
@@ -159,3 +159,32 @@ quantidades, taxa, edição/remoção e rejeição de dados inválidos).
    Tente conferir com edição aberta: a revisão não deve aparecer.
 6. Use Tab, Shift+Tab e Enter; confira legibilidade, foco e ausência de rolagem
    horizontal no celular antes de repetir a apresentação em tela maior.
+
+## Gravação compartilhada — F05
+
+A integração foi implementada com o SDK oficial @supabase/supabase-js. Sem
+configuração, a tela informa indisponibilidade e não simula gravação. Configure
+o projeto, as contas e a autorização conforme [banco/README.md](banco/README.md).
+Copie .env.example para .env.local, preencha apenas URL e chave pública e reinicie
+o servidor. Não envie senhas ou chaves privilegiadas ao chat nem ao repositório.
+
+O fluxo passa por acesso.ts (login), registro.ts (validação e código da tentativa),
+banco.ts (requisição autenticada) e registrar_pedido (função PostgreSQL). O banco
+recalcula valores e guarda descrições, preços, itens, cliente, data e atendente.
+A interface só mostra sucesso depois de receber confirmação do banco. Falhas
+preservam o rascunho e o código para consulta/repetição sem duplicação.
+
+Após conferir dados e valores, use “Gravar pedido no banco”. A gravação confirmada
+fica bloqueada para edição; “Novo pedido” inicia outro rascunho. A conferência por
+código permite verificar persistência após reabrir ou em outro dispositivo.
+A listagem e os detalhes completos pertencem à F06.
+
+Execute npm test para tipos, build e testes. testes/registro.test.mjs verifica
+configuração, isolamento dos dados, falhas, respostas inválidas e reenvio.
+testes/banco.test.mjs executa a migração real com PostgreSQL via PGlite, testa RLS,
+autorização, preço no servidor, repetição, atomicidade e persistência após reabrir.
+O contrato de autenticação do Supabase é simulado nesses testes locais; conexão
+real, Auth hospedado e dois dispositivos continuam exigindo o projeto configurado.
+
+O roteiro de cinco cenários para o autor está em banco/README.md. Não considerar
+testes locais como relato do autor ou verificação da nuvem.

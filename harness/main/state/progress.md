@@ -157,3 +157,29 @@
 
 - Autor solicitou criar um commit com as alterações realizadas. Agrupamento: montagem, cálculo e revisão do pedido (F03/F04), com código, testes, documentação, capturas e estado pertinente do harness.
 - Preservadas as verificações finais: npm test com tipos, build e 13 testes aprovados; navegador móvel e desktop; JSON válido e diff sem erros de espaços. Nenhuma alteração executável posterior exige repetir os testes. F05 a F07 permanecem não iniciadas.
+
+
+## 2026-11-13 — F05: integração de gravação preparada
+
+- Autor solicitou continuidade; iniciada F05. Baseline npm test passou com tipos, build e 13 testes, zero falhas. Branch main inicialmente limpa; último commit 9151f73. Verificadores próprios do harness indisponíveis. Preferências locais ausentes, sem criação silenciosa; recomenda-se criar quando houver template.
+- Autor informou que ainda não possui projeto Supabase. Integração Supabase encontrada e sugerida; instalação/conexão não confirmada. Nenhum recurso externo provisionado, nenhum dado de cliente enviado à nuvem e nenhuma publicação realizada.
+- T01 aprovada: Supabase Auth com contas criadas pelo administrador, sem cadastro público na aplicação; lista de atendentes autorizados e ativos, RLS e leitura compartilhada só entre autorizados. Visitantes e contas não autorizadas não acessam pedidos. Sessão em sessionStorage; saída local limpa a tela. Configuração e roteiro em banco/README.md; .env.example contém apenas exemplos públicos.
+- T02 aprovada quanto à implementação: preparador/controlador em registro.ts, adaptação ao SDK em banco.ts, login e consulta por código em acesso.ts, integração à montagem. Código da tentativa é mantido após falha; confirmação só após resposta válida. Durante envio, rascunho bloqueado; após sucesso, Novo pedido inicia outro. Falha preserva os dados e orienta consultar o código antes de novo pedido.
+- banco/001_criar_pedidos.sql cria catálogo interno, autorização e pedidos com data/atendente/dados/itens/descrições/preços/totais preservados. Função verifica acesso, dados, limites e total previsto; recalcula no servidor; grava atomicamente e retorna o original em repetição do mesmo código/conteúdo. Não permite edição/exclusão ou inserção direta pelos clientes.
+- Dependências: @supabase/supabase-js 2.119.0 (execução) e @electric-sql/pglite 0.5.16 (desenvolvimento/testes). SDK inicialmente falhou com ENOTFOUND; instalação autorizada resolveu. npm audit da instalação não apontou vulnerabilidades. Lockfile atualizado. Nenhuma credencial incluída.
+- Testes novos: configuração/validação, cópia dos dados, falhas sem falso sucesso, confirmação inválida e concorrência; migração executada em PostgreSQL via PGlite com auth.uid/users simulados. Cobertos catálogo, servidor, autorização/RLS, leitura por segundo atendente, bloqueio anônimo e sem permissão, autoautorização impedida, atomicidade, preço adulterado, repetição, imutabilidade e revogação. Primeira execução falhou na reabertura do PGlite; restaurar papel administrativo antes de fechar resolveu e a reabertura com registro/políticas passou. Retirada sem taxa acrescentada à suíte final.
+- Tipos passaram. Navegador sem configuração: controles de acesso/gravação desativados com aviso explícito; montagem, revisão e total R$ 12 continuam funcionando. Móvel 390x844 (375 px de conteúdo), desktop 1280x900 (1265 px) sem rolagem horizontal; Enter conferido; console sem erros observados. Capturas f05-movel.jpg e f05-desktop.jpg. Servidor preexistente 5173 preservado.
+- git diff --check sem erros; arquivos novos sem espaços finais. Suíte completa final npm test passou: tipos, build e 28 testes, zero falhas, incluindo nove subcenários PostgreSQL e o teste agrupador. F05 permanece em andamento por pendências externas. Lembretes de commit apresentados ao concluir T01 e T02; nenhum commit criado.
+
+### Bloqueios e riscos atuais da F05
+
+- F05 permanece em andamento, T03 em andamento e T04 não iniciada. Projeto Supabase, migração aplicada e contas reais de demonstração ainda inexistentes nesta sessão. Testes locais não comprovam Auth hospedado, comunicação real ou dois dispositivos. F06/F07 não iniciadas.
+- Próximo requisito externo: criar/conectar projeto do autor, aplicar SQL, autorizar contas e configurar URL/chave pública no .env.local ou ambiente de build. Não pedir senhas/chaves privilegiadas no chat. Depois verificar gravação, reabertura, acesso e falha reais; orientar autor nos cinco cenários de banco/README.md e colher quantidade/resultados exatos. Zero cenários relatados pelo autor na F05.
+- Rascunho ainda se perde ao recarregar. Em falha de rede, a gravação pode ter ocorrido sem resposta: consultar o código antes de iniciar outro pedido. Catálogo interno do banco e aplicação precisam ser atualizados juntos; o servidor rejeita total previsto divergente. Dados/preços fictícios. Não há confirmação de recebimento do pagamento.
+
+
+## 2026-11-13 — Registro da implementação local da F05
+
+- Autor solicitou criar um commit com as alterações realizadas. Agrupamento: autenticação e gravação via Supabase, migração PostgreSQL, configuração de exemplo, testes, documentação, capturas e estado pertinente do harness.
+- Preservadas as verificações finais: npm test com tipos, build e 28 testes aprovados, navegador móvel/desktop e diff sem erros de espaços. Nenhuma alteração executável posterior exige repetir testes.
+- F05 permanece em andamento: T03 aguarda projeto/configuração e validação hospedada; T04 aguarda teste do autor em dois dispositivos. F06/F07 não iniciadas. O commit não aprova essas verificações pendentes.

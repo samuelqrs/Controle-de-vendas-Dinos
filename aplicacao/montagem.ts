@@ -2,6 +2,8 @@ import { tamanhos, sabores, bebidas, adicionais, formatarPreco } from './cardapi
 import { calcularItem, calcularPedido, taxaEntrega } from './valores.ts';
 import { validarItem, validarPedido } from './pedido.ts';
 import type { ItemPedido, DadosPedido } from './pedido.ts';
+import { banco } from './acesso.ts';
+import { criarGravador } from './registro.ts';
 
 const secao = document.querySelector<HTMLElement>('#secao-pedido')!;
 secao.innerHTML = `
@@ -41,12 +43,15 @@ secao.innerHTML = `
     <p>Entrega: ${formatarPreco(taxaEntrega)} por pedido. Retirada sem taxa. Valores dos itens já adicionados; salve as alterações do item para atualizar.</p>
     <dl id="valores-pedido" aria-live="polite"></dl>
   </section>
-  <button type="submit" form="dados-pedido">Conferir dados do pedido</button>
+  <button type="submit" form="dados-pedido" id="conferir-pedido">Conferir dados do pedido</button>
   <p id="mensagem-pedido" role="status" tabindex="-1"></p>
   <section id="revisao-pedido" class="resumo-valores" aria-labelledby="titulo-revisao" hidden>
     <h3 id="titulo-revisao">Revisão do pedido</h3><dl id="dados-revisao"></dl>
     <p>Confira os itens e valores acima. Este rascunho ainda não é uma venda registrada e nenhum pagamento foi confirmado.</p>
-  </section>`;
+    <button type="button" id="gravar-pedido">Gravar pedido no banco</button>
+  </section>
+  <p id="mensagem-gravacao" role="status" tabindex="-1"></p>
+  <button type="button" id="novo-pedido" hidden>Novo pedido</button>`;
 
 const formulario = secao.querySelector<HTMLFormElement>('#dados-pedido')!;
 const editor = secao.querySelector<HTMLFormElement>('#editor-item')!;
@@ -56,8 +61,18 @@ const erroItem = secao.querySelector<HTMLElement>('#erro-item')!;
 const botaoConfirmar = secao.querySelector<HTMLButtonElement>('#confirmar-item')!;
 const botaoCancelar = secao.querySelector<HTMLButtonElement>('#cancelar-item')!;
 const revisao = secao.querySelector<HTMLElement>('#revisao-pedido')!;
+const botaoGravar = secao.querySelector<HTMLButtonElement>('#gravar-pedido')!;
+const botaoNovo = secao.querySelector<HTMLButtonElement>('#novo-pedido')!;
+const mensagemGravacao = secao.querySelector<HTMLElement>('#mensagem-gravacao')!;
+const gravador = criarGravador(async solicitacao => {
+  if (!banco) throw new Error('Supabase não configurado. A gravação está indisponível.');
+  return banco.gravar(solicitacao);
+});
+botaoGravar.disabled = !banco;
+if (!banco) mensagemGravacao.textContent = 'Gravação indisponível até configurar o Supabase. O rascunho continua apenas nesta aba.';
 let itens: ItemPedido[] = [];
 let indiceEdicao: number | null = null;
+let pedidoGravado = false;
 
 function campo(nome: string): HTMLInputElement | HTMLSelectElement {
   return editor.elements.namedItem(nome) as HTMLInputElement | HTMLSelectElement;
@@ -179,6 +194,7 @@ editor.addEventListener('submit', evento => {
     ? { tipo: 'pizza', quantidade, tamanho: tamanho.identificador, sabores: dados.getAll('sabores').map(String), adicionais: dados.getAll('adicionais').map(String) }
     : { tipo: 'bebida', quantidade, bebida: String(dados.get('bebida')) };
   const erros = validarItem(item);
+  if (indiceEdicao === null && itens.length >= 100) erros.push('O pedido aceita até 100 itens.');
   erroItem.textContent = erros.join(' ');
   if (erros.length) return;
   if (indiceEdicao === null) itens.push(item);
@@ -221,6 +237,59 @@ formulario.addEventListener('submit', evento => {
   }
   mensagem.textContent = erros.length ? erros.join(' ') : 'Dados conferidos. O rascunho está montado e ainda não foi gravado.';
   mensagem.focus();
+});
+
+function bloquearRascunho(bloquear: boolean): void {
+  formulario.inert = bloquear;
+  editor.inert = bloquear;
+  lista.inert = bloquear;
+  secao.querySelector<HTMLButtonElement>('#conferir-pedido')!.disabled = bloquear;
+  botaoGravar.disabled = bloquear || !banco;
+}
+
+function iniciarNovoPedido(): void {
+  gravador.reiniciar();
+  pedidoGravado = false;
+  revisao.querySelector('p')!.textContent = 'Confira os itens e valores acima. Este rascunho ainda não é uma venda registrada e nenhum pagamento foi confirmado.';
+  formulario.reset();
+  limparEditor();
+  itens = [];
+  const endereco = secao.querySelector<HTMLFieldSetElement>('#endereco-pedido')!;
+  endereco.hidden = true;
+  endereco.disabled = true;
+  bloquearRascunho(false);
+  apresentarItens();
+  botaoNovo.hidden = true;
+  mensagemGravacao.textContent = banco ? '' : 'Gravação indisponível até configurar o Supabase.';
+  formulario.querySelector<HTMLInputElement>('input')!.focus();
+}
+
+botaoNovo.addEventListener('click', iniciarNovoPedido);
+document.addEventListener('encerrar-acesso', iniciarNovoPedido);
+botaoGravar.addEventListener('click', async () => {
+  if (revisao.hidden || indiceEdicao !== null || pedidoGravado) return;
+  const dados = Object.fromEntries(new FormData(formulario)) as DadosPedido;
+  const codigo = gravador.obterCodigo();
+  bloquearRascunho(true);
+  const acesso = document.querySelector<HTMLElement>('#secao-acesso')!;
+  acesso.inert = true;
+  mensagemGravacao.textContent = `Enviando pedido. Código desta tentativa: ${codigo}. Aguarde a confirmação.`;
+  try {
+    const registro = await gravador.salvar(dados, itens);
+    pedidoGravado = true;
+    mensagem.textContent = 'Pedido registrado. Use Novo pedido para iniciar outro.';
+    revisao.querySelector('p')!.textContent = 'Registro confirmado no banco. O pagamento informado ainda não confirma recebimento.';
+    mensagemGravacao.textContent = `Pedido gravado: ${registro.identificador}. Data: ${new Date(registro.criado_em).toLocaleString('pt-BR')}. Total confirmado: ${formatarPreco(registro.total)}. Pagamento ainda não confirmado.`;
+    const codigoConsulta = document.querySelector<HTMLInputElement>('#consultar-gravacao input[name="codigo"]')!;
+    codigoConsulta.value = registro.identificador;
+    botaoNovo.hidden = false;
+  } catch (erro) {
+    mensagemGravacao.textContent = `${erro instanceof Error ? erro.message : 'Gravação não confirmada.'} Código: ${codigo}. Consulte esse código antes de iniciar outro pedido; o rascunho foi preservado.`;
+  } finally {
+    bloquearRascunho(pedidoGravado);
+    acesso.inert = false;
+    mensagemGravacao.focus();
+  }
 });
 atualizarOpcoes();
 apresentarItens();

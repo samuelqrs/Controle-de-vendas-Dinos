@@ -4,28 +4,34 @@
 
 Construir o sistema acadêmico DINNOS por etapas, com aprendizagem do autor iniciante. Prazo interpretado como 18/11/2026, ainda sem confirmação explícita do mês. Branch única main.
 
-F01, F02, F03, F04 e F08 aprovadas. Nenhuma tarefa em andamento. F05 a F07 não iniciadas. Ler o guia e os três arquivos de estado antes de continuar. Autor delegou premissas razoáveis e ajustáveis, sem exigir respostas a perguntas.
+F01, F02, F03, F04 e F08 aprovadas. F05 em andamento: T01/T02 aprovadas quanto à definição e implementação local; somente T03 em andamento, aguardando configuração e testes reais; T04 do autor não iniciada. F06/F07 não iniciadas. Não iniciar próxima funcionalidade enquanto houver pendências da F05. Ler guia e três arquivos de estado antes de continuar.
 
-Aplicação em HTML5, CSS3 e TypeScript estrito com Vite, sem framework. Cardápio fictício em aplicacao/cardapio.ts; montagem e edição em aplicacao/montagem.ts; tipos/validação em aplicacao/pedido.ts; cálculo em aplicacao/valores.ts. Rascunho em memória, perdido ao recarregar, com aviso na tela. Sem persistência ou cobrança.
+Autor delegou premissas razoáveis e ajustáveis, sem exigir respostas de decisões rotineiras. Informou explicitamente que ainda não tem projeto Supabase e precisa criar. Integração Supabase descoberta e sugerida; instalação/conexão não confirmada. Não afirmar que foi instalada/conectada. Nenhum recurso externo provisionado ou publicado.
 
-## Regras atuais
+## Implementação e regras
 
-Nome e telefone com DDD (10/11 dígitos) obrigatórios. Entrega exige logradouro, número, bairro e cidade; retirada dispensa endereço. Complemento e observações opcionais. Dinheiro, Pix ou cartão informativos. Quantidades inteiras 1 a 99; sabores conforme tamanho. Pizza pelo sabor mais caro no tamanho, mais adicionais por unidade; bebidas por quantidade. Valores em centavos inteiros. Taxa fictícia fixa R$ 5 por pedido de entrega, retirada sem taxa. Rascunho vazio mostra zeros.
+HTML5, CSS3 e TypeScript estrito com Vite, sem framework. Cardápio em cardapio.ts; montagem em montagem.ts; validação em pedido.ts; cálculos em valores.ts. Valores em centavos, pizza pelo sabor mais caro no tamanho, adicionais por unidade, bebidas por quantidade. Entrega fictícia R$ 5 por pedido, retirada sem taxa. Quantidades 1 a 99; até 100 linhas por pedido. Campos e regras no README.
 
-Venda registrada somente após gravação bem-sucedida na futura F05; pagamento informado não confirma recebimento. Conferência mostra dados e total; qualquer alteração oculta a revisão. Conferir durante edição aberta exige salvar ou cancelar. Valores exibidos durante edição representam os itens já adicionados.
+F05: acesso.ts implementa login e conferência de gravação por código; banco.ts adapta SDK oficial; configuracao.ts valida URL/chave pública; registro.ts prepara uma cópia dos dados e controla UUID estável, concorrência e confirmação. Sem configuração, controles ficam desativados e nenhum sucesso é simulado. Rascunho em memória, perdido ao recarregar. Falha de rede pode ter resultado desconhecido: consultar código antes de iniciar outro pedido; repetir mesmo código/conteúdo não duplica. Após confirmar, rascunho fica bloqueado e Novo pedido reinicia. Pagamento informado não confirma recebimento.
 
-## Verificações
+Banco em banco/001_criar_pedidos.sql: catálogo interno; Supabase Auth mais tabela de autorização; RLS para compartilhar apenas entre atendentes autorizados. Visitantes e contas sem autorização não leem/gravam. Gravação por função com validação, cálculo no servidor, comparação com total previsto e inserção atômica. Cliente não pode inserir diretamente, editar ou excluir registros. Data/atendente/dados/itens/descrições/preços preservados. Revogação de ativo impede acesso mesmo com token válido.
 
-Baseline com sete testes e tipos/build passou. F04: npm test passou com tipos, build e 13 testes, zero falhas. Seis novos testes de valores usam resultados literais independentes; cobrem tamanhos, sabor mais caro, adicionais, quantidades, bebida, taxa única, edição/remoção, inteiros e rejeição de dados inválidos.
+SDK @supabase/supabase-js 2.119.0 em execução; @electric-sql/pglite 0.5.16 apenas em desenvolvimento/testes. Lockfile atualizado. Instalação do SDK falhou com ENOTFOUND e foi repetida com autorização; instalações auditadas sem vulnerabilidades. .env.example tem exemplos; .env.local é ignorado e não foi criado. Sessão em sessionStorage; saída local limpa a tela.
 
-Navegador primeiro móvel 390x844, depois desktop 1280x900, sem rolagem horizontal; console observado sem erros. Exemplo: duas pizzas médias muçarela/frango com bacon R$ 106 + três colas R$ 36 = R$ 142 retirada/R$ 147 entrega. Edição para uma pizza gerou R$ 94; remover bebidas R$ 58; cancelar preservou R$ 147. Revisão invalidada ao mudar nome/modalidade e bloqueada com edição aberta; Enter conferido. Capturas f04-movel.jpg e f04-desktop.jpg em harness/main/evidencias/. Servidor preexistente 5173 reutilizado e preservado.
+## Verificações e limites
 
-Verificadores próprios do harness indisponíveis. JSON com 8 funcionalidades e 24 tarefas únicas; demais funcionalidades preservadas. git diff --check sem erros, apenas avisos LF/CRLF. Prática do autor não verificada; não atribuir testes do agente ao autor. Sem auditoria completa de acessibilidade ou teste em celular físico.
+Baseline npm test passou com 13 testes, tipos e build antes da implementação. Final npm test passou com tipos, build e 28 testes, zero falhas. Novos testes de registro cobrem configuração, cópia, falhas, confirmação inválida e concorrência. Testes PostgreSQL executam migração real via PGlite e simulam somente auth.uid/users: nove subcenários de catálogo, gravação/retirada, idempotência, acesso compartilhado, negação, atomicidade, preço/imutabilidade, revogação e reabertura persistente. Falha inicial na reabertura foi corrigida restaurando papel administrativo antes de fechar; execução final passou.
 
-## Próximo passo
+Navegador primeiro móvel 390x844 (375 px), depois desktop 1280x900 (1265 px), sem rolagem horizontal; console observado sem erros. Acesso e gravação desativados sem configuração, aviso explícito; montagem/revisão com Enter e total R$ 12 mantidas. Capturas f05-movel.jpg e f05-desktop.jpg em harness/main/evidencias/. Servidor preexistente 5173 preservado.
 
-F05: gravação compartilhada. Supabase foi previsto para PostgreSQL, autenticação e políticas de acesso; Netlify para publicação futura. Nenhum serviço provisionado. Consultar capacidades e documentação atual antes da integração. Definir acesso autorizado e configurações sem segredos, preservar itens/preços/data/identificação na gravação e tratar falhas sem falso sucesso. Não iniciar F06 antes de resolver as pendências da F05. T04 da F05 exige teste orientado do autor em dois dispositivos; apresentar roteiro antes de solicitar.
+Não verificados: Auth/Supabase hospedado, UI de login/gravação com projeto real, publicação e dois dispositivos físicos. Zero cenários relatados pelo autor na F05. Não atribuir testes locais ao autor ou à nuvem. Verificadores próprios do harness indisponíveis; JSON/diff revisados separadamente.
 
-Manter pt-BR, mobile first, uma tarefa em andamento por vez e atualização dos três arquivos de estado. Preferências locais ausentes, sem criação silenciosa; recomenda-se criá-las quando houver template.
+## Próximo passo obrigatório
 
-Autor solicitou registrar F03/F04 em um commit com código, testes, documentação, capturas e estado do harness. Consultar git log para identificar o registro. Último commit anterior db3dcc0. Lembrar o autor de solicitar o commit ao concluir tarefas; não criar sem pedido explícito.
+Criar/configurar projeto Supabase na conta do autor. Instruções completas e roteiro de cinco cenários em banco/README.md. Se a integração for instalada/conectada, usar suas capacidades confirmadas para preparar o projeto; não repetir bloqueio de conexão se uma confirmação posterior chegar. Sem integração, orientar criação no painel. Não solicitar senhas/chaves privilegiadas no chat.
+
+Aplicar SQL em projeto novo, criar contas de demonstração e autorizá-las; configurar URL HTTPS e chave pública sb_publishable_ no .env.local e reiniciar Vite. Desabilitar cadastro público no provedor. Verificar gravação, reabertura, acesso autorizado/negado e falha reais em T03. Preparar publicação para teste do autor em dois dispositivos; roteiro já documentado, pedir quantidade/resultados exatos na T04. Só aprovar F05 após verificar o objetivo.
+
+Catálogo do banco e aplicação devem mudar juntos por migração nova; servidor rejeita total previsto divergente. Não editar registros históricos. Supabase/Netlify permanecem planejados; nenhum site publicado. Manter pt-BR e mobile first.
+
+Autor solicitou registrar a implementação local da F05 em commit com código, migração, testes, documentação, capturas e harness. Consultar git log para identificar esse registro. As pendências da F05 permanecem inalteradas. F03/F04 estão no commit 9151f73. Lembretes de commit apresentados ao concluir F05-T01/T02. Preferências locais ausentes; recomenda-se criar quando houver template, sem criação silenciosa.

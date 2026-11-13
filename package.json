@@ -15,7 +15,11 @@
     "test": "npm run build && node --experimental-strip-types --test testes/*.test.mjs"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.16",
     "typescript": "~6.0.0",
     "vite": "^8.0.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.0"
   }
 }

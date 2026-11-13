@@ -38,6 +38,7 @@ input:not([type="checkbox"]), textarea { width: 100%; min-height: 44px; padding:
 textarea { resize: vertical; }
 button { min-height: 44px; padding: 10px 16px; border: 1px solid #26392e; border-radius: 6px; background: #26392e; color: #fff; cursor: pointer; }
 button:hover { background: #405b4a; }
+button:disabled { cursor: not-allowed; opacity: .6; }
 input:focus-visible, textarea:focus-visible, button:focus-visible { outline: 3px solid #a73725; outline-offset: 3px; }
 fieldset { min-width: 0; margin: 16px 0; border: 1px solid #b7c2b7; border-radius: 6px; padding: 16px; }
 legend { font-weight: 700; }
@@ -53,6 +54,8 @@ legend { font-weight: 700; }
 #itens-pedido button { margin: 4px 8px 4px 0; }
 #itens-pedido p, #mensagem-pedido { overflow-wrap: anywhere; }
 #erro-item { color: #972c1a; }
+#secao-acesso form { margin-block: 24px; }
+#mensagem-gravacao, #resultado-consulta { overflow-wrap: anywhere; }
 .resumo-valores { background: #e7ebdf; border: 1px solid #b7c2b7; border-radius: 8px; padding: 20px; margin-block: 24px; }
 .resumo-valores p { font-size: 14px; }
 .resumo-valores dl { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }

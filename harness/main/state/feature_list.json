@@ -10,7 +10,7 @@
     {
       "identificador": "F05",
       "titulo": "Gravar pedidos com acesso compartilhado",
-      "estado": "nao_iniciada",
+      "estado": "em_andamento",
       "objetivo": "Persistir pedidos após fechar o sistema e permitir consultá-los em mais de um dispositivo.",
       "verificacao": "Salvar um pedido, fechar e reabrir o sistema e consultar o mesmo registro em outro dispositivo; verificar que uma falha de gravação não é apresentada como sucesso.",
       "tarefas": [
@@ -18,22 +18,22 @@
           "identificador": "F05-T01",
           "descricao": "Definir o controle de acesso antes de disponibilizar dados de clientes e documentar configurações sem segredos.",
           "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
+          "estado": "aprovada",
+          "evidencia": "Definidas contas de atendentes via Supabase Auth e lista de autorização com RLS. Sem cadastro público na aplicação; visitantes e contas não autorizadas não acessam pedidos; atendentes autorizados compartilham leitura. Gravação somente por função que valida autorização e recalcula no servidor. Configuração sem segredos e roteiro em banco/README.md; chave pública no Vite, sessão em sessionStorage. Aplicação das políticas no projeto real ainda não verificada."
         },
         {
           "identificador": "F05-T02",
           "descricao": "Implementar armazenamento compartilhado e gravação com identificação, data, itens e preços preservados, explicando o fluxo dos dados.",
           "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
+          "estado": "aprovada",
+          "evidencia": "Integração local implementada: SDK oficial Supabase, login/sessão, autorização, gravação por função PostgreSQL com UUID estável, data do servidor, catálogo/preços preservados e consulta de existência por código. Migração transacional, RLS, validação e cálculo no servidor testados em PGlite. UI sem configuração verificada: não simula sucesso. Ativação e validação no Supabase hospedado permanecem pendentes em T03."
         },
         {
           "identificador": "F05-T03",
           "descricao": "Verificar gravação, reabertura, acesso autorizado e tratamento de falha; apresentar os passos para teste em dois dispositivos.",
           "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
+          "estado": "em_andamento",
+          "evidencia": "npm test passou: tipos, build e 28 testes, zero falhas. Testes locais executam SQL/PostgreSQL via PGlite (auth.uid/users simulados): catálogo, entrega/retirada, acesso autorizado/negado, leitura por segundo atendente, repetição sem duplicação, atomicidade, imutabilidade, revogação e reabertura com dados/políticas preservados. Controlador testa falhas sem falso sucesso, cópia, configuração e concorrência. Navegador sem configuração: controles desativados/aviso, montagem/revisão mantidas, móvel e desktop sem rolagem horizontal e console sem erros; capturas f05-movel.jpg e f05-desktop.jpg. Pendente: Supabase/Auth hospedado, publicação e dois dispositivos reais. Autor ainda não possui projeto; roteiro de cinco cenários em banco/README.md."
         },
         {
           "identificador": "F05-T04",
