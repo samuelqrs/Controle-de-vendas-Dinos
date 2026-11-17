@@ -4,34 +4,51 @@
 
 Construir o sistema acadêmico DINNOS por etapas, com aprendizagem do autor iniciante. Prazo interpretado como 18/11/2026, ainda sem confirmação explícita do mês. Branch única main.
 
-F01, F02, F03, F04 e F08 aprovadas. F05 em andamento: T01/T02 aprovadas quanto à definição e implementação local; somente T03 em andamento, aguardando configuração e testes reais; T04 do autor não iniciada. F06/F07 não iniciadas. Não iniciar próxima funcionalidade enquanto houver pendências da F05. Ler guia e três arquivos de estado antes de continuar.
+F01, F02, F03, F04 e F08 aprovadas. F05 em andamento: T01/T02 configuradas e T03 aprovada com verificação hospedada; somente F05-T04 do autor em andamento. F06/F07 não iniciadas. Não avançar para F06 enquanto houver pendências da F05. Ler guia e três arquivos de estado antes de continuar.
 
-Autor delegou premissas razoáveis e ajustáveis, sem exigir respostas de decisões rotineiras. Informou explicitamente que ainda não tem projeto Supabase e precisa criar. Integração Supabase descoberta e sugerida; instalação/conexão não confirmada. Não afirmar que foi instalada/conectada. Nenhum recurso externo provisionado ou publicado.
+Autor delegou decisões razoáveis e ajustáveis. Criou as contas Supabase e Netlify diretamente nos sites e confirmou a autorização da conta de atendente e a publicação pública. Não solicitar senhas no chat. Integrações Supabase/Netlify não estão conectadas nesta sessão; trabalho remoto realizado pelo navegador, sem copiar tokens de sessão.
 
-## Implementação e regras
+## Aplicação e banco configurados
 
-HTML5, CSS3 e TypeScript estrito com Vite, sem framework. Cardápio em cardapio.ts; montagem em montagem.ts; validação em pedido.ts; cálculos em valores.ts. Valores em centavos, pizza pelo sabor mais caro no tamanho, adicionais por unidade, bebidas por quantidade. Entrega fictícia R$ 5 por pedido, retirada sem taxa. Quantidades 1 a 99; até 100 linhas por pedido. Campos e regras no README.
+HTML5, CSS3 e TypeScript estrito com Vite, sem framework. Cardápio, montagem, validação e cálculo em aplicacao/. Pizzas pelo sabor mais caro no tamanho, adicionais por unidade e bebidas por quantidade; valores em centavos. Entrega fictícia R$ 5 por pedido, retirada sem taxa. Quantidades 1 a 99; até 100 linhas. Rascunho em memória, perdido ao recarregar. Pagamento informado não confirma recebimento.
 
-F05: acesso.ts implementa login e conferência de gravação por código; banco.ts adapta SDK oficial; configuracao.ts valida URL/chave pública; registro.ts prepara uma cópia dos dados e controla UUID estável, concorrência e confirmação. Sem configuração, controles ficam desativados e nenhum sucesso é simulado. Rascunho em memória, perdido ao recarregar. Falha de rede pode ter resultado desconhecido: consultar código antes de iniciar outro pedido; repetir mesmo código/conteúdo não duplica. Após confirmar, rascunho fica bloqueado e Novo pedido reinicia. Pagamento informado não confirma recebimento.
+Supabase DINNOS: lnqkycxtoaovoktnsgrj, organização DINNOS Free fdhrwwkuleiypwlqjdms, São Paulo. Migração banco/001_criar_pedidos.sql aplicada no SQL Editor. RLS ativa nas três tabelas, inclusive catálogo interno; cadastro público e login anônimo desativados, confirmação de e-mail mantida. Função de gravação valida acesso/dados, calcula no servidor, compara total previsto e preserva descrições/preços/data. Clientes não podem inserir diretamente, editar ou excluir pedidos.
 
-Banco em banco/001_criar_pedidos.sql: catálogo interno; Supabase Auth mais tabela de autorização; RLS para compartilhar apenas entre atendentes autorizados. Visitantes e contas sem autorização não leem/gravam. Gravação por função com validação, cálculo no servidor, comparação com total previsto e inserção atômica. Cliente não pode inserir diretamente, editar ou excluir registros. Data/atendente/dados/itens/descrições/preços preservados. Revogação de ativo impede acesso mesmo com token válido.
+.env.local criado neste ambiente com URL e chave pública; ignorado pelo Git. Não imprimir valores nem incluir arquivo no commit. SDK @supabase/supabase-js 2.119.0 em execução; @electric-sql/pglite 0.5.16 apenas nos testes. Senhas e chaves privilegiadas não estão no código. Sessão usa sessionStorage e precisa de novo login por origem/navegador.
 
-SDK @supabase/supabase-js 2.119.0 em execução; @electric-sql/pglite 0.5.16 apenas em desenvolvimento/testes. Lockfile atualizado. Instalação do SDK falhou com ENOTFOUND e foi repetida com autorização; instalações auditadas sem vulnerabilidades. .env.example tem exemplos; .env.local é ignorado e não foi criado. Sessão em sessionStorage; saída local limpa a tela.
+Conta fictícia: atendente@dinnos.example, UUID 2e97c156-c7ff-4ed4-8563-dd34d2f829b6. Acesso aos pedidos concedido após confirmação explícita do autor, ativo = true verificado. Senha criada e guardada pelo autor; não ler ou solicitar. Após sucesso, o rascunho fica bloqueado e Novo pedido inicia outro. Em falha ambígua, consultar o código antes de novo pedido; repetir mesmo código/conteúdo não duplica.
 
-## Verificações e limites
+## Publicação concluída em 17/11/2026
 
-Baseline npm test passou com 13 testes, tipos e build antes da implementação. Final npm test passou com tipos, build e 28 testes, zero falhas. Novos testes de registro cobrem configuração, cópia, falhas, confirmação inválida e concorrência. Testes PostgreSQL executam migração real via PGlite e simulam somente auth.uid/users: nove subcenários de catálogo, gravação/retirada, idempotência, acesso compartilhado, negação, atomicidade, preço/imutabilidade, revogação e reabertura persistente. Falha inicial na reabertura foi corrigida restaurando papel administrativo antes de fechar; execução final passou.
+Endereço público: https://eloquent-pie-d5c729.netlify.app
+Projeto Netlify: eloquent-pie-d5c729; implantação 6afc5cb5c5ae5b603ae178a5.
 
-Navegador primeiro móvel 390x844 (375 px), depois desktop 1280x900 (1265 px), sem rolagem horizontal; console observado sem erros. Acesso e gravação desativados sem configuração, aviso explícito; montagem/revisão com Enter e total R$ 12 mantidas. Capturas f05-movel.jpg e f05-desktop.jpg em harness/main/evidencias/. Servidor preexistente 5173 preservado.
+Autor aprovou explicitamente o envio e a visibilidade pública. Enviado pacote com apenas index.html e assets/ compilados; nenhuma senha, .env ou chave privilegiada. Sem plano pago, domínio personalizado, GitHub vinculado ou execução de agente de geração. Netlify inicialmente deixou o site restrito à equipe; Make public foi executado dentro da autorização recebida, e o endereço final foi aberto e verificado.
 
-Não verificados: Auth/Supabase hospedado, UI de login/gravação com projeto real, publicação e dois dispositivos físicos. Zero cenários relatados pelo autor na F05. Não atribuir testes locais ao autor ou à nuvem. Verificadores próprios do harness indisponíveis; JSON/diff revisados separadamente.
+Pacote temporário .npm-cache/dinnos-publicacao.zip, SHA256 646EA99C3F1BB362EB274FE34C016FB8C0BDDBBE4D81BFDD5818F2287DC50FD3. Não versionar pacote/dist. Para atualizar, recompilar com configuração pública e enviar novo conteúdo de dist/. Sem integração Git automática.
+
+## Verificações
+
+npm test passou com tipos, build e 28 testes, zero falhas. PostgreSQL real via PGlite com somente auth.uid/users simulados: catálogo, RLS das três tabelas, gravação/retirada, idempotência, leitura compartilhada, negação, atomicidade, revogação e reabertura. O baseline falhou inicialmente ao recriar postmaster.pid dentro do OneDrive, inclusive fora do sandbox. Corrigido testes/banco.test.mjs para usar diretório temporário exclusivo do sistema, com verificação do caminho antes da remoção. Teste isolado (10) e suíte completa (28) passaram. Reset role sozinho não bastava.
+
+Banco remoto: leitura e gravação anônimas bloqueadas por PostgreSQL 42501. Autor entrou na aplicação local; acesso autorizado observado pelo agente. Aplicação gravou pedido inteiramente fictício 6b4ea74d-9f04-4b52-888a-e01aec6cb7f6: duas pizzas médias muçarela/frango com bacon + três colas, entrega; subtotal 14200, taxa 500 e total 14700 centavos. Após recarregar, consulta preservou data/total. Depois de sair, nova tentativa sem login falhou sem falso sucesso e preservou o rascunho. Console observado sem erros.
+
+Publicação: produção recompilada após configuração pública, build aprovado. Site final carregou HTML/CSS/JS e controles de acesso habilitados. Viewports 390x844 (375 px de conteúdo) e 1280x900 (1265 px), sem rolagem horizontal; console observado sem erros. Login/consulta na origem Netlify ainda não verificados; sessão local não é transferida.
+
+Evidências em harness/main/evidencias/: f05-criacao-projeto.jpg, f05-rls-supabase.jpg, f05-conta-atendente.jpg, f05-autorizacao-preparada.jpg, f05-pedido-gravado.jpg, f05-persistencia-hospedada.jpg, f05-netlify-publicacao-preparada.jpg, f05-netlify-publicado.jpg, f05-publicado-movel.jpg e f05-publicado-desktop.jpg.
+
+Servidor local de verificação encerrado pelo agente (sessão 53196). Para prática local, iniciar npm run dev; cache do Vite pode exigir execução autorizada. Para o teste compartilhado, usar a URL pública.
 
 ## Próximo passo obrigatório
 
-Criar/configurar projeto Supabase na conta do autor. Instruções completas e roteiro de cinco cenários em banco/README.md. Se a integração for instalada/conectada, usar suas capacidades confirmadas para preparar o projeto; não repetir bloqueio de conexão se uma confirmação posterior chegar. Sem integração, orientar criação no painel. Não solicitar senhas/chaves privilegiadas no chat.
+Orientar autor a abrir a URL publicada no computador e celular e entrar com atendente@dinnos.example usando sua senha. Executar os cinco cenários de banco/README.md: gravar pedido, fechar/reabrir navegador e consultar, consultar no segundo dispositivo, verificar acesso negado e falha de rede sem falso sucesso. Pode usar o código fictício de referência acima para primeira conferência.
 
-Aplicar SQL em projeto novo, criar contas de demonstração e autorizá-las; configurar URL HTTPS e chave pública sb_publishable_ no .env.local e reiniciar Vite. Desabilitar cadastro público no provedor. Verificar gravação, reabertura, acesso autorizado/negado e falha reais em T03. Preparar publicação para teste do autor em dois dispositivos; roteiro já documentado, pedir quantidade/resultados exatos na T04. Só aprovar F05 após verificar o objetivo.
+Obter quantidade exata e resultados dos cenários relatados pelo autor. Até aqui: zero cenários completos relatados. Não atribuir testes do agente ou viewport móvel a dois dispositivos físicos; recarregar a página não equivale a fechar/reabrir todo o navegador. F05 não aprovada até verificar o objetivo. Não iniciar F06 antes.
 
-Catálogo do banco e aplicação devem mudar juntos por migração nova; servidor rejeita total previsto divergente. Não editar registros históricos. Supabase/Netlify permanecem planejados; nenhum site publicado. Manter pt-BR e mobile first.
+No painel SQL Monaco, substituir documento com Ctrl+A e colagem, não fill. Conferir inventário atual de abas; aba pública marcada como entrega. Não repetir autorização de acesso/publicação já recebida, salvo mudança de escopo que realmente exija nova confirmação.
 
-Autor solicitou registrar a implementação local da F05 em commit com código, migração, testes, documentação, capturas e harness. Consultar git log para identificar esse registro. As pendências da F05 permanecem inalteradas. F03/F04 estão no commit 9151f73. Lembretes de commit apresentados ao concluir F05-T01/T02. Preferências locais ausentes; recomenda-se criar quando houver template, sem criação silenciosa.
+## Registro no Git
+
+Autor solicitou commit desta configuração/publicação, correção do teste, reforço de RLS, documentação, evidências e harness. Consultar git log para identificar o registro. F05-T04 permanece em andamento após o commit. Commits anteriores: 2da0bbe (integração local F05) e 9151f73 (F03/F04). Criar novos commits somente quando solicitado.
+
+Verificadores próprios do harness indisponíveis; JSON e diff revisados separadamente dos testes da aplicação. Preferências locais ausentes, sem criação silenciosa; recomenda-se criar quando houver template. Manter português do Brasil, mobile first e no máximo uma tarefa em andamento.

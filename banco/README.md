@@ -65,6 +65,11 @@ testes não substituem conexão real com Supabase nem os dois dispositivos.
 
 ## Roteiro de dois dispositivos — F05
 
+Use https://eloquent-pie-d5c729.netlify.app no computador e no celular.
+A conta de demonstração é atendente@dinnos.example, com a senha guardada pelo autor.
+Pedido de referência gravado pelo agente: 6b4ea74d-9f04-4b52-888a-e01aec6cb7f6, R$ 147,00.
+Não confundir a referência do agente com os cinco cenários a executar abaixo.
+
 1. No dispositivo A, entre com atendente autorizado e grave um pedido fictício de
    entrega com pizza personalizada e bebida. Anote código, data e total confirmados.
 2. Feche e reabra o navegador. Entre novamente se solicitado e consulte o código.

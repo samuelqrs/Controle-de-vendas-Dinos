@@ -1,15 +1,16 @@
 import { test as testar } from 'node:test';
 import { strict as verificar } from 'node:assert';
-import { readFile as lerArquivo, mkdtemp as criarTemporario, mkdir as criarPasta, rm as remover } from 'node:fs/promises';
+import { readFile as lerArquivo, mkdtemp as criarTemporario, rm as remover } from 'node:fs/promises';
+import { tmpdir as pastaTemporariaSistema } from 'node:os';
 import { resolve as resolverCaminho, dirname as pastaPai } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 import { tamanhos, sabores, bebidas, adicionais } from '../aplicacao/cardapio.ts';
 import { taxaEntrega } from '../aplicacao/valores.ts';
 
 testar('PostgreSQL verifica gravação, persistência e políticas de acesso', async contexto => {
-  const pastaCache = resolverCaminho('.npm-cache');
-  await criarPasta(pastaCache, { recursive: true });
-  const pasta = await criarTemporario(resolverCaminho(pastaCache, 'teste-banco-'));
+  // O banco de teste fica fora da pasta do projeto, que pode ser sincronizada.
+  const pastaTemporaria = resolverCaminho(pastaTemporariaSistema());
+  const pasta = await criarTemporario(resolverCaminho(pastaTemporaria, 'dinnos-teste-banco-'));
   let banco = new PGlite(pasta);
   const atendenteA = '00000000-0000-4000-8000-000000000001';
   const atendenteB = '00000000-0000-4000-8000-000000000002';
@@ -34,6 +35,9 @@ testar('PostgreSQL verifica gravação, persistência e políticas de acesso', a
     await contexto.test('catálogo do servidor corresponde ao TypeScript', async () => {
       const catalogo = (await banco.query('select dados from interno.cardapio')).rows[0].dados;
       verificar.deepEqual(catalogo, { tamanhos, sabores, bebidas, adicionais, taxaEntrega });
+      const protecao = (await banco.query("select c.relrowsecurity from pg_catalog.pg_class c join pg_catalog.pg_namespace n on n.oid = c.relnamespace where (n.nspname = 'interno' and c.relname = 'cardapio') or (n.nspname = 'public' and c.relname in ('pedidos', 'atendentes_autorizados'))")).rows;
+      verificar.equal(protecao.length, 3);
+      verificar.ok(protecao.every(tabela => tabela.relrowsecurity));
     });
     let original;
     await contexto.test('atendente autorizado grava com data e preços calculados no servidor', async () => {
@@ -113,7 +117,7 @@ testar('PostgreSQL verifica gravação, persistência e políticas de acesso', a
   } finally {
     await banco.exec('reset role;');
     await banco.close();
-    if (pastaPai(resolverCaminho(pasta)) !== pastaCache) throw new Error('Diretório de teste fora do cache esperado.');
+    if (pastaPai(resolverCaminho(pasta)) !== pastaTemporaria) throw new Error('Diretório de teste fora da pasta temporária esperada.');
     await remover(pasta, { recursive: true, force: true });
   }
 });

@@ -183,3 +183,57 @@
 - Autor solicitou criar um commit com as alterações realizadas. Agrupamento: autenticação e gravação via Supabase, migração PostgreSQL, configuração de exemplo, testes, documentação, capturas e estado pertinente do harness.
 - Preservadas as verificações finais: npm test com tipos, build e 28 testes aprovados, navegador móvel/desktop e diff sem erros de espaços. Nenhuma alteração executável posterior exige repetir testes.
 - F05 permanece em andamento: T03 aguarda projeto/configuração e validação hospedada; T04 aguarda teste do autor em dois dispositivos. F06/F07 não iniciadas. O commit não aprova essas verificações pendentes.
+
+
+## 2026-11-13 — Acesso ao painel para configurar F05
+
+- Autor solicitou prosseguir após o commit 2da0bbe. Consulta de integrações confirmou Supabase ainda não instalado; sugestão anterior não repetida. Aberto painel web em navegador visível, com redirecionamento para login.
+- Controle entregue ao autor para entrar/criar conta diretamente no navegador. Não solicitadas credenciais no chat; nenhum projeto, acordo, conta ou recurso externo criado pelo agente. Aba mantida para continuidade.
+- F05-T03 continua em andamento, T04 não iniciada. Próximo passo após login: identificar organização/plano e preparar projeto DINNOS; depois aplicar migração e configurar demonstração conforme banco/README.md.
+- Nenhuma alteração executável nesta retomada; preservados tipos, build e 28 testes aprovados na implementação. Nenhum novo commit solicitado ou criado.
+
+## 2026-11-17 — Organização criada e preparação do projeto
+
+- Retomado o estado da branch main após o commit 2da0bbe; preservadas as três alterações anteriores do harness. F05-T03 continua em andamento; F05-T04, F06 e F07 não iniciadas.
+- Painel Supabase autenticado nesta retomada. Criada a organização DINNOS no plano Free ($0/mês). Formulário do projeto preenchido com nome DINNOS e região São Paulo (sa-east-1); Data API habilitada, exposição automática de tabelas desabilitada e RLS automática habilitada. Sem GitHub vinculado e sem plano pago.
+- Autor orientado a definir/guardar a senha do banco diretamente no navegador e concluir Create new project. Nenhuma senha lida, criada ou enviada pelo agente. Projeto ainda não confirmado; organização fdhrwwkuleiypwlqjdms. Aba marcada para continuidade. Evidência: harness/main/evidencias/f05-criacao-projeto.jpg.
+- Baseline npm test falhou: 26 testes passaram, com falha no subcenário de reabertura e no agrupador. Diagnóstico revelou Permission denied ao criar postmaster.pid no diretório de teste dentro do OneDrive; execução fora do sandbox apresentou o mesmo erro. A correção anterior de reset role não bastava.
+- Ajustado testes/banco.test.mjs para criar banco em diretório temporário exclusivo do sistema (node:os.tmpdir), fora da pasta sincronizada. Mantidos os testes de persistência, autorização e verificação do caminho antes de remover o diretório temporário. Teste isolado passou (10 testes); npm test final passou com tipos, build e 28 testes, zero falhas. git diff --check sem erros, apenas avisos LF/CRLF.
+- Nenhuma alteração na lógica da aplicação, SQL ou dependências. Nenhum commit criado. Lembrete: solicitar o commit da correção do teste e do estado quando desejar.
+
+### Pendências
+
+- Aguardar conclusão da senha/criação pelo autor. Em seguida confirmar projeto no painel, aplicar a migração, configurar autenticação e validar a gravação hospedada. Nenhuma migração aplicada nem pedido real gravado até aqui. Não aprovar F05 antes da verificação em dois dispositivos.
+
+## 2026-11-17 — Projeto configurado e autorização preparada
+
+- Autor concluiu a criação do projeto DINNOS, referência lnqkycxtoaovoktnsgrj, organização fdhrwwkuleiypwlqjdms, plano Free, região São Paulo. Saúde confirmada no painel.
+- Pré-verificação confirmou ausência de tabelas da aplicação. Acrescentada RLS explícita a interno.cardapio na migração e verificação das três tabelas protegidas em testes/banco.test.mjs. Teste isolado passou (10 testes); npm test completo passou com tipos, build e 28 testes.
+- A primeira tentativa de SQL foi rejeitada por sintaxe devido à substituição parcial no editor Monaco, sem criar as tabelas. Corrigido o preenchimento com seleção integral e colagem; pré-verificação repetida confirmou banco vazio; migração aplicada com sucesso no SQL Editor. Consulta posterior confirmou interno.cardapio, public.atendentes_autorizados e public.pedidos com RLS true. Evidência f05-rls-supabase.jpg.
+- Cadastro público desativado no provedor e salvo; login anônimo permaneceu desativado e confirmação de e-mail mantida. Configurada .env.local com URL e chave pública existentes, sem chave privilegiada ou senha; arquivo confirmado ignorado pelo Git. Valores não incluídos em documentação ou controle de versão.
+- Verificação remota pelo SDK e chave pública confirmou PostgreSQL 42501 para leitura e gravação anônimas. Falha de conexão no sandbox; nova execução autorizada fora dele passou. Script temporário de diagnóstico está em .npm-cache, ignorado.
+- Servidor de desenvolvimento iniciado pelo agente em 127.0.0.1:5173 após EPERM no cache do Vite e repetição autorizada fora do sandbox. Aplicação conferida no navegador: conexão configurada, controles habilitados e mensagem de login. Manter servidor enquanto configuração e login estiverem em andamento; encerrá-lo ao terminar a verificação.
+- Autor criou e-mail fictício atendente@dinnos.example, confirmado no auth.users com UUID 2e97c156-c7ff-4ed4-8563-dd34d2f829b6. Conta ainda sem autorização de pedidos. SQL de autorização preparado em consulta separada; confirmação solicitada por conceder acesso para gravar e consultar todos os pedidos. Não executar antes da resposta explícita.
+- Credenciais foram preenchidas pelo autor; nenhuma senha lida ou armazenada pelo agente. Evidências f05-conta-atendente.jpg e f05-autorizacao-preparada.jpg. Nenhum commit criado. F05-T03 segue em andamento; gravação autenticada e dois dispositivos continuam pendentes.
+
+## 2026-11-17 — Gravação hospedada verificada e preparação do teste compartilhado
+
+- Autor confirmou a concessão de acesso de atendente@dinnos.example aos pedidos. Inserido o UUID 2e97c156-c7ff-4ed4-8563-dd34d2f829b6 em atendentes_autorizados; consulta confirmou ativo = true. Autor entrou pela aplicação; Acesso autorizado observado pelo agente. Nenhuma senha/token de sessão lido ou copiado.
+- Aplicação gravou pedido inteiramente fictício de entrega: duas pizzas médias muçarela/frango com bacon (R$ 106) e três colas (R$ 36), mais taxa R$ 5, total R$ 147. Confirmação do servidor: código 6b4ea74d-9f04-4b52-888a-e01aec6cb7f6, data 17/11/2026 exibida na aplicação. Após recarregar a página, consulta autenticada preservou código, data e total. Evidências f05-pedido-gravado.jpg e f05-persistencia-hospedada.jpg. Console observado sem erros.
+- Saída encerrou sessão e limpou a tela. Nova tentativa sem login com rascunho fictício de R$ 12 foi bloqueada, sem confirmação de sucesso; dados e itens preservados. A chave pública também foi testada diretamente: leitura e gravação anônimas rejeitadas com 42501. Falha de rede física ainda não testada pelo agente.
+- F05-T03 aprovada com essas evidências e roteiro manual. F05-T04 em andamento para o autor; zero cenários completos do roteiro relatados. Não atribuir testes do agente ao autor. F05 permanece em andamento; F06/F07 não iniciadas.
+- Netlify pesquisado: nenhuma integração disponível nesta sessão. Autor informou não possuir conta; página de cadastro gratuita aberta e orientação fornecida. Nenhum site publicado nem plano pago contratado. É necessário publicar para facilitar o teste no celular, conforme provedor previsto no projeto.
+- Produção compilada após configurar .env.local: npm run build passou. Criado pacote temporário .npm-cache/dinnos-publicacao.zip com somente index.html e assets (JS/CSS); conteúdo conferido sem .env, SHA256 646EA99C3F1BB362EB274FE34C016FB8C0BDDBBE4D81BFDD5818F2287DC50FD3. Pacote ignorado, não versionar artefatos de dist. Nenhuma senha/chave privilegiada incluída.
+- Próximo passo: aguardar cadastro do autor em https://app.netlify.com/signup; depois preparar publicação gratuita, verificar URL e orientar os cinco cenários do teste em dois dispositivos. Conta Netlify, publicação e teste do autor ainda pendentes.
+- Lembrete ao concluir F05-T03: solicitar o commit quando desejar. Nenhum commit criado nesta retomada. Servidor local iniciado pelo agente ainda necessário para configuração/testes; encerrar ao terminar ou registrar handoff se continuar sendo usado.
+- Ao encerrar esta etapa de verificação, o servidor local iniciado pelo agente foi encerrado (sessão 53196). Supabase e dados fictícios permanecem disponíveis; nova prática local exige iniciar npm run dev. Pacote estático pronto para a publicação pendente no Netlify.
+
+## 2026-11-17 — Publicação no Netlify e commit solicitado
+
+- Autor concluiu cadastro no Netlify e autorizou explicitamente a publicação pública da compilação validada. Enviado apenas .npm-cache/dinnos-publicacao.zip, com index.html e assets/ (SHA256 646EA99C3F1BB362EB274FE34C016FB8C0BDDBBE4D81BFDD5818F2287DC50FD3). Não enviados .env.local, senhas, tokens de sessão ou chaves privilegiadas.
+- Projeto Netlify eloquent-pie-d5c729 criado; implantação 6afc5cb5c5ae5b603ae178a5 publicada. Visibilidade pública confirmada após Make public, dentro da autorização recebida. Endereço https://eloquent-pie-d5c729.netlify.app. Não contratados plano pago, domínio personalizado ou agente de geração de código.
+- Site publicado abriu com HTML, CSS, cardápio e acesso do atendente. Verificação móvel 390x844 (375 px de conteúdo) e desktop 1280x900 (1265 px), sem rolagem horizontal; console observado sem erros. Controles de acesso habilitados e mensagem Entre para gravar e consultar pedidos. Sessão da origem local não é transferida ao site público; login/consulta autenticados nessa origem ainda não verificados.
+- Evidências: f05-netlify-publicacao-preparada.jpg, f05-netlify-publicado.jpg, f05-publicado-movel.jpg e f05-publicado-desktop.jpg. README e roteiro de banco atualizados com endereço e pedido fictício de referência.
+- F05-T04 continua em andamento; zero cenários completos do roteiro relatados pelo autor. F05 não aprovada, F06/F07 não iniciadas. Próximo passo: autor testar a URL publicada no computador e celular conforme os cinco cenários de banco/README.md e informar quantidade/resultados exatos.
+- Autor solicitou commit das alterações realizadas. Agrupamento: configuração e publicação da F05, reforço de RLS do catálogo, correção do diretório temporário do teste, documentação, evidências e estado. Preservadas as verificações já realizadas: npm test com tipos, build e 28 testes aprovados; build de produção com configuração pública aprovado; verificação hospedada no Supabase e visual no Netlify. Não houve alteração executável após esses testes que exija repetição.
+- .env.local e pacote compilado confirmados ignorados pelo Git; não incluí-los no commit. Servidor de verificação local já encerrado. Verificadores próprios do harness indisponíveis; validação do estado e diff feita separadamente dos testes da aplicação.

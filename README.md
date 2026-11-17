@@ -1,6 +1,6 @@
 # DINNOS — Pedidos da pizzaria
 
-Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem framework de interface. Cardápio, montagem, cálculo e revisão de rascunhos de pedidos disponíveis; gravação via Supabase preparada e dependente da configuração do projeto; listagem de pedidos ainda não implementada.
+Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem framework de interface. Cardápio, montagem, cálculo e revisão de rascunhos de pedidos disponíveis; gravação via Supabase configurada e verificada; demonstração publicada no Netlify. Listagem de pedidos ainda não implementada.
 
 ## Preparar e executar
 
@@ -56,11 +56,11 @@ npm test executa a checagem de tipos, gera dist/ e verifica se o HTML publicado 
 
 Relate quantos dos cinco passos executou e qualquer diferença observada. A execução e a explicação pelo autor são a tarefa F01-T04 e ainda precisam ser confirmadas.
 
-## Persistência e publicação futuras
+## Persistência e publicação
 
-A base escolhida é HTML + CSS + TypeScript, com Vite para desenvolvimento e compilação. Supabase fica previsto para banco PostgreSQL compartilhado, autenticação e regras de acesso na F05: salvar apenas no navegador não permitiria consultar os mesmos pedidos em outro dispositivo. Nenhuma conexão com banco foi criada no F01.
+A base é HTML + CSS + TypeScript, com Vite para desenvolvimento e compilação. A F05 usa Supabase para PostgreSQL compartilhado, autenticação e regras de acesso. A conexão foi configurada e a gravação hospedada verificada; o roteiro do autor em dois dispositivos permanece pendente.
 
-A publicação planejada é no Netlify: comando de build npm run build e diretório de publicação dist. Não há site publicado ou conta provisionada nesta etapa. Conferir os limites e condições dos serviços antes do uso. O controle de acesso será definido antes de gravar dados de clientes; nunca colocar chaves privilegiadas no código da página.
+Demonstração publicada em [DINNOS](https://eloquent-pie-d5c729.netlify.app). A publicação usa npm run build e o conteúdo de dist/. O acesso aos pedidos exige uma conta de atendente autorizada no Supabase; nunca colocar chaves privilegiadas no código da página. Para uma nova instalação, configurar as variáveis públicas conforme banco/README.md.
 
 Referências oficiais: [Vite](https://vite.dev/guide/), [TypeScript](https://www.typescriptlang.org/tsconfig/), [Supabase Auth](https://supabase.com/docs/guides/auth), [Netlify](https://docs.netlify.com/manage/projects/add-new-project/).
 
@@ -184,7 +184,26 @@ configuração, isolamento dos dados, falhas, respostas inválidas e reenvio.
 testes/banco.test.mjs executa a migração real com PostgreSQL via PGlite, testa RLS,
 autorização, preço no servidor, repetição, atomicidade e persistência após reabrir.
 O contrato de autenticação do Supabase é simulado nesses testes locais; conexão
-real, Auth hospedado e dois dispositivos continuam exigindo o projeto configurado.
+real e Auth hospedado foram verificados no projeto configurado em 17/11/2026; o teste do autor em dois dispositivos permanece pendente.
 
 O roteiro de cinco cenários para o autor está em banco/README.md. Não considerar
 testes locais como relato do autor ou verificação da nuvem.
+
+## Publicação de demonstração e verificação compartilhada
+
+Endereço: https://eloquent-pie-d5c729.netlify.app
+
+A publicação manual no Netlify foi autorizada pelo autor em 17/11/2026 e usa apenas
+index.html e assets/ produzidos por npm run build. Nenhum arquivo .env, senha ou
+chave privilegiada foi enviado. O pacote temporário fica em .npm-cache, ignorado.
+Ao atualizar a aplicação, compilar novamente com a configuração pública correta
+e publicar o novo conteúdo de dist/; não versionar dist/ ou seu pacote.
+
+Acesso à aplicação: conta de demonstração atendente@dinnos.example, com a senha
+criada e guardada pelo autor. A senha não está no repositório. O site é público;
+consulta e gravação de pedidos dependem de autenticação e autorização no banco.
+
+O pedido fictício 6b4ea74d-9f04-4b52-888a-e01aec6cb7f6 foi gravado pelo agente com
+total de R$ 147,00 e preservado após recarregar a aplicação. Ele pode ser usado
+como referência na conferência por código. O roteiro completo do autor em dois
+dispositivos está em banco/README.md; os resultados ainda não foram relatados.
