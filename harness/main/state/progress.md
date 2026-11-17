@@ -259,3 +259,24 @@
 - Bloqueios e riscos: lista vazia/falha/respostas obsoletas verificadas automaticamente; navegação com mais de 20 registros e login autenticado na nova publicação não repetidos. Paginação por deslocamento pode mudar de posição se chegarem pedidos durante a navegação; Atualizar pedidos volta ao início. Não há sincronização automática da lista.
 
 - Autor solicitou registrar a validação e publicação da F06 em commit. Agrupamento: READMEs, quatro capturas e os três arquivos de estado. JSON, identificadores, estados e git diff --check validados; preservados os 32 testes aprovados, pois não houve alteração executável.
+
+## 2026-11-17 — Roteiro institucional e minuta do trabalho
+
+- Iniciada F07-T02 para cumprir o roteiro de ADS enviado pelo autor. PDF de quatro páginas lido visualmente; texto convertido em contornos, sem extração textual útil. Trecho aplicável entre páginas impressas 40 e 43; excluídas partes de outros cursos.
+- Criados trabalho/roteiro-academico.md e trabalho/trabalho-final.md. Seis seções, referências e anexos organizados; descrições técnicas conferidas no projeto; referências MDN, TypeScript e Supabase consultadas. Sem novo documento PDF/DOCX final ou alegação de formatação pronta.
+- Autor informou empresa Dinos, Serra, Cidade Continal, Setor Ásia; pequena empresa familiar de marido/esposa, registros em papel. Logo fornecida preservada sem alteração em trabalho/imagens/logo-dinos.png, marca Dino’s Pizzaria. Nome técnico DINNOS mantido na aplicação.
+- Bloqueios e riscos: conferir grafia/local de origem; detalhar processos, ferramentas e dificuldades observadas; obter evidências autorizadas e dados acadêmicos. Benefícios descritos como esperados, sem métricas inventadas. Recorte não determina capa, margens, fonte ou extensão. Menção a CSS3 (Bootstrap/SASS) documentada para eventual esclarecimento institucional; aplicação usa CSS autoral. Referência NBR 6023/2002 reproduzida como orientação do documento, sem afirmar edição vigente.
+- Nenhum código executável alterado; preservados os 32 testes anteriormente aprovados. Sem novo commit.
+
+## 2026-11-17 — Verificação final e relatório da F07
+
+- F07-T01 aprovada: npm test passou com tipos, build e 32 testes; fluxo completo na publicação autenticada com pizza pequena de muçarela e cola, retirada/Pix, total R$ 40. Pedido 293ed4ca-913b-413a-86e9-41d0138e31e9 confirmado às 15:12:14; após recarregar, quatro pedidos na lista e detalhes preservados. Obrigatoriedade de campos observada; Enter abriu detalhes; console sem erros. Capturas f07-pedido-confirmado.jpg e f07-persistencia-publicada.jpg. Não solicitada nem copiada senha/token.
+- Autor informou nome Samuel Quintão Rodrigues Santiago e disciplina Estágio Supervisionado; incorporados à fonte e ao PDF. Criados roteiro-demonstracao.md, gerar-relatorio.py e output/pdf/trabalho-dinnos.pdf, nove páginas renderizadas com PDFium e inspecionadas, sem cortes ou sobreposição. Fonte Markdown editável, seis seções e recursos verificados. Referências preservadas das consultas anteriores; não afirmada conformidade integral ABNT.
+- Bloqueios e riscos: autor ainda não relatou demonstração/explicação da T03. T02 depende de detalhar processo atual, ferramentas e dificuldades da empresa, conferir localização/origem e regras institucionais externas ao recorte. Relatório continua versão para conferência. Não inventar entrevista, adoção comercial, métricas ou execução do autor. F07 permanece em andamento.
+- Não houve alteração na lógica da aplicação, dependências npm ou migração. Gerador PDF usa ReportLab e fonte Times do Windows, documentado no README/AGENTS. Sem commit nesta retomada; pedir quando desejar.
+
+## 2026-11-17 — Registro solicitado do material acadêmico
+
+- Autor solicitou commit. Agrupamento: relatório PDF e fonte editável, logo fornecida, roteiro institucional, roteiro de demonstração, gerador, documentação, duas capturas finais e estado da F07. T01 aprovada, T02 em andamento e T03 não iniciada; commit não encerra pendências.
+- Preservados os 32 testes e fluxo publicado já verificados. Nenhuma mudança executável posterior na aplicação. JSON, estados, identificadores, referências locais, sintaxe do gerador e integridade do PDF conferidos para o registro.
+- Acrescentado .gitattributes para tratar PDFs como binários; evita diff textual e avisos de whitespace no formato PDF, sem alterar o arquivo gerado.

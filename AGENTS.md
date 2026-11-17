@@ -25,6 +25,10 @@ O repositório contém a aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScr
 - `testes/cardapio.test.mjs`: testes de dados e formatação.
 - `package.json`, `package-lock.json` e `tsconfig.json`: dependências, comandos e checagem de tipos.
 - `README.md`: preparação, explicações e roteiro manual.
+- `trabalho/trabalho-final.md` e `trabalho/roteiro-academico.md`: fonte revisável e exigências do relatório de ADS.
+- `trabalho/roteiro-demonstracao.md`: prática final e explicação do caminho dos dados.
+- `trabalho/gerar-relatorio.py`: geração do relatório PDF com ReportLab em Windows; executar `python trabalho/gerar-relatorio.py` e conferir as páginas renderizadas.
+- `output/pdf/trabalho-dinnos.pdf`: relatório gerado para conferência; não equivale à aprovação da F07.
 - `skills/professor-mode/SKILL.md`: instruções da skill de ensino.
 - `skills/professor-mode/agents/openai.yaml`: metadados de apresentação da skill.
 - `skills/professor-mode.zip`: pacote da skill.

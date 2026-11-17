@@ -1,6 +1,18 @@
 # DINNOS — Pedidos da pizzaria
 
-Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem framework de interface. Cardápio, montagem, cálculo e revisão de rascunhos de pedidos disponíveis; gravação via Supabase configurada e verificada; demonstração publicada no Netlify. Listagem de pedidos ainda não implementada.
+Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem framework de interface. Cardápio, montagem, cálculo e revisão de rascunhos de pedidos disponíveis; gravação via Supabase configurada e verificada; listagem e detalhes publicados no Netlify.
+
+O trabalho acadêmico segue o roteiro de ADS fornecido pelo autor: consultar
+[exigências e pendências](trabalho/roteiro-academico.md) e a
+[minuta em revisão](trabalho/trabalho-final.md). A empresa é identificada como
+Dinos/Dino’s Pizzaria; DINNOS permanece o nome técnico da aplicação.
+
+A versão para conferência está em `output/pdf/trabalho-dinnos.pdf`. O
+[roteiro de demonstração](trabalho/roteiro-demonstracao.md) orienta a prática final.
+Para gerar novamente o relatório após editar a fonte Markdown, use
+`python trabalho/gerar-relatorio.py`, em Windows com a fonte Times New Roman e
+o pacote Python `reportlab`. A geração não executa testes da aplicação nem
+comprova aprovação acadêmica. Conferir visualmente todas as páginas após gerar.
 
 ## Preparar e executar
 
