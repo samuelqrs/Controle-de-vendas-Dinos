@@ -8,29 +8,6 @@
   ],
   "funcionalidades": [
     {
-      "identificador": "F06",
-      "titulo": "Consultar os pedidos registrados",
-      "estado": "em_andamento",
-      "objetivo": "Listar pedidos salvos e abrir seus detalhes, sem acompanhamento de etapas de produção ou entrega.",
-      "verificacao": "Encontrar um pedido salvo e conferir cliente, modalidade, itens, observações, pagamento informado e total; verificar a lista vazia e falhas de consulta.",
-      "tarefas": [
-        {
-          "identificador": "F06-T01",
-          "descricao": "Implementar listagem e detalhes dos pedidos persistidos.",
-          "responsavel": "agente",
-          "estado": "aprovada",
-          "evidencia": "Implementadas listagem de 20 pedidos por página, ordenação por data/código, detalhes com dados e preços históricos, mensagens de consulta e limpeza ao sair com invalidação de respostas pendentes. npm test passou com tipos, build e 32 testes; quatro testes novos em testes/consulta.test.mjs. Interface ainda não verificada visualmente e não publicada."
-        },
-        {
-          "identificador": "F06-T02",
-          "descricao": "Verificar dados apresentados, lista vazia e mensagens de falha.",
-          "responsavel": "agente",
-          "estado": "em_andamento",
-          "evidencia": "Testes automatizados de detalhes históricos, retirada, lista vazia, falha e respostas obsoletas aprovados. Conferência visual/autenticada, teclado, tela pequena e capturas pendentes: navegador integrado recusou/expirou acesso local; controle nativo interrompido pela ferramenta por não identificar URL com segurança. F06 não aprovada."
-        }
-      ]
-    },
-    {
       "identificador": "F07",
       "titulo": "Validar e preparar a apresentação acadêmica",
       "estado": "nao_iniciada",
@@ -246,6 +223,29 @@
           "responsavel": "autor",
           "estado": "aprovada",
           "evidencia": "Relatados pelo autor em 17/11/2026: cinco de cinco cenários executados, todos com resultado esperado: gravação, fechamento/reabertura, consulta no celular, acesso negado e falha de rede com preservação do rascunho e ausência de duplicação. Evidência declarada pelo autor, distinta dos testes do agente."
+        }
+      ]
+    },
+    {
+      "identificador": "F06",
+      "titulo": "Consultar os pedidos registrados",
+      "estado": "aprovada",
+      "objetivo": "Listar pedidos salvos e abrir seus detalhes, sem acompanhamento de etapas de produção ou entrega.",
+      "verificacao": "Encontrar um pedido salvo e conferir cliente, modalidade, itens, observações, pagamento informado e total; verificar a lista vazia e falhas de consulta.",
+      "tarefas": [
+        {
+          "identificador": "F06-T01",
+          "descricao": "Implementar listagem e detalhes dos pedidos persistidos.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Implementadas listagem de 20 pedidos por página, ordenação por data/código, detalhes com dados e preços históricos, mensagens de consulta e limpeza ao sair com invalidação de respostas pendentes. npm test passou com tipos, build e 32 testes; quatro testes novos em testes/consulta.test.mjs. Interface ainda não verificada visualmente e não publicada."
+        },
+        {
+          "identificador": "F06-T02",
+          "descricao": "Verificar dados apresentados, lista vazia e mensagens de falha.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "17/11/2026: npm test passou com tipos, build e 32 testes. Agente observou login feito pelo autor, listagem real de três pedidos em ordem decrescente e abertura por Enter do pedido fictício 6b4ea74d-9f04-4b52-888a-e01aec6cb7f6; cliente, endereço, Pix, observações, itens, subtotal 14200, taxa 500 e total 14700 centavos conferidos. Foco transferido aos detalhes; larguras 390x844 e 1280x900 sem rolagem horizontal. Sair removeu lista/detalhes; consulta sem login impedida. Console sem erros observados. Lista vazia, falha e respostas obsoletas verificadas por testes automatizados, não por falha física nesta etapa. Navegação entre páginas não exercitada com mais de 20 registros. Capturas f06-detalhes-movel.jpg e f06-detalhes-desktop.jpg. Publicação Netlify 6afc9234abab6f83d12ed897 confirmada; tela pública nova e acesso negado sem login verificados, sem repetir login autenticado na origem pública."
         }
       ]
     }

@@ -249,3 +249,13 @@
 - F06-T01 implementada: listagem paginada, detalhes históricos e limpeza ao sair. F06-T02 em andamento; npm test passou com tipos, build e 32 testes. Novos testes em testes/consulta.test.mjs; execução documentada nos READMEs e AGENTS.md.
 - Bloqueios e riscos: conferência visual/autenticada, teclado, tela pequena e capturas não verificadas. Prévia integrada falhou por conexão recusada/timeout; controle nativo interrompido pela ferramenta por não identificar URL com segurança. Publicação continua na versão anterior; F06 não aprovada, F07 não iniciada.
 - Autor solicitou commit. Agrupamento: consulta de pedidos, testes, documentação e estado pertinente, incluindo conclusão da validação da F05. Nenhuma dependência ou migração adicionada.
+
+## 2026-11-17 — Validação e publicação da F06
+
+- Resolvido acesso à prévia ao iniciar npm run dev fora do sandbox na porta 5175. Autor entrou diretamente na interface; nenhuma senha/token lido. Listagem real retornou três pedidos. Detalhes do pedido fictício de R$ 147 conferidos e abertos por Enter, com foco na região de detalhes. Saída limpou os pedidos e consulta sem login foi impedida.
+- Capturas móvel 390x844 e desktop 1280x900 em f06-detalhes-movel.jpg e f06-detalhes-desktop.jpg. Sem rolagem horizontal (375/375 e 1265/1265) ou erros no console observado. npm test passou novamente com tipos, build e 32 testes.
+- Publicado pacote .npm-cache/dinnos-f06-publicacao.zip (somente index.html e dois assets) no mesmo Netlify, implantação 6afc9234abab6f83d12ed897. SHA256 077611E0183CAD7D6C1316752D9A987B45429B731ACDCABEF572EBD43DA1A977. Arquivo ignorado; nenhum ambiente, senha ou chave privilegiada enviado. Publicação confirmada, três arquivos; tela pública e bloqueio sem login conferidos. Evidências f06-netlify-publicado.jpg e f06-publicado.jpg.
+- F06 aprovada; F07 permanece não iniciada. Nenhum código executável alterado nem novo commit criado nesta etapa.
+- Bloqueios e riscos: lista vazia/falha/respostas obsoletas verificadas automaticamente; navegação com mais de 20 registros e login autenticado na nova publicação não repetidos. Paginação por deslocamento pode mudar de posição se chegarem pedidos durante a navegação; Atualizar pedidos volta ao início. Não há sincronização automática da lista.
+
+- Autor solicitou registrar a validação e publicação da F06 em commit. Agrupamento: READMEs, quatro capturas e os três arquivos de estado. JSON, identificadores, estados e git diff --check validados; preservados os 32 testes aprovados, pois não houve alteração executável.

@@ -49,8 +49,9 @@ evitarmos reenvio acidental; “Novo pedido” limpa o formulário e gera novo c
 O rascunho não é persistido localmente; recarregar pode perdê-lo.
 
 A consulta por código confirma existência, data e total para a verificação da F05.
-Listagem paginada e detalhes completos da F06 estão implementados localmente;
-a conferência visual/autenticada e a atualização da publicação ainda estão pendentes.
+Listagem paginada e detalhes completos da F06 estão publicados. A consulta
+autenticada foi verificada na prévia local conectada ao Supabase real, incluindo
+itens, preços históricos e limpeza ao sair; layout móvel/desktop conferido.
 
 ## Catálogo e testes
 
