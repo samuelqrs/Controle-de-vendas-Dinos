@@ -22,12 +22,20 @@ secao.innerHTML = `<h2 id="titulo-acesso">Acesso do atendente</h2>
   <form id="consultar-gravacao"><label>Código do pedido<input name="codigo" required spellcheck="false" autocapitalize="off"></label>
     <button type="submit">Conferir gravação por código</button>
   </form><p id="resultado-consulta" role="status"></p>`;
-document.querySelector('#secao-pedido')!.before(secao);
+document.querySelector('#area-acesso')!.append(secao);
 const formulario = secao.querySelector<HTMLFormElement>('#entrar-atendente')!;
 const mensagem = secao.querySelector<HTMLElement>('#mensagem-acesso')!;
 const botaoSair = secao.querySelector<HTMLButtonElement>('#sair-atendente')!;
 const consulta = secao.querySelector<HTMLFormElement>('#consultar-gravacao')!;
 const resultado = secao.querySelector<HTMLElement>('#resultado-consulta')!;
+let versaoConsulta = 0;
+document.querySelector('#acoes-sessao')!.append(botaoSair);
+const conferencia = document.createElement('section');
+conferencia.className = 'secao-cardapio';
+const tituloConferencia = document.createElement('h2');
+tituloConferencia.textContent = 'Conferir gravação por código';
+conferencia.append(tituloConferencia, consulta, resultado);
+document.querySelector('#tela-relatorios')!.append(conferencia);
 
 async function verificarAcesso(): Promise<void> {
   if (!banco) { mensagem.textContent = avisoConfiguracao; return; }
@@ -36,15 +44,20 @@ async function verificarAcesso(): Promise<void> {
     const conta = await banco.obterAcesso();
     mensagem.textContent = conta ? `Acesso autorizado: ${conta}.` : 'Entre para gravar e consultar pedidos.';
     botaoSair.hidden = !conta;
+    formulario.hidden = !!conta;
+    document.querySelector('#resumo-acesso')!.textContent = conta ? `Atendente: ${conta}` : 'Sessão não iniciada';
   } catch (erro) {
     mensagem.textContent = erro instanceof Error ? erro.message : 'Não foi possível verificar o acesso.';
     botaoSair.hidden = false;
+    formulario.hidden = false;
+    document.querySelector('#resumo-acesso')!.textContent = 'Acesso não confirmado';
   }
 }
 
 if (!banco) {
   secao.querySelectorAll<HTMLInputElement | HTMLButtonElement>('input, button').forEach(controle => { controle.disabled = true; });
   mensagem.textContent = avisoConfiguracao;
+  consulta.querySelectorAll<HTMLInputElement | HTMLButtonElement>('input, button').forEach(controle => { controle.disabled = true; });
 } else void verificarAcesso();
 
 formulario.addEventListener('submit', async evento => {
@@ -57,12 +70,15 @@ formulario.addEventListener('submit', async evento => {
   try {
     await banco.entrar(String(dados.get('email')), String(dados.get('senha')));
     await verificarAcesso();
+    if (formulario.hidden) location.hash = 'pedidos';
   } catch (erro) { mensagem.textContent = erro instanceof Error ? erro.message : 'Não foi possível entrar.'; }
   finally { senha.value = ''; formulario.inert = false; }
 });
 secao.querySelector('#verificar-acesso')!.addEventListener('click', () => { void verificarAcesso(); });
 botaoSair.addEventListener('click', async () => {
   if (!banco) return;
+  botaoSair.disabled = true;
+  versaoConsulta++;
   secao.inert = true;
   try {
     await banco.sair();
@@ -71,18 +87,23 @@ botaoSair.addEventListener('click', async () => {
     resultado.textContent = '';
     document.dispatchEvent(new Event('encerrar-acesso'));
     botaoSair.hidden = true;
+    formulario.hidden = false;
+    document.querySelector('#resumo-acesso')!.textContent = 'Sessão não iniciada';
+    location.hash = 'inicio';
     mensagem.textContent = 'Sessão encerrada neste navegador. A tela foi limpa.';
   } catch { mensagem.textContent = 'Não foi possível encerrar a sessão. Tente novamente.'; }
-  finally { secao.inert = false; }
+  finally { secao.inert = false; botaoSair.disabled = false; }
 });
 consulta.addEventListener('submit', async evento => {
   evento.preventDefault();
   if (!banco) return;
+  const atual = ++versaoConsulta;
   consulta.inert = true;
   resultado.textContent = 'Consultando gravação…';
   try {
     const pedido = await banco.consultar(String(new FormData(consulta).get('codigo')).trim());
+    if (atual !== versaoConsulta) return;
     resultado.textContent = `Registro encontrado: ${pedido.identificador}. Data: ${new Date(pedido.criado_em).toLocaleString('pt-BR')}. Total preservado: ${(pedido.total / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.`;
-  } catch (erro) { resultado.textContent = erro instanceof Error ? erro.message : 'Falha de consulta.'; }
+  } catch (erro) { if (atual === versaoConsulta) resultado.textContent = erro instanceof Error ? erro.message : 'Falha de consulta.'; }
   finally { consulta.inert = false; }
 });

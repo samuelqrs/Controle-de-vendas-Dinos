@@ -39,9 +39,9 @@ Evidências em harness/main/evidencias/: f05-criacao-projeto.jpg, f05-rls-supaba
 
 Servidor local de verificação encerrado pelo agente (sessão 53196). Para prática local, iniciar npm run dev; cache do Vite pode exigir execução autorizada. Para o teste compartilhado, usar a URL pública.
 
-## Próximo passo obrigatório
+## Estado de encerramento
 
-Concluir F07-T02 e T03 sem atribuir ao autor testes do agente. T01 aprovada com 32 testes e pedido final na publicação, código 293ed4ca-913b-413a-86e9-41d0138e31e9, R$ 40,00. PDF para conferência em output/pdf/trabalho-dinnos.pdf, nove páginas verificadas; fonte trabalho/trabalho-final.md; prática em trabalho/roteiro-demonstracao.md. Autor informou Samuel Quintão Rodrigues Santiago, disciplina Estágio Supervisionado. Aguardar relato da prática e explicação do fluxo, já solicitados, além de dados do levantamento da empresa e confirmação da localização. Não marcar F07 aprovada somente por pedido de conclusão. Se o autor dispensar alguma confirmação, registrar a dispensa e seus limites explicitamente.
+F07 concluída em 17/11/2026 após relato do autor sobre lentidão e legibilidade do registro em papel. T01 com 32 testes e fluxo publicado; T02 com relatório atualizado e PDF de dez páginas conferido; T03 com demonstração técnica delegada explicitamente ao agente, sem afirmar prática oral pelo aluno. Lista de funcionalidades pendentes vazia. Documento em output/pdf/trabalho-dinnos.pdf; fonte trabalho/trabalho-final.md; apresentação em trabalho/demonstracao-comentada.md. Conclusão do escopo do projeto não significa aprovação acadêmica da instituição. Limitações do levantamento e regras externas ao PDF permanecem documentadas. Não reabrir demandas ou repetir testes sem solicitação ou mudança executável. Alterações desta conclusão ainda sem novo commit.
 
 No painel SQL Monaco, substituir documento com Ctrl+A e colagem, não fill. Conferir inventário atual de abas; aba pública marcada como entrega. Não repetir autorização de acesso/publicação já recebida, salvo mudança de escopo que realmente exija nova confirmação.
 
@@ -62,3 +62,19 @@ Fonte externa: C:/Users/samue/OneDrive/Área de Trabalho/EXIGÊNCIAS DO TRABALHO
 ## Última verificação da F07
 
 T01 aprovada em 17/11/2026; T02 em andamento; T03 não iniciada, aguardando relato da prática solicitada. Aplicação não alterada. Autor solicitou commit da fonte, PDF, roteiro, logo, gerador e evidências; consultar git log para o registro. O commit preserva F07 em andamento. Aba pública mantida para a prática do autor. Nenhum servidor local iniciado nesta etapa. Não repetir os testes já aprovados sem mudança executável.
+
+## Atualização de escopo da demonstração
+
+Em 17/11/2026, autor delegou explicitamente demonstração e explicação ao agente. T03 agora aprovada no escopo delegado, responsável agente; não exigir execução pelo aluno para essa tarefa. Material em trabalho/demonstracao-comentada.md; explicação oral e aprendizagem do aluno não avaliadas. T02 continua em andamento pelo levantamento da empresa. Trechos anteriores sobre T03 pendente são históricos e substituídos por esta delegação. Nenhuma alteração executável; não repetir testes. Nenhum commit novo solicitado.
+
+## Atualização final
+
+Esta atualização substitui pendências históricas de F07-T02 e T03: F07 aprovada, movida para concluidas; autor relatou dificuldades em papel e delegou demonstração técnica. Preservar a atribuição de relatos e execução. Há limitações documentadas, sem afirmar métricas, entrevistas ou implantação. Novo commit depende de solicitação.
+
+## Nova demanda F09 — cardápio oficial
+
+Autor solicitou incorporar sabores/valores do PDF C:/Users/samue/Downloads/CARDÁPIO.pdf. Ler harness/main/specs/cardapio-oficial.md para transcrição completa e lacunas. T01 aprovada; T02 do autor em andamento (perguntas já enviadas); T03 a T05 não iniciadas. Baseline npm test: tipos, build, 32 aprovados. Aguardar definições sobre tamanho único/combo, combinações, adicionais, bebidas avulsas/entrega antes de mudar cálculo. Atualizar aplicação e catálogo do servidor com migração nova; preservar pedidos históricos. Site publicado permanece anterior. Relatório/F07 já possuem alterações anteriores não commitadas; preservar.
+
+## Estado atual após F09
+
+F09 concluída e publicada em 17/11/2026: cardápio oficial, dois sabores, combo grande com Coca-Cola 2 litros, retirada apenas; três telas início/lançamento/relatórios. Esta atualização substitui o estado pendente histórico da F09. Migração 002 aplicada no Supabase, final Netlify 6afca3f1d43f468dbc345612; 37 testes aprovados. Novo pedido fictício ddb134f8-2342-49e7-b8d4-15f29a40b513, total R$ 105,80, verificado com histórico preservado. Fila de funcionalidades vazia. Complemento acadêmico em trabalho/atualizacao-f09.md; PDF F07 histórico não regenerado. Não repetir testes sem mudanças executáveis. Servidor local iniciado nesta etapa encerrado após a conferência. Nenhum novo commit; preservar alterações anteriores do relatório e F07. Para continuar, pedir nova demanda ou registrar commit quando solicitado.

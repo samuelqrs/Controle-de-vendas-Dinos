@@ -19,6 +19,8 @@ consultas e gravações, inclusive com token de sessão ainda válido.
    no gerenciador de senhas; não envie senhas ou chaves privilegiadas ao chat.
 2. Execute banco/001_criar_pedidos.sql uma vez no SQL Editor do projeto novo.
    A migração é transacional e cria tabelas, políticas, catálogo e função de gravação.
+   Em seguida execute banco/002_cardapio_oficial.sql para aplicar o catálogo atual.
+   Em um banco existente, execute somente a migração 002; não reaplique a 001.
 3. Em Authentication, desabilite cadastro público e crie a conta de demonstração
    com e-mail e senha. Registre o UUID dessa conta em atendentes_autorizados pelo
    painel administrativo: identificador = UUID da conta; ativo = true.
@@ -55,8 +57,11 @@ itens, preços históricos e limpeza ao sair; layout móvel/desktop conferido.
 
 ## Catálogo e testes
 
-O catálogo interno da migração contém os mesmos dados fictícios de cardapio.ts e
-a taxa de valores.ts. Ao mudar produtos/preços, criar migração nova para o banco
+O catálogo interno após a migração 002 contém os mesmos dados oficiais de
+cardapio.ts e a taxa zero da retirada em valores.ts. Novos pedidos de entrega são
+rejeitados até confirmar a taxa; bebidas avulsas e adicionais não são ofertados.
+A atualização não altera preços/descrições de pedidos antigos e preserva a
+repetição idempotente de uma tentativa histórica já confirmada. Ao mudar produtos/preços, criar migração nova para o banco
 e atualizar a aplicação juntos; não editar pedidos existentes. O servidor recusa
 gravar se o total calculado diferir do total previsto pelo rascunho.
 
@@ -65,8 +70,10 @@ de sessão. @electric-sql/pglite é dependência apenas de desenvolvimento para
 executar a migração em PostgreSQL isolado e testar políticas e gravação. Esses
 testes não substituem conexão real com Supabase nem os dois dispositivos.
 
-## Roteiro de dois dispositivos — F05
+## Roteiro histórico de dois dispositivos — F05
 
+Este roteiro registra a validação com catálogo fictício anterior. Para novos pedidos,
+use pizzas/combo oficiais e somente retirada, conforme o roteiro atual no README.
 Use https://eloquent-pie-d5c729.netlify.app no computador e no celular.
 A conta de demonstração é atendente@dinnos.example, com a senha guardada pelo autor.
 Pedido de referência gravado pelo agente: 6b4ea74d-9f04-4b52-888a-e01aec6cb7f6, R$ 147,00.

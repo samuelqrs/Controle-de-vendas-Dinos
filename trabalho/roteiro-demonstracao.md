@@ -3,6 +3,11 @@
 Autor: Samuel Quintão Rodrigues Santiago.
 Disciplina: Estágio Supervisionado.
 
+A demonstração técnica foi delegada ao agente pelo autor. Consulte também
+`demonstracao-comentada.md`, com a execução verificada, as capturas e uma fala
+sugerida para apresentar o caminho dos dados. Os passos abaixo permanecem úteis
+para ensaio; sua realização pelo aluno não é afirmada neste material.
+
 ## Preparação
 
 Abra https://eloquent-pie-d5c729.netlify.app/ e entre com a conta de atendente.
@@ -48,9 +53,10 @@ caixa, produção ou entrega. O rascunho se perde ao recarregar. O sistema preci
 de internet para gravar e consultar. O protótipo não comprova adoção comercial
 nem redução medida de custos ou erros na empresa.
 
-## Relato necessário para encerrar F07-T03
+## Ensaio opcional do autor
 
 Após realizar os passos, relate quantos dos oito executou, o resultado e o código
 do pedido fictício. Explique, em poucas frases e com suas palavras, o que acontece
 entre o clique em gravar, a confirmação do banco e a consulta. Não envie senha.
-Essa prática permanece pendente até seu relato; o roteiro não comprova execução.
+Esse relato pode complementar o material, sem substituir a identificação da
+demonstração técnica como realizada pelo agente a pedido do autor.

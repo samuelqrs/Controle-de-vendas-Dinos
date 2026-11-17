@@ -4,15 +4,21 @@ Projeto acadêmico construído por etapas com HTML5, CSS3 e TypeScript, sem fram
 
 O trabalho acadêmico segue o roteiro de ADS fornecido pelo autor: consultar
 [exigências e pendências](trabalho/roteiro-academico.md) e a
-[minuta em revisão](trabalho/trabalho-final.md). A empresa é identificada como
+[relatório](trabalho/trabalho-final.md). A empresa é identificada como
 Dinos/Dino’s Pizzaria; DINNOS permanece o nome técnico da aplicação.
 
-A versão para conferência está em `output/pdf/trabalho-dinnos.pdf`. O
+O relatório gerado está em `output/pdf/trabalho-dinnos.pdf`. A F07 foi concluída
+com as limitações do levantamento documentadas; isso não representa aprovação
+acadêmica pela instituição. A [demonstração comentada](trabalho/demonstracao-comentada.md)
+foi preparada pelo agente por delegação do autor. O
 [roteiro de demonstração](trabalho/roteiro-demonstracao.md) orienta a prática final.
 Para gerar novamente o relatório após editar a fonte Markdown, use
 `python trabalho/gerar-relatorio.py`, em Windows com a fonte Times New Roman e
 o pacote Python `reportlab`. A geração não executa testes da aplicação nem
 comprova aprovação acadêmica. Conferir visualmente todas as páginas após gerar.
+
+O PDF registra a versão da F07. A evolução posterior, com cardápio oficial e três
+telas, está no [complemento da F09](trabalho/atualizacao-f09.md).
 
 ## Preparar e executar
 
@@ -58,7 +64,7 @@ npm run preview
 
 npm test executa a checagem de tipos, gera dist/ e verifica se o HTML publicado usa português e referencia arquivos JavaScript e CSS existentes. Esse teste não substitui a verificação de aparência e interação no navegador. O preview serve a compilação, normalmente em http://127.0.0.1:4173; encerre com Ctrl+C. Para apenas compilar, use npm run build.
 
-## Roteiro manual do F01
+## Roteiro histórico do F01
 
 1. Execute npm run dev e abra a URL Local. Confira o título DINNOS e a apresentação, sem erros visíveis.
 2. Clique em “Conhecer as próximas etapas”: a lista deve aparecer e o texto do botão deve mudar para “Ocultar as próximas etapas”. Clique novamente: a lista deve desaparecer.
@@ -66,111 +72,70 @@ npm test executa a checagem de tipos, gera dist/ e verifica se o HTML publicado 
 4. Reduza a janela para aproximadamente 390 pixels de largura. Confira se o conteúdo fica em uma coluna, legível e sem rolagem horizontal.
 5. Explique com suas palavras qual arquivo muda o conteúdo, qual muda a aparência e qual controla o botão; explique por que o navegador recebe JavaScript.
 
-Relate quantos dos cinco passos executou e qualquer diferença observada. A execução e a explicação pelo autor são a tarefa F01-T04 e ainda precisam ser confirmadas.
+Esse roteiro documenta a primeira etapa e não descreve a navegação atual. Para a versão publicada, use o roteiro de telas e cardápio oficial abaixo.
 
 ## Persistência e publicação
 
-A base é HTML + CSS + TypeScript, com Vite para desenvolvimento e compilação. A F05 usa Supabase para PostgreSQL compartilhado, autenticação e regras de acesso. A conexão foi configurada e a gravação hospedada verificada; o roteiro do autor em dois dispositivos permanece pendente.
+A base é HTML + CSS + TypeScript, com Vite para desenvolvimento e compilação. A F05 usa Supabase para PostgreSQL compartilhado, autenticação e regras de acesso. A conexão foi configurada e a gravação hospedada verificada; o autor relatou os cinco cenários de verificação compartilhada com resultado esperado.
 
 Demonstração publicada em [DINNOS](https://eloquent-pie-d5c729.netlify.app). A publicação usa npm run build e o conteúdo de dist/. O acesso aos pedidos exige uma conta de atendente autorizada no Supabase; nunca colocar chaves privilegiadas no código da página. Para uma nova instalação, configurar as variáveis públicas conforme banco/README.md.
 
 Referências oficiais: [Vite](https://vite.dev/guide/), [TypeScript](https://www.typescriptlang.org/tsconfig/), [Supabase Auth](https://supabase.com/docs/guides/auth), [Netlify](https://docs.netlify.com/manage/projects/add-new-project/).
 
-## Cardápio e mobile first (F02)
+## Telas e cardápio oficial
 
-A interface parte do celular: CSS base em uma coluna e controles com altura mínima de 44 px; media queries min-width ampliam o layout a partir de 640 e 1024 px. Verificar primeiro em 390 px e depois em telas maiores.
+A navegação separa três telas, sem recarregar o documento:
 
-Os dados fictícios e ajustáveis ficam em aplicacao/cardapio.ts. Uma lista reúne vários produtos; cada objeto descreve um produto com identificador, nome e preços. O tipo Sabor exige preço para todos os tamanhos; os preços são inteiros em centavos. A função formatarPreco converte centavos apenas para exibição. principal.ts cria os elementos e atualiza preços e limites ao trocar o tamanho.
+- Tela inicial: apresentação, cardápio e acesso do atendente.
+- Lançamento de pedidos: dados, montagem, revisão e gravação.
+- Relatórios: lista de pedidos e detalhes preservados, além da consulta por código.
 
-Premissas adotadas por delegação do autor: pequena de 25 cm/4 fatias/1 sabor; média de 30 cm/6 fatias/2 sabores; grande de 35 cm/8 fatias/3 sabores. Sabores combinados usam o preço mais caro do tamanho escolhido. Adicionais são cobrados integralmente uma vez por pizza, em qualquer tamanho. A montagem e o cálculo do pedido ficam para F03 e F04.
+O login concluído abre o lançamento. O botão Sair fica no cabeçalho em todas as
+telas e limpa os dados. Trocar de tela preserva o rascunho; recarregar pode perdê-lo.
+Os links antigos para montagem e consulta continuam encaminhando à tela correta.
+Relatórios exibem registros de pedidos, sem comprovar recebimento de pagamentos.
 
-Preços por sabor, na ordem pequena/média/grande: muçarela R$ 28/38/48; calabresa R$ 30/42/52; frango R$ 34/46/58; quatro queijos R$ 36/48/62. Bebidas: cola 2 litros R$ 12; guaraná 350 ml R$ 6; sucos de laranja e uva 500 ml R$ 9 cada. Adicionais: muçarela extra R$ 6; bacon R$ 7; requeijão R$ 5.
+Sabores e preços seguem o cardápio oficial fornecido pelo autor em 17/11/2026:
 
-Verificar com npm test: checagem de tipos, compilação, teste dos recursos publicados e dois testes de dados/formatação em testes/cardapio.test.mjs. O Node.js usa --experimental-strip-types para ler os dados TypeScript nos testes; a checagem de tipos continua responsabilidade do tsc.
+| Produto | Média | Grande |
+| --- | ---: | ---: |
+| Margherita | R$ 39,90 | R$ 49,90 |
+| Calabresa | R$ 42,90 | R$ 52,90 |
+| Portuguesa | R$ 44,90 | R$ 54,90 |
+| Frango com Catupiry | R$ 45,90 | R$ 55,90 |
+| Carne Seca | R$ 49,90 | R$ 59,90 |
+| Romeu e Julieta | Indisponível | R$ 39,90 |
+| Combo Franbacon + Coca-Cola 2 litros | Indisponível | R$ 59,90 |
 
-Roteiro atual: abrir a página em tela pequena, conferir quatro pizzas, trocar entre os três tamanhos, comparar preços e limites com os valores acima, conferir quatro bebidas e três adicionais e ampliar para desktop. O roteiro anterior do F01 é histórico: seu botão de próximas etapas foi substituído pelo cardápio.
-## Montagem do pedido — F03
+Média e grande aceitam até dois sabores, pelo preço do mais caro. O combo é fechado,
+inclui pizza grande e uma Coca-Cola de 2 litros. Adicionais, bebidas avulsas e entrega
+ficam indisponíveis enquanto valores/escolhas não forem confirmados. Não há oferta
+pequena nem diâmetro/fatias presumidos. A taxa interna zero corresponde à retirada,
+não a entrega gratuita. Pedidos antigos conservam preços e descrições originais.
 
-A seção “Montar pedido” permite incluir, editar e remover pizzas e bebidas em um
-rascunho temporário. Os dados são perdidos ao recarregar a página. O cálculo e a
-revisão foram acrescentados na F04; a gravação pertence à F05.
+O tipo de preço por tamanho é parcial: um produto só pode ser montado no tamanho
+em que possui preço. O combo não pode ser misturado com sabores avulsos. A aplicação
+e a função do banco validam essas regras; os preços são inteiros em centavos.
 
-Premissas fictícias e ajustáveis, definidas por delegação do autor:
+### Roteiro manual atual
 
-- Nome e telefone com DDD (10 ou 11 dígitos) obrigatórios.
-- Retirada dispensa endereço. Entrega exige logradouro, número (ou s/n), bairro e cidade.
-- Complemento e observações são opcionais.
-- Dinheiro, Pix ou cartão são informações de pagamento; não há cobrança pelo sistema.
-- Quantidades inteiras de 1 a 99 por item; sabores seguem o limite de cada tamanho.
-- Adicionais opcionais aplicam-se a cada pizza da quantidade informada.
+1. Em 390 px, confira as três opções da navegação e o login apenas na tela inicial.
+2. Confira os cinco sabores na média; escolha grande e confira doce e combo.
+3. No lançamento, adicione média Margherita/Frango com Catupiry (R$ 45,90).
+4. Vá a Relatórios e volte: dados e itens do rascunho devem continuar iguais.
+5. Adicione o combo grande de R$ 59,90; confira total R$ 105,80, retirada e taxa zero.
+6. Confira que doce e combo não podem ser montados na média e que três sabores ou
+   mistura de combo são rejeitados; bebidas avulsas, adicionais e entrega não são oferecidos.
+7. Entre na tela inicial, revise e grave com dados fictícios. Guarde código/data/total.
+8. Em Relatórios, atualize e abra o mesmo código; confira itens e valores. Após sair,
+   os resultados devem desaparecer e a consulta deve exigir autorização.
+9. Repita navegação por Tab/Enter, conferindo foco, legibilidade e ausência de
+   rolagem horizontal, antes de ampliar para desktop.
 
-`aplicacao/pedido.ts` define os tipos e funções de validação sem acessar a tela.
-`aplicacao/montagem.ts` escuta eventos: `change` alterna os campos da modalidade e
-do produto; `submit` valida o formulário e impede a navegação com `preventDefault`.
-A variável `itens` guarda a lista em memória. `indiceEdicao` identifica o item sendo
-editado; ao salvar, esse item é substituído. Cancelar preserva o item original.
-Depois de cada alteração, `apresentarItens` reconstrói a lista com `textContent`.
-
-Execute `npm test` para tipos, compilação, recursos publicados, cardápio e
-`testes/pedido.test.mjs` (entrega, retirada, obrigatoriedade, quantidades e personalização).
-
-## Roteiro manual da F03
-
-1. Em tela pequena, abra “Montar pedido”. Use apenas dados fictícios, por exemplo
-   Cliente Exemplo e (11) 99999-9999. Selecione retirada e Pix.
-2. Tente conferir sem itens. Inclua duas pizzas médias com dois sabores e bacon,
-   depois uma bebida. Confira os dados e observe a confirmação do rascunho.
-3. Edite a pizza, mude a quantidade e salve. Edite novamente e cancele; o item
-   original deve permanecer. Remova a bebida e inclua outra.
-4. Tente quantidade zero, negativa e fracionária; tente pizza sem sabor e pizza
-   pequena com dois sabores. Nenhuma deve entrar no pedido.
-5. Alterne para entrega. Confira sem endereço, depois preencha logradouro, número,
-   bairro e cidade fictícios. Volte para retirada: endereço não deve ser exigido.
-6. Navegue com Tab e Shift+Tab, selecione caixas com Espaço e acione botões com
-   Enter. Confira foco visível, legibilidade, toque e ausência de rolagem horizontal.
-   Repita a apresentação em tela maior.
-
-## Cálculo e revisão — F04
-
-A função calcularItem, em aplicacao/valores.ts, usa o sabor mais caro no tamanho
-escolhido, soma os adicionais uma vez por pizza e multiplica pela quantidade.
-Bebidas usam preço unitário vezes quantidade. calcularPedido soma os subtotais
-e acrescenta a taxa uma única vez: entrega R$ 5,00, retirada R$ 0,00. Um rascunho
-vazio mostra zero em todos os valores. São premissas fictícias e ajustáveis.
-
-Todos os cálculos usam inteiros em centavos: R$ 53,00 é 5300. A divisão por 100
-ocorre apenas na exibição com formatarPreco. As funções não acessam a tela nem
-alteram os itens recebidos; a interface usa seus resultados para apresentar os valores.
-
-Exemplo independente: duas pizzas médias de muçarela/frango com bacon usam
-R$ 46 + R$ 7 = R$ 53 por unidade, ou R$ 106 nas duas. Três refrigerantes de cola
-custam R$ 36. Subtotal R$ 142; retirada R$ 142; entrega R$ 147.
-
-O botão “Conferir dados do pedido” valida os dados e mostra cliente, telefone,
-modalidade, endereço, pagamento, observações e total conferido. Qualquer alteração
-oculta essa revisão até nova conferência. Durante uma edição, os valores continuam
-representando os itens adicionados; salve ou cancele antes de conferir.
-
-O rascunho não representa venda. A premissa é considerar venda registrada apenas
-após gravação bem-sucedida na F05. Pagamento informado não confirma recebimento;
-não há processamento de pagamento. Nenhuma gravação foi implementada na F04.
-
-Execute npm test: tipos, build e testes, incluindo testes/valores.test.mjs com
-resultados literais calculados independentemente (sabores, adicionais, bebidas,
-quantidades, taxa, edição/remoção e rejeição de dados inválidos).
-
-### Roteiro manual da F04
-
-1. Em largura de 390 px, inclua duas pizzas médias de muçarela/frango com bacon e
-   três refrigerantes de cola. Compare os valores com o exemplo acima.
-2. Troque retirada por entrega e vice-versa. Confira a diferença única de R$ 5.
-3. Preencha dados fictícios e confira: a revisão deve apresentar os dados e o total.
-4. Edite a quantidade, cancele, depois edite e salve; remova uma bebida. Confira os
-   valores após cada ação e que a revisão anterior ficou oculta.
-5. Altere cliente, pagamento ou modalidade após conferir: exija nova conferência.
-   Tente conferir com edição aberta: a revisão não deve aparecer.
-6. Use Tab, Shift+Tab e Enter; confira legibilidade, foco e ausência de rolagem
-   horizontal no celular antes de repetir a apresentação em tela maior.
+Execute npm test: checagem de tipos, build e 37 testes, incluindo regras oficiais,
+migração PostgreSQL, histórico, acesso, gravação, consultas e rotas antigas/atuais.
+Os roteiros históricos de F01 a F07 ficam registrados no harness e no trabalho
+acadêmico, com seus preços e capturas da época.
 
 ## Gravação compartilhada — F05
 
@@ -191,7 +156,7 @@ fica bloqueada para edição; “Novo pedido” inicia outro rascunho. A confer�
 código permite verificar persistência após reabrir ou em outro dispositivo.
 A listagem e os detalhes completos da F06 estão publicados, com
 páginas de 20 pedidos, dos mais recentes aos mais antigos. Entre como atendente,
-abra “Consultar pedidos registrados”, clique em “Atualizar pedidos” e depois em
+abra a tela “Relatórios”, clique em “Atualizar pedidos” e depois em
 “Ver detalhes”. A tela usa os valores preservados no registro e limpa os resultados
 ao sair. A consulta autenticada e o layout móvel/desktop foram conferidos;
 o site publicado foi atualizado. Execute `npm test` para os testes, incluindo `testes/consulta.test.mjs`

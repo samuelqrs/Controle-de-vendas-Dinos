@@ -6,7 +6,7 @@ const secao = document.createElement('section');
 secao.id = 'secao-pedidos-salvos';
 secao.className = 'secao-cardapio';
 secao.setAttribute('aria-labelledby', 'titulo-pedidos-salvos');
-secao.innerHTML = `<h2 id="titulo-pedidos-salvos">Pedidos registrados</h2>
+secao.innerHTML = `<h2 id="titulo-pedidos-salvos">Relatórios de pedidos</h2>
   <p>Consulte os pedidos mais recentes e abra seus detalhes. O pagamento exibido é o informado no pedido.</p>
   <div class="acoes"><button id="atualizar-pedidos" type="button">Atualizar pedidos</button>
     <button id="pedidos-anteriores" type="button" disabled>Página anterior</button>
@@ -16,7 +16,7 @@ secao.innerHTML = `<h2 id="titulo-pedidos-salvos">Pedidos registrados</h2>
   <article id="detalhes-pedido-salvo" class="resumo-valores" hidden tabindex="-1" aria-labelledby="titulo-detalhes-pedido">
     <h3 id="titulo-detalhes-pedido">Detalhes do pedido</h3><dl></dl>
   </article>`;
-document.querySelector('main')!.append(secao);
+document.querySelector('#tela-relatorios')!.prepend(secao);
 const mensagem = secao.querySelector<HTMLElement>('#mensagem-listagem')!;
 const lista = secao.querySelector<HTMLElement>('#lista-pedidos-salvos')!;
 const detalhes = secao.querySelector<HTMLElement>('#detalhes-pedido-salvo')!;

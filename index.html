@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Consulte o cardápio de demonstração da pizzaria DINNOS." />
+    <meta name="description" content="Cardápio da Dino’s Pizzaria e sistema de registro de pedidos." />
     <title>DINNOS | Cardápio</title>
     <link rel="stylesheet" href="/aplicacao/estilos.css" />
     <script type="module" src="/aplicacao/principal.ts"></script>
@@ -12,17 +12,24 @@
     <header class="cabecalho">
       <a class="marca" href="#inicio" aria-label="DINNOS, início">DINNOS<span>PIZZARIA</span></a>
       <span class="etiqueta">Projeto acadêmico</span>
+      <div id="acoes-sessao"><span id="resumo-acesso">Sessão não iniciada</span></div>
     </header>
-    <main id="inicio">
+    <nav class="navegacao-telas" aria-label="Telas do sistema">
+      <a href="#inicio" data-destino="inicio">Tela inicial</a>
+      <a href="#pedidos" data-destino="pedidos">Lançamento de pedidos</a>
+      <a href="#relatorios" data-destino="relatorios">Relatórios</a>
+    </nav>
+    <main id="conteudo">
+      <div id="tela-inicial" data-tela="inicio">
       <section class="apresentacao" aria-labelledby="titulo-principal">
         <p class="sobretitulo">FEITA PARA COMPARTILHAR</p>
         <h1 id="titulo-principal">Escolha seu próximo sabor.</h1>
-        <p class="introducao">Pizzas, bebidas e aquele toque a mais. Explore nosso cardápio de demonstração.</p>
-        <p class="aviso">Produtos e preços fictícios. O pedido só é registrado após a confirmação da gravação no banco.</p>
-        <nav aria-label="Categorias do cardápio"><a href="#secao-pizzas">Pizzas</a><a href="#secao-bebidas">Bebidas</a><a href="#secao-adicionais">Adicionais</a><a href="#secao-acesso">Acesso</a><a href="#secao-pedido">Montar pedido</a></nav>
-        <p><a href="#secao-pedidos-salvos">Consultar pedidos registrados</a></p>
+        <p class="introducao">Sabores e preços do cardápio oficial da Dino’s Pizzaria.</p>
+        <p class="aviso">Pedidos nesta versão somente para retirada. Adicionais, bebidas avulsas e entrega aguardam confirmação. O combo inclui Coca-Cola de 2 litros.</p>
+        <p>Entre com sua conta para gravar pedidos e consultar os registros.</p>
         <noscript><p>Ative o JavaScript para consultar os produtos e preços.</p></noscript>
       </section>
+      <div id="area-acesso"></div>
       <section id="secao-pizzas" class="secao-cardapio" aria-labelledby="titulo-pizzas">
         <p class="sobretitulo">01 / DO FORNO</p>
         <h2 id="titulo-pizzas">Pizzas</h2>
@@ -32,18 +39,22 @@
         <p class="regra">Ao combinar sabores, vale o preço do sabor mais caro no tamanho escolhido.</p>
         <ul id="pizzas" class="produtos"></ul>
       </section>
-      <section id="secao-bebidas" class="secao-cardapio" aria-labelledby="titulo-bebidas">
+      <section id="secao-bebidas" class="secao-cardapio" aria-labelledby="titulo-bebidas" hidden>
         <p class="sobretitulo">02 / PARA ACOMPANHAR</p>
         <h2 id="titulo-bebidas">Bebidas</h2>
         <ul id="bebidas" class="produtos"></ul>
       </section>
-      <section id="secao-adicionais" class="secao-cardapio" aria-labelledby="titulo-adicionais">
+      <section id="secao-adicionais" class="secao-cardapio" aria-labelledby="titulo-adicionais" hidden>
         <p class="sobretitulo">03 / DO SEU JEITO</p>
         <h2 id="titulo-adicionais">Adicionais</h2>
         <p class="regra">Cada adicional é cobrado integralmente uma vez por pizza, além do preço dos sabores.</p>
         <ul id="adicionais" class="produtos"></ul>
       </section>
-      <section id="secao-pedido" class="secao-cardapio" aria-labelledby="titulo-pedido"></section>
+      </div>
+      <div id="tela-pedidos" data-tela="pedidos" hidden>
+        <section id="secao-pedido" class="secao-cardapio" aria-labelledby="titulo-pedido"></section>
+      </div>
+      <div id="tela-relatorios" data-tela="relatorios" hidden></div>
     </main>
     <footer>DINNOS <span aria-hidden="true">/</span> Aprendendo a construir, uma etapa por vez.</footer>
   </body>

@@ -5,8 +5,8 @@ import { lerConfiguracao } from '../aplicacao/configuracao.ts';
 
 const codigo = '10000000-0000-4000-8000-000000000001';
 const dados = { nome: ' Cliente fictício ', telefone: '(11) 99999-9999', modalidade: 'retirada', pagamento: 'pix', logradouro: 'Endereço anterior', numero: '1', bairro: 'Centro', cidade: 'Exemplo', complemento: '', observacoes: '' };
-const itens = [{ tipo: 'bebida', bebida: 'suco-uva', quantidade: 2 }];
-const confirmado = { identificador: codigo, criado_em: '2026-11-13T15:00:00Z', atendente: 'exemplo', dados, itens: [{ produto: itens[0], descricao: 'Suco de uva', precoBase: 900, precoAdicionais: 0, precoUnitario: 900, subtotal: 1800 }], subtotal: 1800, taxa: 0, total: 1800 };
+const itens = [{ tipo: 'pizza', tamanho: 'media', sabores: ['margherita'], adicionais: [], quantidade: 2 }];
+const confirmado = { identificador: codigo, criado_em: '2026-11-13T15:00:00Z', atendente: 'exemplo', dados, itens: [{ produto: itens[0], descricao: 'Pizza Média — Margherita', precoBase: 3990, precoAdicionais: 0, precoUnitario: 3990, subtotal: 7980 }], subtotal: 7980, taxa: 0, total: 7980 };
 
 testar('configuração ausente mantém a gravação desligada e rejeita chaves privilegiadas', () => {
   verificar.equal(lerConfiguracao({}), null);
@@ -19,7 +19,7 @@ testar('registro normaliza dados, remove endereço da retirada e copia os itens'
   const registro = prepararRegistro(codigo, dados, itens);
   verificar.equal(registro.dados.nome, 'Cliente fictício');
   verificar.equal(registro.dados.logradouro, '');
-  verificar.equal(registro.totalPrevisto, 1800);
+  verificar.equal(registro.totalPrevisto, 7980);
   registro.itens[0].quantidade = 8;
   verificar.equal(itens[0].quantidade, 2);
   verificar.equal(dados.logradouro, 'Endereço anterior');

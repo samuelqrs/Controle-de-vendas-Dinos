@@ -1,5 +1,5 @@
 import { tamanhos, sabores, bebidas, adicionais, formatarPreco } from './cardapio.ts';
-import { calcularItem, calcularPedido, taxaEntrega } from './valores.ts';
+import { calcularItem, calcularPedido } from './valores.ts';
 import { validarItem, validarPedido } from './pedido.ts';
 import type { ItemPedido, DadosPedido } from './pedido.ts';
 import { banco } from './acesso.ts';
@@ -7,13 +7,13 @@ import { criarGravador } from './registro.ts';
 
 const secao = document.querySelector<HTMLElement>('#secao-pedido')!;
 secao.innerHTML = `
-  <p class="sobretitulo">04 / SEU PEDIDO</p><h2 id="titulo-pedido">Montar pedido</h2>
+  <p class="sobretitulo">LANÇAMENTO</p><h2 id="titulo-pedido">Montar pedido</h2>
   <p>Rascunho temporário: os dados serão perdidos ao recarregar a página. Use dados fictícios.</p>
   <form id="dados-pedido">
     <div class="campos-pedido">
       <label>Nome do cliente *<input name="nome" required autocomplete="name" maxlength="100"></label>
       <label>Telefone com DDD *<input name="telefone" type="tel" required autocomplete="tel" placeholder="(11) 99999-9999"></label>
-      <label>Modalidade *<select name="modalidade"><option value="retirada">Retirada</option><option value="entrega">Entrega</option></select></label>
+      <label>Modalidade *<select name="modalidade"><option value="retirada">Retirada</option></select></label>
       <label>Pagamento *<select name="pagamento" required><option value="">Selecione</option><option value="dinheiro">Dinheiro</option><option value="pix">Pix</option><option value="cartao">Cartão</option></select></label>
     </div>
     <fieldset id="endereco-pedido" hidden disabled><legend>Endereço de entrega</legend><div class="campos-pedido">
@@ -27,12 +27,12 @@ secao.innerHTML = `
   </form>
   <form id="editor-item">
     <h3 id="titulo-editor">Adicionar item</h3>
-    <div class="campos-pedido"><label>Produto<select name="tipo"><option value="pizza">Pizza</option><option value="bebida">Bebida</option></select></label>
+    <div class="campos-pedido"><label>Produto<select name="tipo"><option value="pizza">Pizza ou combo</option></select></label>
     <label>Quantidade *<input name="quantidade" type="number" min="1" max="99" step="1" value="1" required></label></div>
     <fieldset id="opcoes-pizza"><legend>Personalizar pizza</legend>
       <label>Tamanho<select name="tamanho">${tamanhos.map(item => `<option value="${item.identificador}">${item.nome}</option>`).join('')}</select></label>
       <p id="limite-sabores"></p><fieldset><legend>Sabores *</legend>${sabores.map(item => `<label class="opcao"><input type="checkbox" name="sabores" value="${item.identificador}">${item.nome}</label>`).join('')}</fieldset>
-      <fieldset><legend>Adicionais opcionais</legend>${adicionais.map(item => `<label class="opcao"><input type="checkbox" name="adicionais" value="${item.identificador}">${item.nome}</label>`).join('')}</fieldset>
+      <fieldset hidden disabled><legend>Adicionais opcionais</legend>${adicionais.map(item => `<label class="opcao"><input type="checkbox" name="adicionais" value="${item.identificador}">${item.nome}</label>`).join('')}</fieldset>
     </fieldset>
     <fieldset id="opcoes-bebida" hidden disabled><legend>Bebida</legend><label>Escolha a bebida<select name="bebida">${bebidas.map(item => `<option value="${item.identificador}">${item.nome} · ${item.volume}</option>`).join('')}</select></label></fieldset>
     <p id="erro-item" role="alert"></p><div class="acoes"><button type="submit" id="confirmar-item">Adicionar item</button><button type="button" id="cancelar-item" hidden>Cancelar edição</button></div>
@@ -40,7 +40,7 @@ secao.innerHTML = `
   <h3>Itens do pedido</h3><ul id="itens-pedido" class="produtos"></ul>
   <section class="resumo-valores" aria-labelledby="titulo-valores">
     <h3 id="titulo-valores">Valores do rascunho</h3>
-    <p>Entrega: ${formatarPreco(taxaEntrega)} por pedido. Retirada sem taxa. Valores dos itens já adicionados; salve as alterações do item para atualizar.</p>
+    <p>Somente retirada, sem taxa. Entrega, adicionais e bebidas avulsas aguardam confirmação. Valores dos itens já adicionados; salve as alterações do item para atualizar.</p>
     <dl id="valores-pedido" aria-live="polite"></dl>
   </section>
   <button type="submit" form="dados-pedido" id="conferir-pedido">Conferir dados do pedido</button>
@@ -86,7 +86,12 @@ function atualizarOpcoes(): void {
     grupo.disabled = !ativo;
   }
   const tamanho = tamanhos.find(item => item.identificador === campo('tamanho').value)!;
-  secao.querySelector('#limite-sabores')!.textContent = `Escolha de 1 a ${tamanho.limiteSabores} sabor(es). Ao reduzir o tamanho, ajuste os sabores antes de confirmar.`;
+  editor.querySelectorAll<HTMLInputElement>('input[name="sabores"]').forEach(controle => {
+    const sabor = sabores.find(item => item.identificador === controle.value)!;
+    controle.disabled = sabor.precos[tamanho.identificador] === undefined;
+    if (controle.disabled) controle.checked = false;
+  });
+  secao.querySelector('#limite-sabores')!.textContent = `Escolha até ${tamanho.limiteSabores} sabores. Romeu e Julieta e combo somente grandes. O combo inclui Coca-Cola de 2 litros e não combina com outros sabores.`;
 }
 
 function limparEditor(): void {
@@ -272,7 +277,9 @@ botaoGravar.addEventListener('click', async () => {
   const codigo = gravador.obterCodigo();
   bloquearRascunho(true);
   const acesso = document.querySelector<HTMLElement>('#secao-acesso')!;
+  const acoesSessao = document.querySelector<HTMLElement>('#acoes-sessao')!;
   acesso.inert = true;
+  acoesSessao.inert = true;
   mensagemGravacao.textContent = `Enviando pedido. Código desta tentativa: ${codigo}. Aguarde a confirmação.`;
   try {
     const registro = await gravador.salvar(dados, itens);
@@ -288,6 +295,7 @@ botaoGravar.addEventListener('click', async () => {
   } finally {
     bloquearRascunho(pedidoGravado);
     acesso.inert = false;
+    acoesSessao.inert = false;
     mensagemGravacao.focus();
   }
 });

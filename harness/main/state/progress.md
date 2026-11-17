@@ -280,3 +280,32 @@
 - Autor solicitou commit. Agrupamento: relatório PDF e fonte editável, logo fornecida, roteiro institucional, roteiro de demonstração, gerador, documentação, duas capturas finais e estado da F07. T01 aprovada, T02 em andamento e T03 não iniciada; commit não encerra pendências.
 - Preservados os 32 testes e fluxo publicado já verificados. Nenhuma mudança executável posterior na aplicação. JSON, estados, identificadores, referências locais, sintaxe do gerador e integridade do PDF conferidos para o registro.
 - Acrescentado .gitattributes para tratar PDFs como binários; evita diff textual e avisos de whitespace no formato PDF, sem alterar o arquivo gerado.
+
+## 2026-11-17 — Demonstração delegada pelo autor
+
+- Autor solicitou explicitamente que o agente realizasse a demonstração e explicasse o caminho dos dados. F07-T03 adaptada à delegação, responsável agente e aprovada com demonstração técnica documentada, sem alegar execução ou aprendizagem do aluno.
+- Criado trabalho/demonstracao-comentada.md com seis partes, fala sugerida, fluxo e capturas do pedido fictício de R$ 40 já verificado na T01. Roteiro anterior preservado como apoio para ensaio opcional. Não repetida gravação nem atribuída nova verificação ao material.
+- Bloqueios e riscos: T02 ainda depende do levantamento complementar da empresa; F07 permanece em andamento. PDF anterior não regenerado nesta etapa; demonstração comentada é material complementar. Nenhum código executável alterado ou novo commit criado.
+
+## 2026-11-17 — Relato do processo em papel e conclusão da F07
+
+- Autor relatou lentidão, pouca funcionalidade e letra nem sempre legível na anotação dos pedidos. Incorporado às seções 2 e 5 e ao Anexo A com autoria e data. Benefícios mantidos como esperados; automação limitada ao cálculo e gravação após entrada e revisão humanas.
+- PDF atualizado para dez páginas e conferido visualmente, com ajuste para manter título da seção de telas junto às imagens. Seções, imagens e referências locais preservadas. Demonstração técnica anteriormente delegada ao agente mantida como tal, sem afirmar execução/explicação oral do aluno.
+- F07-T02 aprovada e F07 movida para concluidas: versão demonstrável/documentada, testes finais e fluxo publicado já aprovados em T01, demonstração comentada delegada aprovada em T03. Não há funcionalidades pendentes no planejamento atual.
+- Bloqueios e riscos: não há bloqueio para o escopo encerrado. Permanecem limites do relatório: localização conforme relato, histórico de origem/canais/cozinha/ferramentas não levantados, sem cronometragem, implantação ou aprovação institucional comprovada. Formatação adotada não substitui regras externas ao recorte.
+- Nenhuma alteração de lógica da aplicação ou dependências; 32 testes da última execução preservados, sem repetição desnecessária. JSON, referências e PDF verificados. Novo commit não solicitado nem criado; solicitar quando desejar.
+
+## 2026-11-17 — Preparação do cardápio oficial F09
+
+- Autor solicitou incorporar sabores e preços de CARDÁPIO.pdf. Documento de uma página lido e renderizado; transcrição conferida em harness/main/specs/cardapio-oficial.md. Cinco pizzas salgadas média/grande, Romeu e Julieta e combo Franbacon com refrigerante 2 litros em tamanho único; adicional R$ 5 cada.
+- F09 registrada com cinco tarefas. T01 aprovada, T02 do autor em andamento para esclarecer regras ausentes; implementação/testes/publicação ainda não iniciados. Baseline npm test passou com tipos, build e 32 testes. Preservadas alterações preexistentes do relatório e conclusão F07.
+- Bloqueios e riscos: PDF não define tamanho único, limites/cobrança de combinação, refrigerante específico do combo, escolhas de adicionais, bebidas avulsas e taxa de entrega. Não tratar preços/regras fictícios anteriores como oficiais. Atualização precisa ser coordenada com nova migração PostgreSQL para evitar divergência, preservando pedidos antigos. Nada alterado no catálogo executável ou publicado. Nenhum commit criado.
+
+## 2026-11-17 — Cardápio oficial e três telas publicados
+
+- Autor confirmou grande para doce/combo, Coca-Cola 2 litros, dois sabores pelo preço mais caro. Adicionais, bebidas avulsas e entrega excluídos até confirmar. Escopo ampliado pelo autor para tela inicial, lançamento e relatórios; implementado na F09-T06 com rascunho preservado, foco e links antigos.
+- Catálogo e migração 002 implementados; 001 preservada. Migração aplicada ao Supabase: quatro pedidos anteriores preservados e sete produtos atuais. Histórico consultável sem recalcular preços antigos. Não alteradas RLS, contas ou permissões.
+- npm test final: tipos, build e 37 testes aprovados. Navegador: combinação média Margherita/Frango R$ 45,90 e combo grande R$ 59,90, pedido fictício ddb134f8-2342-49e7-b8d4-15f29a40b513 confirmado às 15:53:18 por R$ 105,80; listado e aberto por Enter. Saída limpou dados, voltou ao início e consulta sem login foi impedida. Mobile 390 px sem rolagem horizontal (375/375), console sem erros.
+- Publicação intermediária 6afca264e944ee3a41b7d93a; final 6afca3f1d43f468dbc345612 com proteção da sessão durante gravação e invalidação da consulta por código após sair. Upload final demorou, mas estado published confirmado; arquivo JS final verificado na página e consulta autenticada repetida. Pacote .npm-cache/dinnos-f09-publicacao.zip (somente index.html/assets), SHA256 5D664FD14406E16A99EEF008E66D81DEEB47D521A7EAD95E0B0BF64883B9F0C1.
+- README, banco/README, AGENTS e especificação atualizados. Complemento acadêmico trabalho/atualizacao-f09.md explica a evolução; PDF F07 preserva a versão histórica e suas verificações. F09 aprovada e movida para concluidas. Alterações preexistentes F07 preservadas, nenhum commit criado.
+- Bloqueios e riscos: bebidas/adicionais/entrega indisponíveis conforme decisão do autor; combo fechado e sem rateio; não foram medidos diâmetro/fatias. Relatórios mostram pedidos e não recebimentos. Paginação com mais de 20 registros e rede física não repetidas nesta etapa. Cache/abas antigas devem recarregar para usar catálogo novo, pois divergência é rejeitada pelo servidor.

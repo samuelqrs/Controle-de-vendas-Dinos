@@ -4,9 +4,11 @@ Autor: Samuel Quintão Rodrigues Santiago.
 
 Disciplina: Estágio Supervisionado.
 
-**Minuta em elaboração.** Esta versão organiza o conteúdo pelo roteiro de ADS
-fornecido pelo autor. Não constitui documento pronto para entrega: faltam dados
-acadêmicos, complementação do levantamento e revisão da formatação institucional.
+Este relatório apresenta o desenvolvimento do DINNOS para registro e consulta de
+pedidos da Dino’s Pizzaria, conforme o roteiro de ADS fornecido pelo autor.
+O estudo reúne observações relatadas pelo autor, descrição do protótipo e
+evidências de verificação. A formatação adotada não substitui eventuais regras
+complementares da instituição que não constam no recorte recebido.
 
 ![Logo da Dino’s Pizzaria fornecida pelo autor](imagens/logo-dinos.png)
 
@@ -16,8 +18,9 @@ A empresa escolhida para o estudo é a Dinos, cuja identidade visual apresenta o
 nome Dino’s Pizzaria. Segundo informações fornecidas pelo autor em 17 de novembro
 de 2026, trata-se de uma empresa familiar de pequeno porte, na qual trabalham
 marido e esposa. O estabelecimento está localizado na cidade de Serra, na
-localidade informada como “Cidade Continal, Setor Ásia”. A grafia dessa localização
-e sua correspondência com o local de origem solicitado pelo manual serão conferidas.
+localidade informada pelo autor como “Cidade Continal, Setor Ásia”. A localização
+é apresentada conforme esse relato; não houve conferência cadastral independente
+nem levantamento do histórico de origem do estabelecimento.
 
 A área de atuação considerada neste projeto é a comercialização de pizzas e o
 atendimento a pedidos. O autor informou que os registros são feitos em papel.
@@ -37,11 +40,20 @@ conexão com a internet e de uma conta de atendente autorizada. Essa escolha foi
 verificada tecnicamente no protótipo; a disponibilidade de internet e a adequação
 à rotina dos responsáveis ainda precisam ser confirmadas com a empresa.
 
-O levantamento disponível comprova apenas, por relato do autor, o uso do papel.
-Não permite concluir que a empresa deixa de utilizar qualquer software em outras
-atividades. Também não permite afirmar que ocorrem perdas de pedidos, cobranças
-incorretas ou atrasos. A descrição detalhada do fluxo atual e das dificuldades
-observadas será acrescentada após sua confirmação.
+Segundo observação relatada pelo autor, os pedidos são escritos manualmente em
+papel. Ele descreveu esse processo como lento e pouco funcional: a anotação
+consome tempo e a letra nem sempre fica legível. A dificuldade identificada está,
+portanto, no esforço de registrar cada pedido e na clareza de sua leitura.
+
+O processo proposto substitui a escrita manual por campos digitais, seleção de
+produtos, cálculo automático e gravação estruturada. A pessoa responsável continua
+informando e revisando o pedido; o aplicativo automatiza o cálculo e a persistência
+após a confirmação. Não há recebimento autônomo de pedidos de clientes.
+
+O levantamento não identifica os canais de recebimento, o encaminhamento à cozinha
+ou ferramentas usadas em outras atividades. Não foram comprovadas perdas de
+pedidos ou cobranças incorretas. A análise se concentra nas dificuldades relatadas
+de tempo de anotação e legibilidade, sem acrescentar ocorrências não observadas.
 
 ## 3. Descrição da aplicação
 
@@ -117,6 +129,11 @@ no registro do pedido em campos JSONB; não existem tabelas independentes de
 clientes e itens nesta implementação.
 
 ## 5. Proposta de valor
+
+A proposta responde às dificuldades de anotação e legibilidade relatadas pelo
+autor. Os campos digitais apresentam texto legível e organizado, enquanto o cálculo
+e a gravação estruturada automatizam parte do registro após o preenchimento.
+Espera-se reduzir o esforço de escrita e facilitar a leitura e a conferência.
 
 A proposta oferece aos responsáveis uma forma estruturada de registrar pedidos
 e recuperar suas informações em dispositivos autorizados. A revisão antes da
@@ -209,11 +226,13 @@ Após recarregar a página, a listagem apresentou quatro pedidos e os detalhes
 preservaram esse código, a data, os itens e o total. O pedido vazio foi bloqueado
 pelos campos obrigatórios e não foram observados erros no console. Essa execução
 foi feita pelo agente de desenvolvimento; a demonstração e a explicação pelo autor
-são atividades separadas, orientadas em `roteiro-demonstracao.md`.
+foram posteriormente delegadas ao agente pelo autor. O material correspondente
+está em `demonstracao-comentada.md`, acompanhado de roteiro para ensaio. Não foi
+avaliada a explicação oral nem o domínio do conteúdo pelo aluno.
 
 ## Referências
 
-Referências técnicas consultadas para esta minuta, em ordem alfabética.
+Referências técnicas consultadas para este relatório, em ordem alfabética.
 O recorte do manual solicita NBR 6023 e menciona ABNT, 2002. A edição e a
 formatação de entrega devem ser conferidas conforme orientação da instituição.
 
@@ -237,8 +256,25 @@ https://www.typescriptlang.org/docs/. Acesso em: 17 nov. 2026.
 
 ## Anexos
 
-Logo fornecida pelo autor e preservada no início desta minuta. Para comprovar os
-processos levantados, ainda são necessários documentos autorizados da empresa,
-como modelo de anotação em branco ou relato dos responsáveis. Não foram recebidos
-contratos, entrevistas, registros de vendas ou documentos de implantação.
-As capturas do protótipo comprovam sua apresentação, não a adoção pela empresa.
+### Anexo A Relato do levantamento fornecido pelo autor
+
+Em 17 de novembro de 2026, o autor informou que a Dinos é uma pequena empresa
+familiar de marido e esposa, localizada em Serra, na localidade acima descrita,
+e que os pedidos são registrados em papel. Complementou sua observação com o
+seguinte relato, transcrito de sua mensagem:
+
+“Sobre o processo em papel, o que observei era que o processo era muito lento e
+pouco funcional. Escrever os pedidos em um papel leva mais tempo, além da letra
+nem sempre ficar legível. Com os pedidos sendo feitos pelo aplicativo, os registros
+ficam automatizados.”
+
+Fonte: relato do autor fornecido durante a elaboração do trabalho, 17 nov. 2026.
+O relato registra uma percepção qualitativa; não contém cronometragem ou comparação
+quantitativa antes e depois. Não foram recebidos contratos, entrevistas com os
+proprietários, pedidos comerciais ou documentos de implantação. As capturas
+comprovam a apresentação do protótipo, não sua adoção pela empresa.
+
+### Anexo B Identidade visual fornecida
+
+A logo apresentada no início do relatório foi fornecida pelo autor, com a marca
+Dino’s Pizzaria, e preservada sem alteração no arquivo `imagens/logo-dinos.png`.

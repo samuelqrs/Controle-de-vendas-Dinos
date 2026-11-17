@@ -53,7 +53,7 @@ conteudo.append(Spacer(1, 1*cm))
 conteudo.append(Paragraph('DINNOS aplicação web para registro e consulta de pedidos da Dino’s Pizzaria', estilos['TituloRelatorio']))
 conteudo.append(Paragraph('Disciplina de Estágio Supervisionado', estilos['CentroRelatorio']))
 conteudo.append(Spacer(1, 1*cm))
-conteudo.append(Paragraph('Versão para conferência do autor', estilos['CentroRelatorio']))
+conteudo.append(Paragraph('Relatório do projeto acadêmico', estilos['CentroRelatorio']))
 conteudo.append(Paragraph('2026', estilos['CentroRelatorio']))
 conteudo.append(PageBreak())
 
@@ -75,7 +75,7 @@ for indice, bloco in enumerate(blocos):
         if caminho == 'imagens/logo-dinos.png':
             continue
         imagem = Image(str((raiz/'trabalho'/caminho).resolve()))
-        proporcao = min(16*cm/imagem.imageWidth, 9.7*cm/imagem.imageHeight)
+        proporcao = min(16*cm/imagem.imageWidth, 9.3*cm/imagem.imageHeight)
         imagem.drawWidth = imagem.imageWidth*proporcao
         imagem.drawHeight = imagem.imageHeight*proporcao
         legenda = ' '.join(blocos[indice+1].splitlines())
@@ -83,6 +83,8 @@ for indice, bloco in enumerate(blocos):
             Spacer(1, 5), Paragraph(formatar(legenda), estilos['LegendaRelatorio'])]))
         ignorar_legenda = True
     elif bloco.startswith('### '):
+        if bloco.startswith('### 6.2 '):
+            conteudo.append(PageBreak())
         conteudo.append(Paragraph(formatar(bloco[4:]), estilos['SubsecaoRelatorio']))
     elif bloco.startswith('## '):
         em_referencias = bloco[3:] == 'Referências'

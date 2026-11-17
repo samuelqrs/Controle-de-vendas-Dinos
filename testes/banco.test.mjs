@@ -32,9 +32,10 @@ testar('PostgreSQL verifica gravação, persistência e políticas de acesso', a
       insert into auth.users values ('${atendenteA}'), ('${atendenteB}'), ('${semPermissao}');`);
     await banco.exec(await lerArquivo(new URL('../banco/001_criar_pedidos.sql', import.meta.url), 'utf8'));
     await banco.query('insert into public.atendentes_autorizados (identificador) values ($1), ($2)', [atendenteA, atendenteB]);
-    await contexto.test('catálogo do servidor corresponde ao TypeScript', async () => {
+    await contexto.test('migração inicial mantém catálogo histórico e políticas', async () => {
       const catalogo = (await banco.query('select dados from interno.cardapio')).rows[0].dados;
-      verificar.deepEqual(catalogo, { tamanhos, sabores, bebidas, adicionais, taxaEntrega });
+      verificar.equal(catalogo.sabores[0].precos.pequena, 2800);
+      verificar.equal(catalogo.taxaEntrega, 500);
       const protecao = (await banco.query("select c.relrowsecurity from pg_catalog.pg_class c join pg_catalog.pg_namespace n on n.oid = c.relnamespace where (n.nspname = 'interno' and c.relname = 'cardapio') or (n.nspname = 'public' and c.relname in ('pedidos', 'atendentes_autorizados'))")).rows;
       verificar.equal(protecao.length, 3);
       verificar.ok(protecao.every(tabela => tabela.relrowsecurity));
@@ -113,6 +114,48 @@ testar('PostgreSQL verifica gravação, persistência e políticas de acesso', a
       verificar.equal(registro.total, 14700);
       await autenticar('', 'anon');
       await verificar.rejects(banco.query('select * from public.pedidos'), /permission denied/);
+    });
+    await contexto.test('migração oficial preserva histórico e sincroniza o catálogo atual', async () => {
+      await banco.exec('reset role;');
+      await banco.exec(await lerArquivo(new URL('../banco/002_cardapio_oficial.sql', import.meta.url), 'utf8'));
+      verificar.deepEqual((await banco.query('select dados from interno.cardapio')).rows[0].dados, { tamanhos, sabores, bebidas, adicionais, taxaEntrega });
+      await banco.query('update public.atendentes_autorizados set ativo = true where identificador = $1', [atendenteA]);
+      await autenticar(atendenteA);
+      verificar.deepEqual(await gravar(), original);
+      verificar.equal((await banco.query('select total from public.pedidos where identificador = $1',[codigo])).rows[0].total,14700);
+    });
+    await contexto.test('banco cobra preços oficiais e inclui a Coca-Cola no combo fechado', async () => {
+      let numero = 10;
+      const campos = { ...dados, modalidade: 'retirada', logradouro: '', numero: '', bairro: '', cidade: '' };
+      for (const [sabor, tamanho, preco] of [
+        ['margherita','media',3990], ['margherita','grande',4990],
+        ['calabresa','media',4290], ['calabresa','grande',5290],
+        ['portuguesa','media',4490], ['portuguesa','grande',5490],
+        ['frango','media',4590], ['frango','grande',5590],
+        ['carne-seca','media',4990], ['carne-seca','grande',5990],
+        ['romeu-julieta','grande',3990], ['combo-franbacon','grande',5990],
+      ]) {
+        const produto = { tipo: 'pizza', tamanho, sabores: [sabor], adicionais: [], quantidade: 1 };
+        const registro = await gravar(`20000000-0000-4000-8000-${String(numero++).padStart(12,'0')}`, campos, [produto], preco);
+        verificar.equal(registro.total,preco);
+        verificar.equal(registro.taxa,0);
+        if (sabor === 'combo-franbacon') verificar.match(registro.itens[0].descricao,/Coca-Cola 2 litros/);
+      }
+      const combinada = await gravar('20000000-0000-4000-8000-000000000099',campos,[{tipo:'pizza',tamanho:'media',sabores:['margherita','carne-seca'],adicionais:[],quantidade:2}],9980);
+      verificar.equal(combinada.itens[0].precoUnitario,4990);
+    });
+    await contexto.test('servidor rejeita oferta indisponível e preço adulterado sem inserir', async () => {
+      const campos = { ...dados, modalidade: 'retirada', logradouro: '', numero: '', bairro: '', cidade: '' };
+      const produto = {tipo:'pizza',tamanho:'grande',sabores:['margherita'],adicionais:[],quantidade:1};
+      const antes = (await banco.query('select count(*)::integer as quantidade from public.pedidos')).rows[0].quantidade;
+      const id = '30000000-0000-4000-8000-000000000001';
+      for(const alteracao of [{tamanho:'pequena'},{tamanho:'media',sabores:['romeu-julieta']},{tamanho:'media',sabores:['combo-franbacon']},{sabores:['combo-franbacon','margherita']},{sabores:['margherita','calabresa','portuguesa']},{adicionais:['bacon']}]) await verificar.rejects(gravar(id,campos,[{...produto,...alteracao}],4990));
+      await verificar.rejects(gravar(id,campos,[{tipo:'bebida',bebida:'refrigerante-cola',quantidade:1}],1200));
+      await verificar.rejects(gravar(id,dados,[produto],4990),/Entrega indisponível/);
+      await verificar.rejects(gravar(id,campos,[produto],1),/preços mudaram/);
+      verificar.equal((await banco.query('select count(*)::integer as quantidade from public.pedidos')).rows[0].quantidade,antes);
+      await autenticar('', 'anon');
+      await verificar.rejects(gravar(id,campos,[produto],4990),/permission denied/);
     });
   } finally {
     await banco.exec('reset role;');

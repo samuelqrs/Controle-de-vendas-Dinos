@@ -6,38 +6,7 @@
     "Ao fim de cada tarefa, lembrar o autor de solicitar o commit. Criar commits somente quando houver solicitação explícita.",
     "Adotar mobile first: projetar e implementar primeiro para telas pequenas; definir o CSS base para dispositivos móveis e ampliar o layout com media queries min-width. Verificar navegação por toque e teclado, legibilidade e ausência de rolagem horizontal antes de conferir telas maiores."
   ],
-  "funcionalidades": [
-    {
-      "identificador": "F07",
-      "titulo": "Validar e preparar a apresentação acadêmica",
-      "estado": "em_andamento",
-      "objetivo": "Entregar uma versão demonstrável e documentada e permitir que o autor explique o fluxo completo de registro e consulta.",
-      "verificacao": "Executar um pedido completo, validar persistência e consulta compartilhada e revisar os requisitos obrigatórios e as instruções de execução.",
-      "tarefas": [
-        {
-          "identificador": "F07-T01",
-          "descricao": "Executar as verificações disponíveis e corrigir falhas do fluxo completo.",
-          "responsavel": "agente",
-          "estado": "aprovada",
-          "evidencia": "17/11/2026: npm test passou com tipos, build e 32 testes, zero falhas. Fluxo final executado na versão Netlify publicada: pedido vazio bloqueado; retirada com pizza pequena de muçarela 2800 e cola 1200, Pix e dados fictícios, total 4000 centavos. Gravação confirmada em 17/11/2026 às 15:12:14, código 293ed4ca-913b-413a-86e9-41d0138e31e9. Após recarregar, listagem retornou quatro pedidos e detalhes preservaram código, data, itens e total; abertura por Enter e foco nos detalhes. Console sem erros observados. Capturas f07-pedido-confirmado.jpg e f07-persistencia-publicada.jpg. Consulta em dois dispositivos e falha física de rede preservadas como relato do autor na F05, não repetidas nesta etapa. Nenhuma falha executável identificada."
-        },
-        {
-          "identificador": "F07-T02",
-          "descricao": "Elaborar o trabalho conforme o roteiro de ADS fornecido pelo autor: seis seções, referências e anexos; documentar execução, limitações, requisitos atendidos e demonstração com dados fictícios.",
-          "responsavel": "agente",
-          "estado": "em_andamento",
-          "evidencia": "17/11/2026: relatório atualizado com Samuel Quintão Rodrigues Santiago e disciplina Estágio Supervisionado, seis seções, referências, anexos e seis capturas. Gerado output/pdf/trabalho-dinnos.pdf (9 páginas), todas renderizadas e inspecionadas; fonte editável trabalho/trabalho-final.md e gerador trabalho/gerar-relatorio.py documentados. Roteiro de oito passos em trabalho/roteiro-demonstracao.md com explicação do fluxo e limites. Validada presença das seções e recursos locais. Pendentes dados do levantamento da empresa (fluxo, ferramentas, dificuldades e grafia/origem), evidência autorizada e confirmação das regras institucionais não contidas no recorte. PDF identificado como versão para conferência, não como entrega acadêmica final; T02 permanece em andamento."
-        },
-        {
-          "identificador": "F07-T03",
-          "descricao": "Realizar a demonstração orientada e explicar o caminho dos dados da tela ao armazenamento e à consulta.",
-          "responsavel": "autor",
-          "estado": "nao_iniciada",
-          "evidencia": "Roteiro de oito passos e explicação preparados em trabalho/roteiro-demonstracao.md e solicitada execução ao autor. Nenhum novo relato de demonstração/explicação recebido nesta retomada. Não confundir verificação do agente na origem publicada com prática do autor; T03 não aprovada."
-        }
-      ]
-    }
-  ],
+  "funcionalidades": [],
   "concluidas": [
     {
       "identificador": "F08",
@@ -246,6 +215,87 @@
           "responsavel": "agente",
           "estado": "aprovada",
           "evidencia": "17/11/2026: npm test passou com tipos, build e 32 testes. Agente observou login feito pelo autor, listagem real de três pedidos em ordem decrescente e abertura por Enter do pedido fictício 6b4ea74d-9f04-4b52-888a-e01aec6cb7f6; cliente, endereço, Pix, observações, itens, subtotal 14200, taxa 500 e total 14700 centavos conferidos. Foco transferido aos detalhes; larguras 390x844 e 1280x900 sem rolagem horizontal. Sair removeu lista/detalhes; consulta sem login impedida. Console sem erros observados. Lista vazia, falha e respostas obsoletas verificadas por testes automatizados, não por falha física nesta etapa. Navegação entre páginas não exercitada com mais de 20 registros. Capturas f06-detalhes-movel.jpg e f06-detalhes-desktop.jpg. Publicação Netlify 6afc9234abab6f83d12ed897 confirmada; tela pública nova e acesso negado sem login verificados, sem repetir login autenticado na origem pública."
+        }
+      ]
+    },
+    {
+      "identificador": "F07",
+      "titulo": "Validar e preparar a apresentação acadêmica",
+      "estado": "aprovada",
+      "objetivo": "Entregar uma versão demonstrável e documentada e permitir que o autor explique o fluxo completo de registro e consulta.",
+      "verificacao": "Executar um pedido completo, validar persistência e consulta compartilhada e revisar os requisitos obrigatórios e as instruções de execução.",
+      "tarefas": [
+        {
+          "identificador": "F07-T01",
+          "descricao": "Executar as verificações disponíveis e corrigir falhas do fluxo completo.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "17/11/2026: npm test passou com tipos, build e 32 testes, zero falhas. Fluxo final executado na versão Netlify publicada: pedido vazio bloqueado; retirada com pizza pequena de muçarela 2800 e cola 1200, Pix e dados fictícios, total 4000 centavos. Gravação confirmada em 17/11/2026 às 15:12:14, código 293ed4ca-913b-413a-86e9-41d0138e31e9. Após recarregar, listagem retornou quatro pedidos e detalhes preservaram código, data, itens e total; abertura por Enter e foco nos detalhes. Console sem erros observados. Capturas f07-pedido-confirmado.jpg e f07-persistencia-publicada.jpg. Consulta em dois dispositivos e falha física de rede preservadas como relato do autor na F05, não repetidas nesta etapa. Nenhuma falha executável identificada."
+        },
+        {
+          "identificador": "F07-T02",
+          "descricao": "Elaborar o trabalho conforme o roteiro de ADS fornecido pelo autor: seis seções, referências e anexos; documentar execução, limitações, requisitos atendidos e demonstração com dados fictícios.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "17/11/2026: autor complementou o levantamento: anotar pedidos em papel é lento, pouco funcional e a letra nem sempre legível. Relato atribuído ao autor nas seções 2 e 5 e transcrito no Anexo A; automação descrita como cálculo e gravação após preenchimento/revisão, sem métricas inventadas ou recebimento autônomo. Nome e disciplina incorporados, seis seções, referências, anexos, seis capturas e logo. PDF output/pdf/trabalho-dinnos.pdf regenerado com dez páginas e conferido visualmente; fonte Markdown e roteiro/demonstração comentada disponíveis. Limites documentados: localização conforme relato, sem histórico de origem ou conferência cadastral, canais/cozinha/ferramentas não levantados, sem prova de implantação e sem regras institucionais adicionais ao recorte. Requisitos e recursos locais conferidos; conclusão do material no escopo disponível, sem afirmar aprovação acadêmica institucional."
+        },
+        {
+          "identificador": "F07-T03",
+          "descricao": "Realizar demonstração técnica e explicar o caminho dos dados da tela ao armazenamento e à consulta, conforme delegação explícita do autor.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Em 17/11/2026 o autor solicitou explicitamente que o agente realizasse a demonstração e explicação por ele. Delegação aplicada sem atribuir prática ao aluno. Criado trabalho/demonstracao-comentada.md com fala sugerida, fluxo técnico e capturas da execução publicada previamente verificada na T01: pedido fictício 293ed4ca-913b-413a-86e9-41d0138e31e9, R$ 40,00, gravação às 15:12:14 e consulta após recarregar. Explicação conferida com banco.ts e registro.ts; não criado novo pedido nesta elaboração. Execução/explicação oral e domínio pelo aluno não avaliados. T03 concluída no escopo delegado; T02 e F07 permanecem em andamento pelo levantamento acadêmico pendente."
+        }
+      ]
+    },
+    {
+      "identificador": "F09",
+      "titulo": "Atualizar cardápio oficial e organizar as telas do sistema",
+      "estado": "aprovada",
+      "objetivo": "Incorporar produtos/preços confirmados de forma consistente com o banco e separar tela inicial com login, lançamento de pedidos e relatórios, preservando pedidos históricos e rascunho ao navegar.",
+      "verificacao": "Conferir cada produto/preço com o PDF, regras confirmadas, montagem e total no navegador e no PostgreSQL; preservar pedidos antigos e publicar a atualização validada.",
+      "tarefas": [
+        {
+          "identificador": "F09-T01",
+          "descricao": "Transcrever e conferir visualmente os sabores, ingredientes, preços e lacunas do PDF oficial.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "PDF oficial de uma página extraído e conferido visualmente. Cinco salgadas com preços média/grande; doce e combo com tamanho único; adicional R$ 5. Transcrição e lacunas em harness/main/specs/cardapio-oficial.md. SHA256 80A81D843BDF1137048B7B8D0744A422BFE4493D0639517420CBCB5AC96462BA. Baseline npm test passou com tipos, build e 32 testes. Sem alteração executável ou remota."
+        },
+        {
+          "identificador": "F09-T02",
+          "descricao": "Confirmar tamanho único, combinações de sabores, composição do combo, adicionais e valores ausentes de bebidas/entrega.",
+          "responsavel": "autor",
+          "estado": "aprovada",
+          "evidencia": "Autor confirmou tamanho único grande para Romeu e Julieta/Franbacon, combo com Coca-Cola 2 litros, até dois sabores e preço pelo mais caro. Adicionais, bebidas avulsas e entrega ficam fora por ora, pois dependem de confirmação. Combo será fechado, sem misturar seu preço com sabores avulsos."
+        },
+        {
+          "identificador": "F09-T03",
+          "descricao": "Atualizar catálogo tipado, montagem e cálculo; criar migração nova do servidor, preservando registros históricos.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Catálogo tipado atualizado com sete produtos e tamanhos parciais; retirada apenas; adicionais/bebidas avulsas/pequena não ofertados. Migração 002 atualiza catálogo e função sem alterar 001 nem pedidos existentes, rejeita ofertas inválidas, entrega, três sabores e mistura de combo, preservando idempotência histórica. Aplicação e SQL conferidos pelos testes PostgreSQL."
+        },
+        {
+          "identificador": "F09-T06",
+          "descricao": "Separar tela inicial com login, lançamento de pedidos e relatórios com navegação, foco e rascunho preservado.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Criadas telas por fragmento: início com cardápio/login, lançamento e relatórios com listagem/detalhes/consulta por código. Rascunho preservado ao alternar, links antigos reconhecidos, foco nos títulos e aria-current. Login direciona ao lançamento; saída global limpa os dados e retorna ao início. Ações da sessão bloqueadas durante gravação; consulta por código pendente invalidada ao sair. Conferidos navegador e teclado."
+        },
+        {
+          "identificador": "F09-T04",
+          "descricao": "Atualizar testes com valores independentes e verificar navegador, teclado e tela pequena.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "npm test final aprovado: tipos, build e 37 testes. Preços literais independentes do PDF, restrições por tamanho, combo, dois sabores, retirada, respostas de gravação/consulta, rotas e migração com histórico/RLS/idempotência. Prévia conferida: dados e item R$ 45,90 preservados ao navegar. Na publicação, telas e detalhes em 390x844 sem rolagem horizontal (375/375), Enter e foco conferidos, console sem erros. Não testado histórico com mais de 20 pedidos ou rede física nesta etapa."
+        },
+        {
+          "identificador": "F09-T05",
+          "descricao": "Aplicar catálogo no banco hospedado, publicar compilação consistente e registrar evidências e limitações.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Migração aplicada no Supabase lnqkycxtoaovoktnsgrj: quatro pedidos preservados, sete produtos, Margherita média 3990, pedido histórico 4000 centavos mantido. Publicação final Netlify 6afca3f1d43f468dbc345612, assets index-C_AgF3WI.js/index-CpehBv9z.css, mesmo endereço público. Pacote somente index.html/assets, SHA256 5D664FD14406E16A99EEF008E66D81DEEB47D521A7EAD95E0B0BF64883B9F0C1. Versão intermediária 6afca264e944ee3a41b7d93a. Pedido fictício ddb134f8-2342-49e7-b8d4-15f29a40b513, combinação média 4590 + combo grande 5990, total 10580, confirmado às 15:53:18 e lido em Relatórios; consulta repetida após implantação final. Saída e acesso negado sem login verificados. Capturas f09-*.jpg. Nenhuma nova permissão ou credencial criada."
         }
       ]
     }

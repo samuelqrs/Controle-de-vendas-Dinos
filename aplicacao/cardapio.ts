@@ -1,37 +1,33 @@
 export const tamanhos = [
-  { identificador: 'pequena', nome: 'Pequena', diametro: 25, fatias: 4, limiteSabores: 1 },
-  { identificador: 'media', nome: 'Média', diametro: 30, fatias: 6, limiteSabores: 2 },
-  { identificador: 'grande', nome: 'Grande', diametro: 35, fatias: 8, limiteSabores: 3 },
+  { identificador: 'media', nome: 'Média', limiteSabores: 2 },
+  { identificador: 'grande', nome: 'Grande', limiteSabores: 2 },
 ] as const;
 
-export type IdentificadorTamanho = typeof tamanhos[number]['identificador'];
+// Pequena permanece no tipo para leitura do histórico, sem nova oferta.
+export type IdentificadorTamanho = typeof tamanhos[number]['identificador'] | 'pequena';
 
 type Sabor = {
   identificador: string;
   nome: string;
   ingredientes: string;
-  precos: Record<IdentificadorTamanho, number>;
+  precos: Partial<Record<IdentificadorTamanho, number>>;
+  exclusivo?: boolean;
 };
 
 export const sabores: Sabor[] = [
-  { identificador: 'mucarela', nome: 'Muçarela', ingredientes: 'Molho de tomate, muçarela, tomate e orégano.', precos: { pequena: 2800, media: 3800, grande: 4800 } },
-  { identificador: 'calabresa', nome: 'Calabresa', ingredientes: 'Molho de tomate, muçarela, calabresa e cebola.', precos: { pequena: 3000, media: 4200, grande: 5200 } },
-  { identificador: 'frango', nome: 'Frango com requeijão', ingredientes: 'Molho de tomate, muçarela, frango desfiado e requeijão.', precos: { pequena: 3400, media: 4600, grande: 5800 } },
-  { identificador: 'quatro-queijos', nome: 'Quatro queijos', ingredientes: 'Molho de tomate, muçarela, provolone, parmesão e requeijão.', precos: { pequena: 3600, media: 4800, grande: 6200 } },
+  { identificador: 'margherita', nome: 'Margherita', ingredientes: 'Molho de tomate, muçarela, rodelas de tomate fresco e manjericão fresco.', precos: { media: 3990, grande: 4990 } },
+  { identificador: 'calabresa', nome: 'Calabresa', ingredientes: 'Calabresa fatiada, cebola roxa, muçarela e orégano.', precos: { media: 4290, grande: 5290 } },
+  { identificador: 'portuguesa', nome: 'Portuguesa', ingredientes: 'Muçarela, presunto, ovos, cebola, ervilha e azeitonas pretas.', precos: { media: 4490, grande: 5490 } },
+  { identificador: 'frango', nome: 'Frango com Catupiry', ingredientes: 'Frango desfiado temperado, catupiry cremoso e orégano.', precos: { media: 4590, grande: 5590 } },
+  { identificador: 'carne-seca', nome: 'Carne Seca', ingredientes: 'Carne seca e queijo coalho.', precos: { media: 4990, grande: 5990 } },
+  { identificador: 'romeu-julieta', nome: 'Romeu e Julieta', ingredientes: 'Muçarela, goiabada cremosa e raspas de queijo parmesão. Somente grande.', precos: { grande: 3990 } },
+  { identificador: 'combo-franbacon', nome: 'Combo Franbacon + Coca-Cola 2 litros', ingredientes: 'Pizza grande de frango desfiado, bacon, muçarela, azeitona e manjericão, acompanhada de uma Coca-Cola de 2 litros. Combo fechado.', precos: { grande: 5990 }, exclusivo: true },
 ];
 
-export const bebidas = [
-  { identificador: 'refrigerante-cola', nome: 'Refrigerante de cola', volume: '2 litros', preco: 1200 },
-  { identificador: 'refrigerante-guarana', nome: 'Refrigerante de guaraná', volume: '350 ml', preco: 600 },
-  { identificador: 'suco-laranja', nome: 'Suco de laranja', volume: '500 ml', preco: 900 },
-  { identificador: 'suco-uva', nome: 'Suco de uva', volume: '500 ml', preco: 900 },
-];
+export const bebidas: { identificador: string; nome: string; volume: string; preco: number }[] = [];
 
-export const adicionais = [
-  { identificador: 'mucarela-extra', nome: 'Muçarela extra', preco: 600 },
-  { identificador: 'bacon', nome: 'Bacon', preco: 700 },
-  { identificador: 'requeijao', nome: 'Requeijão', preco: 500 },
-];
+export const adicionais: { identificador: string; nome: string; preco: number }[] = [];
+export const entregaDisponivel = false;
 
 export function formatarPreco(centavos: number): string {
   return (centavos / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });

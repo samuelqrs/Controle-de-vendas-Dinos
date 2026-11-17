@@ -6,6 +6,8 @@ O repositório contém a aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScr
 
 - `index.html`: estrutura e conteúdo da primeira página.
 - `aplicacao/principal.ts`: apresentação dos produtos e troca de tamanho.
+- `aplicacao/navegacao.ts` e `aplicacao/telas.ts`: navegação entre início, lançamento e relatórios, preservando o rascunho.
+- `testes/navegacao.test.mjs`: rotas atuais e links antigos; executar com `npm test`.
 - `aplicacao/cardapio.ts`: dados tipados e preços fictícios em centavos.
 - `aplicacao/acesso.ts`: login de atendentes e conferência da gravação por código.
 - `aplicacao/consulta.ts` e `aplicacao/pedidos-salvos.ts`: consulta paginada, detalhes históricos e limpeza ao sair.
@@ -14,6 +16,7 @@ O repositório contém a aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScr
 - `aplicacao/registro.ts`: preparação, confirmação e controle das tentativas de gravação.
 - `aplicacao/configuracao.ts`, `aplicacao/ambiente.d.ts` e `.env.example`: configuração pública do banco.
 - `banco/001_criar_pedidos.sql` e `banco/README.md`: esquema, acesso, configuração e roteiro de dois dispositivos.
+- `banco/002_cardapio_oficial.sql`: catálogo oficial e novas regras de gravação, sem alterar pedidos históricos; aplicar após a migração 001.
 - `testes/registro.test.mjs` e `testes/banco.test.mjs`: falhas de gravação, PostgreSQL e políticas de acesso.
 - `aplicacao/valores.ts`: cálculo de preços por item, taxa e total em centavos.
 - `testes/valores.test.mjs`: regras de preço com resultados independentes.

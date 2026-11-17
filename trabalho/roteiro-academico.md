@@ -52,9 +52,9 @@ do trecho. Um link não substitui o tutorial e a descrição das telas exigidos.
 Não foi informada classificação jurídica, faturamento, data de fundação, nome dos
 proprietários, quantidade de pedidos ou software utilizado em outras atividades.
 “Pequena” é a descrição do autor, sem afirmar enquadramento legal como EPP ou ME.
-Não foram relatados problemas específicos nem resultados de implantação na empresa.
+Autor relatou lentidão e letra nem sempre legível no processo em papel. Não foram informados resultados medidos de implantação.
 
-## Próximos complementos
+## Limitações e complementos futuros
 
 1. Confirmar a grafia da localização, o local de origem e o nome usado na apresentação.
 2. Levantar o fluxo atual: recebimento, anotação, cálculo, produção e consulta posterior;
@@ -64,4 +64,8 @@ Não foram relatados problemas específicos nem resultados de implantação na e
 4. Completar dados acadêmicos e consultar as demais regras de formatação do curso.
 5. Revisar a minuta, conferir referências e executar a demonstração orientada.
 
-A minuta em `trabalho-final.md` segue a ordem exigida e permanece em revisão.
+O relatório em `trabalho-final.md` segue a ordem exigida. A F07 foi encerrada no escopo disponível com limitações explícitas; a demonstração técnica foi delegada ao agente. Os complementos acima podem ampliar o levantamento e adequar a entrega a regras adicionais da instituição, sem alterar os fatos já registrados.
+
+## Relato complementar incorporado
+
+Em 17/11/2026, o autor informou que escrever os pedidos em papel leva mais tempo e a letra nem sempre é legível, tornando o processo lento e pouco funcional. Relato incorporado nas seções 2 e 5 e no Anexo A. A redução de tempo é um benefício esperado, sem medição quantitativa. A demonstração técnica comentada foi delegada ao agente e está documentada; não foi avaliada a apresentação oral do aluno.
