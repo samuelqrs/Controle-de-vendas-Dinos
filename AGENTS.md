@@ -8,6 +8,8 @@ O repositório contém a aplicação acadêmica DINNOS, em HTML5, CSS3 e TypeScr
 - `aplicacao/principal.ts`: apresentação dos produtos e troca de tamanho.
 - `aplicacao/cardapio.ts`: dados tipados e preços fictícios em centavos.
 - `aplicacao/acesso.ts`: login de atendentes e conferência da gravação por código.
+- `aplicacao/consulta.ts` e `aplicacao/pedidos-salvos.ts`: consulta paginada, detalhes históricos e limpeza ao sair.
+- `testes/consulta.test.mjs`: detalhes históricos, lista vazia, falha e invalidação de respostas pendentes; executar com `npm test`.
 - `aplicacao/banco.ts`: adaptação ao SDK oficial do Supabase.
 - `aplicacao/registro.ts`: preparação, confirmação e controle das tentativas de gravação.
 - `aplicacao/configuracao.ts`, `aplicacao/ambiente.d.ts` e `.env.example`: configuração pública do banco.

@@ -49,7 +49,8 @@ evitarmos reenvio acidental; “Novo pedido” limpa o formulário e gera novo c
 O rascunho não é persistido localmente; recarregar pode perdê-lo.
 
 A consulta por código confirma existência, data e total para a verificação da F05.
-Listagem e detalhes completos pertencem à F06 e não foram iniciados.
+Listagem paginada e detalhes completos da F06 estão implementados localmente;
+a conferência visual/autenticada e a atualização da publicação ainda estão pendentes.
 
 ## Catálogo e testes
 

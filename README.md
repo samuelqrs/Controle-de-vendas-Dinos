@@ -177,7 +177,13 @@ preservam o rascunho e o código para consulta/repetição sem duplicação.
 Após conferir dados e valores, use “Gravar pedido no banco”. A gravação confirmada
 fica bloqueada para edição; “Novo pedido” inicia outro rascunho. A conferência por
 código permite verificar persistência após reabrir ou em outro dispositivo.
-A listagem e os detalhes completos pertencem à F06.
+A listagem e os detalhes completos da F06 estão implementados localmente, com
+páginas de 20 pedidos, dos mais recentes aos mais antigos. Entre como atendente,
+abra “Consultar pedidos registrados”, clique em “Atualizar pedidos” e depois em
+“Ver detalhes”. A tela usa os valores preservados no registro e limpa os resultados
+ao sair. A conferência visual/autenticada e a atualização do site publicado ainda
+estão pendentes. Execute `npm test` para os testes, incluindo `testes/consulta.test.mjs`
+(detalhes históricos, lista vazia, falha e invalidação de consultas após sair).
 
 Execute npm test para tipos, build e testes. testes/registro.test.mjs verifica
 configuração, isolamento dos dados, falhas, respostas inválidas e reenvio.

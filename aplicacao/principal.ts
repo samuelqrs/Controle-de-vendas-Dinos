@@ -1,6 +1,7 @@
 import { tamanhos, sabores, bebidas, adicionais, formatarPreco } from './cardapio.ts';
 import type { IdentificadorTamanho } from './cardapio.ts';
 import './montagem.ts';
+import './pedidos-salvos.ts';
 
 const selecaoTamanho = document.querySelector<HTMLSelectElement>('#tamanho');
 const listaPizzas = document.querySelector<HTMLUListElement>('#pizzas');

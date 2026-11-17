@@ -44,6 +44,15 @@ export function criarBanco(variaveis: Record<string, unknown>, armazenamento: St
       if (!data) throw new Error('Pedido não encontrado ou acesso não autorizado.');
       return validarConfirmacao(data, identificador);
     },
+    async listar(pagina: number = 0): Promise<RegistroSalvo[]> {
+      if (!Number.isSafeInteger(pagina) || pagina < 0) throw new Error('Página de pedidos inválida.');
+      if (!await this.obterAcesso()) throw new Error('Entre com uma conta de atendente autorizada.');
+      const { data, error } = await cliente.from('pedidos').select('*')
+        .order('criado_em', { ascending: false }).order('identificador', { ascending: false })
+        .range(pagina * 20, pagina * 20 + 19).abortSignal(AbortSignal.timeout(15000));
+      if (error || !data) throw new Error('Não foi possível listar os pedidos. Confira a conexão e tente novamente.');
+      return data.map(registro => validarConfirmacao(registro));
+    },
   };
 }
 

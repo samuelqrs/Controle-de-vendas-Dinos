@@ -4,7 +4,7 @@
 
 Construir o sistema acadêmico DINNOS por etapas, com aprendizagem do autor iniciante. Prazo interpretado como 18/11/2026, ainda sem confirmação explícita do mês. Branch única main.
 
-F01, F02, F03, F04 e F08 aprovadas. F05 em andamento: T01/T02 configuradas e T03 aprovada com verificação hospedada; somente F05-T04 do autor em andamento. F06/F07 não iniciadas. Não avançar para F06 enquanto houver pendências da F05. Ler guia e três arquivos de estado antes de continuar.
+F01 a F05 e F08 aprovadas. Autor relatou cinco de cinco cenários manuais da F05, todos com resultado esperado. F06 em andamento: T01 implementada e aprovada, T02 em andamento; F07 não iniciada. npm test passou com tipos, build e 32 testes. Ler guia e três arquivos de estado antes de continuar.
 
 Autor delegou decisões razoáveis e ajustáveis. Criou as contas Supabase e Netlify diretamente nos sites e confirmou a autorização da conta de atendente e a publicação pública. Não solicitar senhas no chat. Integrações Supabase/Netlify não estão conectadas nesta sessão; trabalho remoto realizado pelo navegador, sem copiar tokens de sessão.
 
@@ -41,14 +41,16 @@ Servidor local de verificação encerrado pelo agente (sessão 53196). Para prá
 
 ## Próximo passo obrigatório
 
-Orientar autor a abrir a URL publicada no computador e celular e entrar com atendente@dinnos.example usando sua senha. Executar os cinco cenários de banco/README.md: gravar pedido, fechar/reabrir navegador e consultar, consultar no segundo dispositivo, verificar acesso negado e falha de rede sem falso sucesso. Pode usar o código fictício de referência acima para primeira conferência.
-
-Obter quantidade exata e resultados dos cenários relatados pelo autor. Até aqui: zero cenários completos relatados. Não atribuir testes do agente ou viewport móvel a dois dispositivos físicos; recarregar a página não equivale a fechar/reabrir todo o navegador. F05 não aprovada até verificar o objetivo. Não iniciar F06 antes.
+Conferir visualmente a F06 local: entrar como atendente, Atualizar pedidos, abrir detalhes e conferir dados/valores; lista vazia, falha, paginação e limpeza ao sair. Verificar teclado e tela pequena e salvar capturas. Navegador integrado recusou/expirou acesso local; controle nativo interrompido por não identificar URL com segurança. Não repetir automação na mesma retomada interrompida. Atualização do Netlify ainda pendente; versão pública permanece anterior à F06. Não aprovar F06 ou iniciar F07 antes da validação.
 
 No painel SQL Monaco, substituir documento com Ctrl+A e colagem, não fill. Conferir inventário atual de abas; aba pública marcada como entrega. Não repetir autorização de acesso/publicação já recebida, salvo mudança de escopo que realmente exija nova confirmação.
 
 ## Registro no Git
 
-Autor solicitou commit desta configuração/publicação, correção do teste, reforço de RLS, documentação, evidências e harness. Consultar git log para identificar o registro. F05-T04 permanece em andamento após o commit. Commits anteriores: 2da0bbe (integração local F05) e 9151f73 (F03/F04). Criar novos commits somente quando solicitado.
+Autor solicitou commit desta configuração/publicação, correção do teste, reforço de RLS, documentação, evidências e harness. Consultar git log para identificar o registro. F05-T04 aprovada conforme relato do autor; F06-T02 permanece em andamento. Commits anteriores: 2da0bbe (integração local F05) e 9151f73 (F03/F04). Criar novos commits somente quando solicitado.
 
 Verificadores próprios do harness indisponíveis; JSON e diff revisados separadamente dos testes da aplicação. Preferências locais ausentes, sem criação silenciosa; recomenda-se criar quando houver template. Manter português do Brasil, mobile first e no máximo uma tarefa em andamento.
+
+## Última retomada — 17/11/2026
+
+F05 concluída conforme relato dos cinco testes pelo autor. F06 implementada localmente, com 32 testes aprovados. Conferência visual e publicação pendentes. Autor solicitou commit; incluir implementação, testes, documentação e estado, sem .env.local, dist ou pacotes compilados. Nenhuma alteração executável após os testes; verificações do JSON e git diff --check realizadas separadamente.

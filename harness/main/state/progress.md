@@ -237,3 +237,15 @@
 - F05-T04 continua em andamento; zero cenários completos do roteiro relatados pelo autor. F05 não aprovada, F06/F07 não iniciadas. Próximo passo: autor testar a URL publicada no computador e celular conforme os cinco cenários de banco/README.md e informar quantidade/resultados exatos.
 - Autor solicitou commit das alterações realizadas. Agrupamento: configuração e publicação da F05, reforço de RLS do catálogo, correção do diretório temporário do teste, documentação, evidências e estado. Preservadas as verificações já realizadas: npm test com tipos, build e 28 testes aprovados; build de produção com configuração pública aprovado; verificação hospedada no Supabase e visual no Netlify. Não houve alteração executável após esses testes que exija repetição.
 - .env.local e pacote compilado confirmados ignorados pelo Git; não incluí-los no commit. Servidor de verificação local já encerrado. Verificadores próprios do harness indisponíveis; validação do estado e diff feita separadamente dos testes da aplicação.
+
+## 2026-11-17 — Retomada e verificação da base
+
+- Retomada em 17/11/2026: npm test executado novamente, com tipos, build e 28 testes aprovados. Solicitado relato dos cinco cenários ao autor; validação física em dois dispositivos continua pendente.
+- Bloqueios e riscos: sem novos resultados relatados, F05-T04 permanece em andamento; F06/F07 não iniciadas. Nenhuma alteração executável ou commit realizado.
+
+## 2026-11-17 — Conclusão da F05 e implementação local da F06
+
+- Relatados pelo autor: cinco de cinco cenários manuais executados, todos com resultado esperado. F05-T04 e F05 aprovadas; funcionalidade movida para concluidas.
+- F06-T01 implementada: listagem paginada, detalhes históricos e limpeza ao sair. F06-T02 em andamento; npm test passou com tipos, build e 32 testes. Novos testes em testes/consulta.test.mjs; execução documentada nos READMEs e AGENTS.md.
+- Bloqueios e riscos: conferência visual/autenticada, teclado, tela pequena e capturas não verificadas. Prévia integrada falhou por conexão recusada/timeout; controle nativo interrompido pela ferramenta por não identificar URL com segurança. Publicação continua na versão anterior; F06 não aprovada, F07 não iniciada.
+- Autor solicitou commit. Agrupamento: consulta de pedidos, testes, documentação e estado pertinente, incluindo conclusão da validação da F05. Nenhuma dependência ou migração adicionada.

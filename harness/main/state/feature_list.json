@@ -8,46 +8,9 @@
   ],
   "funcionalidades": [
     {
-      "identificador": "F05",
-      "titulo": "Gravar pedidos com acesso compartilhado",
-      "estado": "em_andamento",
-      "objetivo": "Persistir pedidos após fechar o sistema e permitir consultá-los em mais de um dispositivo.",
-      "verificacao": "Salvar um pedido, fechar e reabrir o sistema e consultar o mesmo registro em outro dispositivo; verificar que uma falha de gravação não é apresentada como sucesso.",
-      "tarefas": [
-        {
-          "identificador": "F05-T01",
-          "descricao": "Definir o controle de acesso antes de disponibilizar dados de clientes e documentar configurações sem segredos.",
-          "responsavel": "agente",
-          "estado": "aprovada",
-          "evidencia": "Controle de acesso implementado e aplicado ao projeto lnqkycxtoaovoktnsgrj em 17/11/2026: Supabase Auth, lista de atendentes autorizados, RLS nas três tabelas, cadastro público e login anônimo desativados. URL/chave pública em .env.local ignorado. Conta fictícia atendente@dinnos.example criada pelo autor e autorizada após confirmação explícita. Acesso autorizado observado na aplicação; leitura e gravação anônimas bloqueadas pelo servidor (42501)."
-        },
-        {
-          "identificador": "F05-T02",
-          "descricao": "Implementar armazenamento compartilhado e gravação com identificação, data, itens e preços preservados, explicando o fluxo dos dados.",
-          "responsavel": "agente",
-          "estado": "aprovada",
-          "evidencia": "Integração implementada e configurada no Supabase hospedado: SDK oficial, login/sessão, autorização, UUID estável, função transacional com cálculo no servidor e preços/descrições/data preservados. Pedido fictício gravado pela aplicação e consultado após recarregar com mesmo código, data e total. Sem senha/chave privilegiada no código ou repositório."
-        },
-        {
-          "identificador": "F05-T03",
-          "descricao": "Verificar gravação, reabertura, acesso autorizado e tratamento de falha; apresentar os passos para teste em dois dispositivos.",
-          "responsavel": "agente",
-          "estado": "aprovada",
-          "evidencia": "npm test passou com tipos, build e 28 testes após correção do diretório temporário e reforço de RLS. Migração aplicada ao projeto real; tabelas/RLS verificadas. SDK remoto confirmou leitura/gravação anônimas bloqueadas (42501). Login hospedado do autor confirmado; autorização da conta aplicada somente após consentimento explícito. Aplicação gravou pedido fictício 6b4ea74d-9f04-4b52-888a-e01aec6cb7f6 de entrega, duas pizzas médias de muçarela/frango com bacon e três colas: subtotal 14200, taxa 500, total 14700 centavos. Após recarregar, consulta confirmou a mesma data/total; console sem erros observados. Após sair, tentativa sem login foi impedida, sem falso sucesso e com rascunho preservado. Roteiro de cinco cenários em banco/README.md. Fechar o navegador, falha de rede real e dois dispositivos permanecem no teste do autor T04."
-        },
-        {
-          "identificador": "F05-T04",
-          "descricao": "Executar o teste orientado em dois dispositivos e relatar os resultados e a quantidade de cenários executados.",
-          "responsavel": "autor",
-          "estado": "em_andamento",
-          "evidencia": "Roteiro de cinco cenários em banco/README.md. Autor criou contas e entrou na aplicação, mas ainda não relatou cenários completos do roteiro (zero cenários completos relatados). Publicação autorizada explicitamente e concluída no Netlify em https://eloquent-pie-d5c729.netlify.app, implantação 6afc5cb5c5ae5b603ae178a5. Página pública verificada em 390x844 e 1280x900, sem rolagem horizontal ou erros no console observado; conexão configurada e controles de acesso habilitados. Login e consulta nessa origem pública, fechamento completo do navegador, falha de rede real e teste em dois dispositivos ainda pendentes. F05 não aprovada."
-        }
-      ]
-    },
-    {
       "identificador": "F06",
       "titulo": "Consultar os pedidos registrados",
-      "estado": "nao_iniciada",
+      "estado": "em_andamento",
       "objetivo": "Listar pedidos salvos e abrir seus detalhes, sem acompanhamento de etapas de produção ou entrega.",
       "verificacao": "Encontrar um pedido salvo e conferir cliente, modalidade, itens, observações, pagamento informado e total; verificar a lista vazia e falhas de consulta.",
       "tarefas": [
@@ -55,15 +18,15 @@
           "identificador": "F06-T01",
           "descricao": "Implementar listagem e detalhes dos pedidos persistidos.",
           "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
+          "estado": "aprovada",
+          "evidencia": "Implementadas listagem de 20 pedidos por página, ordenação por data/código, detalhes com dados e preços históricos, mensagens de consulta e limpeza ao sair com invalidação de respostas pendentes. npm test passou com tipos, build e 32 testes; quatro testes novos em testes/consulta.test.mjs. Interface ainda não verificada visualmente e não publicada."
         },
         {
           "identificador": "F06-T02",
           "descricao": "Verificar dados apresentados, lista vazia e mensagens de falha.",
           "responsavel": "agente",
-          "estado": "nao_iniciada",
-          "evidencia": "Não verificada."
+          "estado": "em_andamento",
+          "evidencia": "Testes automatizados de detalhes históricos, retirada, lista vazia, falha e respostas obsoletas aprovados. Conferência visual/autenticada, teclado, tela pequena e capturas pendentes: navegador integrado recusou/expirou acesso local; controle nativo interrompido pela ferramenta por não identificar URL com segurança. F06 não aprovada."
         }
       ]
     },
@@ -246,6 +209,43 @@
           "responsavel": "agente",
           "estado": "aprovada",
           "evidencia": "npm test passou: tipos, build e 13 testes, zero falhas; seis novos testes de valores com resultados literais independentes. Navegador móvel e desktop: exemplo R$ 142 retirada/R$ 147 entrega, edição R$ 94, remoção R$ 58, cancelamento preservou total, revisão invalidada e edição aberta bloqueada; Enter conferido. Sem rolagem horizontal em 390x844 e 1280x900; console sem erros observados. Capturas f04-movel.jpg e f04-desktop.jpg. Prática do autor não verificada; verificadores próprios do harness indisponíveis."
+        }
+      ]
+    },
+    {
+      "identificador": "F05",
+      "titulo": "Gravar pedidos com acesso compartilhado",
+      "estado": "aprovada",
+      "objetivo": "Persistir pedidos após fechar o sistema e permitir consultá-los em mais de um dispositivo.",
+      "verificacao": "Salvar um pedido, fechar e reabrir o sistema e consultar o mesmo registro em outro dispositivo; verificar que uma falha de gravação não é apresentada como sucesso.",
+      "tarefas": [
+        {
+          "identificador": "F05-T01",
+          "descricao": "Definir o controle de acesso antes de disponibilizar dados de clientes e documentar configurações sem segredos.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Controle de acesso implementado e aplicado ao projeto lnqkycxtoaovoktnsgrj em 17/11/2026: Supabase Auth, lista de atendentes autorizados, RLS nas três tabelas, cadastro público e login anônimo desativados. URL/chave pública em .env.local ignorado. Conta fictícia atendente@dinnos.example criada pelo autor e autorizada após confirmação explícita. Acesso autorizado observado na aplicação; leitura e gravação anônimas bloqueadas pelo servidor (42501)."
+        },
+        {
+          "identificador": "F05-T02",
+          "descricao": "Implementar armazenamento compartilhado e gravação com identificação, data, itens e preços preservados, explicando o fluxo dos dados.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Integração implementada e configurada no Supabase hospedado: SDK oficial, login/sessão, autorização, UUID estável, função transacional com cálculo no servidor e preços/descrições/data preservados. Pedido fictício gravado pela aplicação e consultado após recarregar com mesmo código, data e total. Sem senha/chave privilegiada no código ou repositório."
+        },
+        {
+          "identificador": "F05-T03",
+          "descricao": "Verificar gravação, reabertura, acesso autorizado e tratamento de falha; apresentar os passos para teste em dois dispositivos.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "npm test passou com tipos, build e 28 testes após correção do diretório temporário e reforço de RLS. Migração aplicada ao projeto real; tabelas/RLS verificadas. SDK remoto confirmou leitura/gravação anônimas bloqueadas (42501). Login hospedado do autor confirmado; autorização da conta aplicada somente após consentimento explícito. Aplicação gravou pedido fictício 6b4ea74d-9f04-4b52-888a-e01aec6cb7f6 de entrega, duas pizzas médias de muçarela/frango com bacon e três colas: subtotal 14200, taxa 500, total 14700 centavos. Após recarregar, consulta confirmou a mesma data/total; console sem erros observados. Após sair, tentativa sem login foi impedida, sem falso sucesso e com rascunho preservado. Roteiro de cinco cenários em banco/README.md. Fechar o navegador, falha de rede real e dois dispositivos permanecem no teste do autor T04."
+        },
+        {
+          "identificador": "F05-T04",
+          "descricao": "Executar o teste orientado em dois dispositivos e relatar os resultados e a quantidade de cenários executados.",
+          "responsavel": "autor",
+          "estado": "aprovada",
+          "evidencia": "Relatados pelo autor em 17/11/2026: cinco de cinco cenários executados, todos com resultado esperado: gravação, fechamento/reabertura, consulta no celular, acesso negado e falha de rede com preservação do rascunho e ausência de duplicação. Evidência declarada pelo autor, distinta dos testes do agente."
         }
       ]
     }
