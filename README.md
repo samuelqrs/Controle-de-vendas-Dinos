@@ -190,3 +190,19 @@ O pedido fictício 6b4ea74d-9f04-4b52-888a-e01aec6cb7f6 foi gravado pelo agente 
 total de R$ 147,00 e preservado após recarregar a aplicação. Ele pode ser usado
 como referência na conferência por código. O roteiro completo do autor em dois
 dispositivos está em banco/README.md; os resultados ainda não foram relatados.
+
+## Excluir um pedido registrado
+
+Entre com uma conta autorizada e acesse **Relatórios → Atualizar pedidos →
+Ver detalhes → Excluir pedido**. Confira o código e o valor antes de confirmar.
+A exclusão é permanente e vale para todos os atendentes; Cancelar preserva o pedido.
+A lista volta à primeira página após a operação. Em falha de conexão, atualize
+a lista e confira o código antes de tentar novamente. Outros dispositivos devem
+atualizar a consulta. É necessário aplicar banco/003_excluir_pedidos.sql antes
+de publicar esta versão. Instalar a função não apaga pedidos existentes.
+
+Verificação: `npm test` inclui a exclusão autorizada, acesso revogado, bloqueio
+anônimo, pedido inexistente e preservação dos demais registros em PostgreSQL.
+Roteiro manual: abrir um pedido de teste, cancelar a confirmação e conferir sua
+presença; excluir esse pedido, atualizar e conferir a ausência na lista e pelo
+código; sair e verificar que nenhuma exclusão pode ser realizada sem autorização.

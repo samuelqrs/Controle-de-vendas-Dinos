@@ -82,3 +82,5 @@ Descrever a alteração, sua finalidade e as verificações realizadas. Vincular
 ## Segurança e configuração
 
 Nunca incluir credenciais, tokens, arquivos locais de ambiente ou dados reais de vendas de clientes no controle de versão. Usar exemplos fictícios e documentar as configurações necessárias sem expor valores secretos.
+
+- `banco/003_excluir_pedidos.sql`: exclusão individual por função autorizada, sem DELETE direto pelo cliente; verificação em `testes/banco.test.mjs`.

@@ -29,6 +29,10 @@ const botaoSair = secao.querySelector<HTMLButtonElement>('#sair-atendente')!;
 const consulta = secao.querySelector<HTMLFormElement>('#consultar-gravacao')!;
 const resultado = secao.querySelector<HTMLElement>('#resultado-consulta')!;
 let versaoConsulta = 0;
+document.addEventListener('pedido-excluido', () => {
+  versaoConsulta++;
+  resultado.textContent = '';
+});
 document.querySelector('#acoes-sessao')!.append(botaoSair);
 const conferencia = document.createElement('section');
 conferencia.className = 'secao-cardapio';

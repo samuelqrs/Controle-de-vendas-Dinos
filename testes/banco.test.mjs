@@ -157,6 +157,27 @@ testar('PostgreSQL verifica gravação, persistência e políticas de acesso', a
       await autenticar('', 'anon');
       await verificar.rejects(gravar(id,campos,[produto],4990),/permission denied/);
     });
+    await contexto.test('exclusão exige autorização ativa e preserva outros pedidos', async () => {
+      await banco.exec('reset role;');
+      await banco.exec(await lerArquivo(new URL('../banco/003_excluir_pedidos.sql', import.meta.url), 'utf8'));
+      const excluir = async id => (await banco.query('select public.excluir_pedido($1::uuid) as excluido', [id])).rows[0].excluido;
+      await autenticar('', 'anon');
+      await verificar.rejects(excluir(codigo), /permission denied/);
+      await autenticar(semPermissao);
+      await verificar.rejects(excluir(codigo), /não autorizado/);
+      await banco.exec('reset role;');
+      await banco.query('update public.atendentes_autorizados set ativo = false where identificador = $1', [atendenteA]);
+      await autenticar(atendenteA);
+      await verificar.rejects(excluir(codigo), /não autorizado/);
+      await autenticar(atendenteB);
+      await verificar.rejects(excluir(null), /Código obrigatório/);
+      await verificar.rejects(banco.query('delete from public.pedidos'), /permission denied/);
+      const antes = (await banco.query('select * from public.pedidos order by identificador')).rows;
+      verificar.equal(await excluir(codigo), true);
+      verificar.equal(await excluir(codigo), false);
+      verificar.equal((await banco.query('select * from public.pedidos where identificador = $1', [codigo])).rows.length, 0);
+      verificar.deepEqual((await banco.query('select * from public.pedidos order by identificador')).rows, antes.filter(pedido => pedido.identificador !== codigo));
+    });
   } finally {
     await banco.exec('reset role;');
     await banco.close();

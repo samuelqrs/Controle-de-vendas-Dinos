@@ -298,6 +298,29 @@
           "evidencia": "Migração aplicada no Supabase lnqkycxtoaovoktnsgrj: quatro pedidos preservados, sete produtos, Margherita média 3990, pedido histórico 4000 centavos mantido. Publicação final Netlify 6afca3f1d43f468dbc345612, assets index-C_AgF3WI.js/index-CpehBv9z.css, mesmo endereço público. Pacote somente index.html/assets, SHA256 5D664FD14406E16A99EEF008E66D81DEEB47D521A7EAD95E0B0BF64883B9F0C1. Versão intermediária 6afca264e944ee3a41b7d93a. Pedido fictício ddb134f8-2342-49e7-b8d4-15f29a40b513, combinação média 4590 + combo grande 5990, total 10580, confirmado às 15:53:18 e lido em Relatórios; consulta repetida após implantação final. Saída e acesso negado sem login verificados. Capturas f09-*.jpg. Nenhuma nova permissão ou credencial criada."
         }
       ]
+    },
+    {
+      "identificador": "F10",
+      "titulo": "Excluir pedidos registrados",
+      "estado": "aprovada",
+      "objetivo": "Permitir exclusão permanente e individual nos relatórios mediante confirmação e autorização no servidor.",
+      "verificacao": "Testar autorização, revogação, inexistência, preservação de outros pedidos e interface de confirmação/erro.",
+      "tarefas": [
+        {
+          "identificador": "F10-T01",
+          "descricao": "Implementar migração, integração e exclusão confirmada na interface.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "Migração 003 e RPC autenticada implementadas; DELETE direto permanece negado. Botão nos detalhes com confirmação de código/valor, bloqueio de envio repetido, retorno à primeira página, limpeza de detalhes/conferência e proteção de respostas após saída. Migração instalada no Supabase sem apagar registros durante instalação."
+        },
+        {
+          "identificador": "F10-T02",
+          "descricao": "Verificar testes, interface e documentar configuração/publicação.",
+          "responsavel": "agente",
+          "estado": "aprovada",
+          "evidencia": "21/11/2026: baseline 37 e suíte final npm test com tipos/build/38 testes aprovados. PostgreSQL verifica exclusão por outro atendente ativo, negação anônima/sem autorização/revogada, UUID nulo, inexistência e preservação integral dos outros pedidos. Site publicado no Netlify 6b0193b5ec94709cff567346 (JS index-DL91FOvA.js). Sessão autenticada pelo autor observada, botão e confirmação apresentados. Após abertura da confirmação, pedido fictício F09 ddb134f8-2342-49e7-b8d4-15f29a40b513 removido; consulta por código ausente e lista com quatro registros, repetida após implantação final. Não atribuir ao agente clique de aceite: diálogo já resolvido quando consultado para cancelar; cancelamento não verificado isoladamente. Interface 390x844 sem rolagem horizontal (375/375), teclado e console sem erros observados. Capturas f10-*.jpg. Não testada falha física de rede nesta etapa."
+        }
+      ]
     }
   ]
 }

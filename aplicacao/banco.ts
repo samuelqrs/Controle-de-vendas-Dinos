@@ -44,6 +44,13 @@ export function criarBanco(variaveis: Record<string, unknown>, armazenamento: St
       if (!data) throw new Error('Pedido não encontrado ou acesso não autorizado.');
       return validarConfirmacao(data, identificador);
     },
+    async excluir(identificador: string): Promise<boolean> {
+      if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(identificador)) throw new Error('Informe um código de pedido válido.');
+      if (!await this.obterAcesso()) throw new Error('Entre com uma conta de atendente autorizada.');
+      const { data, error } = await cliente.rpc('excluir_pedido', { p_identificador: identificador }).abortSignal(AbortSignal.timeout(15000));
+      if (error || typeof data !== 'boolean') throw new Error('Exclusão não confirmada. Atualize a lista para conferir o pedido antes de tentar novamente.');
+      return data;
+    },
     async listar(pagina: number = 0): Promise<RegistroSalvo[]> {
       if (!Number.isSafeInteger(pagina) || pagina < 0) throw new Error('Página de pedidos inválida.');
       if (!await this.obterAcesso()) throw new Error('Entre com uma conta de atendente autorizada.');

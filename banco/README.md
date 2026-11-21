@@ -9,9 +9,10 @@ os mesmos pedidos. Visitantes e contas sem autorização não leem nem gravam pe
 
 A tabela de pedidos permite somente leitura aos clientes autorizados; gravação é
 feita pela função registrar_pedido, que verifica autorização e dados, calcula preços
-no servidor a partir do catálogo interno e preserva descrições/preços/data. Não há
-permissão de editar ou excluir pedidos pela aplicação. Revogar ativo impede novas
-consultas e gravações, inclusive com token de sessão ainda válido.
+no servidor a partir do catálogo interno e preserva descrições/preços/data. A exclusão individual é feita pela função excluir_pedido (migração 003), que exige
+atendente ativo e retorna se o registro foi removido. Não há edição nem DELETE direto
+pelo cliente. Revogar ativo impede consultas, gravações e exclusões, inclusive com token
+de sessão ainda válido.
 
 ## Criar e configurar
 
@@ -20,7 +21,8 @@ consultas e gravações, inclusive com token de sessão ainda válido.
 2. Execute banco/001_criar_pedidos.sql uma vez no SQL Editor do projeto novo.
    A migração é transacional e cria tabelas, políticas, catálogo e função de gravação.
    Em seguida execute banco/002_cardapio_oficial.sql para aplicar o catálogo atual.
-   Em um banco existente, execute somente a migração 002; não reaplique a 001.
+   Depois execute banco/003_excluir_pedidos.sql para habilitar a exclusão.
+   Em um banco existente, aplique somente as migrações ainda não executadas, na ordem; não reaplique a 001.
 3. Em Authentication, desabilite cadastro público e crie a conta de demonstração
    com e-mail e senha. Registre o UUID dessa conta em atendentes_autorizados pelo
    painel administrativo: identificador = UUID da conta; ativo = true.
@@ -101,3 +103,17 @@ e qualquer diferença. Não envie dados de clientes reais ou senhas.
 - [Login com senha](https://supabase.com/docs/reference/javascript/auth-signinwithpassword)
 - [Chamadas de funções](https://supabase.com/docs/reference/javascript/rpc)
 - [PGlite](https://pglite.dev/docs/)
+
+## Exclusão de pedidos
+
+Em Relatórios, atualize a lista, abra Ver detalhes e use Excluir pedido. Confira
+código e valor na confirmação. Cancelar mantém o pedido; confirmar o apaga
+permanentemente para todos os atendentes. Não há lixeira ou recuperação no aplicativo.
+A instalação da migração 003 não apaga registros existentes.
+
+Depois de excluir, a tela retorna à primeira página e limpa os detalhes e a
+conferência anterior por código. Outros dispositivos precisam atualizar a lista.
+Se a conexão falhar, a exclusão pode ter sido efetuada sem confirmação: atualize
+a lista ou consulte o código antes de repetir. Pedido inexistente é tratado sem
+erro e não afeta outros registros. Os testes usam banco temporário, inclusive
+contas anônimas, sem autorização e revogadas, e preservação de outros pedidos.

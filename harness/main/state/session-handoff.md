@@ -78,3 +78,11 @@ Autor solicitou incorporar sabores/valores do PDF C:/Users/samue/Downloads/CARDA
 ## Estado atual após F09
 
 F09 concluída e publicada em 17/11/2026: cardápio oficial, dois sabores, combo grande com Coca-Cola 2 litros, retirada apenas; três telas início/lançamento/relatórios. Esta atualização substitui o estado pendente histórico da F09. Migração 002 aplicada no Supabase, final Netlify 6afca3f1d43f468dbc345612; 37 testes aprovados. Novo pedido fictício ddb134f8-2342-49e7-b8d4-15f29a40b513, total R$ 105,80, verificado com histórico preservado. Fila de funcionalidades vazia. Complemento acadêmico em trabalho/atualizacao-f09.md; PDF F07 histórico não regenerado. Não repetir testes sem mudanças executáveis. Servidor local iniciado nesta etapa encerrado após a conferência. Nenhum novo commit; preservar alterações anteriores do relatório e F07. Para continuar, pedir nova demanda ou registrar commit quando solicitado.
+
+## Último estado — 21/11/2026
+
+F10 aprovada: exclusão permanente individual em Relatórios → Ver detalhes → Excluir pedido, confirmação nativa com código/valor. Migração 003 aplicada ao Supabase; não concede DELETE direto. Atendentes ativos podem excluir pedidos de qualquer atendente. Site final publicado em 6b0193b5ec94709cff567346 (index-DL91FOvA.js); npm test final 38 aprovados. Fontes/documentação/capturas e estado ainda sem commit; solicitar ao autor quando desejar registrar.
+
+Pedido fictício F09 ddb134f8-2342-49e7-b8d4-15f29a40b513 foi excluído durante a conferência da confirmação; agente não emitiu aceite e diálogo já resolvido ao tentar inspecioná-lo para cancelar. Não afirmar cancelamento verificado nem atribuir aceite ao autor. Ausência por código e quatro pedidos restantes confirmados; fontes antigas descrevem execução histórica F09. Móvel 390x844 sem rolagem horizontal, teclado e console conferidos. Riscos: exclusão irreversível no aplicativo, outros dispositivos precisam atualizar, cancelamento isolado e falha física de rede não verificados. Banco temporário cobre permissões/revogação/inexistência/preservação. Lista pendente vazia, sem bloqueios para escopo entregue. Servidores desta sessão encerrados; 5173 preexistente preservado.
+
+Autor solicitou o commit da F10 em 21/11/2026. Alterações agrupadas com testes, documentação e evidências; consultar git log para o registro. Envio ao remoto não solicitado.

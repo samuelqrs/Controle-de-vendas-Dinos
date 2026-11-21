@@ -15,6 +15,9 @@ secao.innerHTML = `<h2 id="titulo-pedidos-salvos">Relatórios de pedidos</h2>
   <ul id="lista-pedidos-salvos" class="produtos"></ul>
   <article id="detalhes-pedido-salvo" class="resumo-valores" hidden tabindex="-1" aria-labelledby="titulo-detalhes-pedido">
     <h3 id="titulo-detalhes-pedido">Detalhes do pedido</h3><dl></dl>
+    <p>A exclusão é permanente e remove o pedido dos relatórios de todos os atendentes.</p>
+    <button id="excluir-pedido" type="button">Excluir pedido</button>
+    <p id="mensagem-exclusao" role="status"></p>
   </article>`;
 document.querySelector('#tela-relatorios')!.prepend(secao);
 const mensagem = secao.querySelector<HTMLElement>('#mensagem-listagem')!;
@@ -26,6 +29,34 @@ const proxima = secao.querySelector<HTMLButtonElement>('#pedidos-proximos')!;
 const controle = criarConsultaPedidos(pagina => banco!.listar(pagina));
 let paginaAtual = 0;
 let versao = 0;
+let pedidoSelecionado: { identificador: string; total: number } | null = null;
+const excluir = secao.querySelector<HTMLButtonElement>('#excluir-pedido')!;
+const mensagemExclusao = secao.querySelector<HTMLElement>('#mensagem-exclusao')!;
+
+excluir.addEventListener('click', async () => {
+  const pedido = pedidoSelecionado;
+  if (!banco || !pedido || excluir.disabled) return;
+  if (!window.confirm(`Excluir permanentemente o pedido ${pedido.identificador}, de ${formatarPreco(pedido.total)}?\nEsta ação não pode ser desfeita.`)) return;
+  const atual = versao;
+  secao.inert = true;
+  excluir.disabled = true;
+  mensagemExclusao.textContent = 'Excluindo pedido…';
+  try {
+    const removido = await banco.excluir(pedido.identificador);
+    if (atual !== versao) return;
+    document.dispatchEvent(new CustomEvent('pedido-excluido', { detail: pedido.identificador }));
+    await carregar(0);
+    if (versao !== atual + 1) return;
+    mensagem.textContent = `${removido ? 'Pedido excluído permanentemente.' : 'O pedido já não existe.'} ${mensagem.textContent}`;
+    secao.inert = false;
+    atualizar.focus();
+  } catch (erro) {
+    if (atual === versao) mensagemExclusao.textContent = erro instanceof Error ? erro.message : 'Exclusão não confirmada. Atualize a lista para conferir.';
+  } finally {
+    secao.inert = false;
+    excluir.disabled = false;
+  }
+});
 
 async function carregar(pagina: number): Promise<void> {
   if (!banco) return;
@@ -33,6 +64,7 @@ async function carregar(pagina: number): Promise<void> {
   atualizar.disabled = anterior.disabled = proxima.disabled = true;
   lista.replaceChildren();
   detalhes.hidden = true;
+  pedidoSelecionado = null;
   detalhes.querySelector('dl')!.replaceChildren();
   mensagem.textContent = 'Consultando pedidos…';
   secao.setAttribute('aria-busy', 'true');
@@ -54,6 +86,8 @@ async function carregar(pagina: number): Promise<void> {
       abrir.textContent = 'Ver detalhes';
       abrir.setAttribute('aria-label', `Ver detalhes do pedido ${pedido.identificador}`);
       abrir.addEventListener('click', () => {
+        pedidoSelecionado = pedido;
+        mensagemExclusao.textContent = '';
         const campos = descreverPedido(pedido).flatMap(([nome, valor]) => {
           const termo = document.createElement('dt');
           const descricao = document.createElement('dd');
@@ -86,6 +120,8 @@ document.addEventListener('encerrar-acesso', () => {
   versao++;
   controle.limpar();
   paginaAtual = 0;
+  pedidoSelecionado = null;
+  mensagemExclusao.textContent = '';
   lista.replaceChildren();
   detalhes.querySelector('dl')!.replaceChildren();
   detalhes.hidden = true;
